@@ -1,10 +1,10 @@
-#👋 Hi, I’m Aditya Rai
-Dev. Portfolio Website → Live Demo 🚀
+👋 #Hi, I’m Aditya Rai
+##Dev. Portfolio Website → Live Demo 🚀
 
-📗 About This Project
+📗 ##About This Project
 A clean, responsive personal portfolio built using HTML, CSS, and JavaScript. It showcases my skills, projects, contact info, and design style in an elegant, user-friendly interface.
 
-✨ Features
+✨ ##Features
 📱 Responsive Design – looks great on screens from mobile to desktop.
 
 💬 Smooth Scrolling – for easy navigation.
@@ -13,13 +13,13 @@ A clean, responsive personal portfolio built using HTML, CSS, and JavaScript. It
 
 📬 Contact Form – send emails directly via form submission.
 
-🛠️ Tech Stack
+🛠️ ##Tech Stack
 Category	Tools
 Frontend	HTML5, CSS3 (Flexbox, Grid), JavaScript
 Icons	Font Awesome
 Hosting	GitHub Pages
 
-🎨 Visual Preview
+🎨 ##Visual Preview
 Insert eye-catching screenshots or embed GIFs here to highlight sections like the hero, project gallery, and contact form.
 Example:
 
@@ -40,7 +40,7 @@ Contact
 
 License
 
-🚀 Installation
+🚀 ##Installation
 Clone the repo:
 
 bash
