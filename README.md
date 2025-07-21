@@ -94,7 +94,7 @@ Commit and push: git commit -am 'Add new feature' && git push origin feature/You
 Open a Pull Request!
 
 📞 Contact
-Email: your-email@example.com
+Email: adtyamighty@gmail.com
 
 LinkedIn: in/aditya-r-8a4351256
 
