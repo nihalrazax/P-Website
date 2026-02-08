@@ -461,12 +461,130 @@ nav {
   }
 }
 
+/* --- Orbit Animation (Hero Image) --- */
+:root {
+  --orbit-radius: 220px;
+  --orbit-size: 440px;
+}
+
+.orbit-hero-right {
+  flex: 0 0 auto;
+  width: var(--orbit-size);
+  height: var(--orbit-size);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.orbit-center-image {
+  width: 280px;
+  height: 340px;
+  position: absolute;
+  z-index: 20;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: visible;
+  filter: drop-shadow(0 10px 30px rgba(0, 0, 0, 0.3));
+}
+
+.orbit-center-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom;
+}
+
+.orbit-animation-ring {
+  width: var(--orbit-size);
+  height: var(--orbit-size);
+  position: relative;
+  border-radius: 50%;
+  border: 1px solid rgba(232, 73, 73, 0.15);
+  background: radial-gradient(closest-side, rgba(78, 69, 213, 0.05), transparent);
+  animation: orbitSpinRight 40s linear infinite;
+}
+
+.orbit-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: var(--orbit-size);
+  height: var(--orbit-size);
+  border-radius: 50%;
+  box-shadow: 0 0 100px -20px rgba(232, 73, 73, 0.1);
+  pointer-events: none;
+}
+
+.orbit-slot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -20px;
+  margin-left: -20px;
+  width: 40px;
+  height: 40px;
+  pointer-events: none;
+  transform: rotate(var(--angle)) translate(var(--orbit-radius));
+}
+
+.orbit-counter-rotator {
+  width: 100%;
+  height: 100%;
+  animation: orbitSpinLeft 40s linear infinite;
+}
+
+.orbit-orientation-fixer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  pointer-events: auto;
+  transform: rotate(calc(var(--angle) * -1));
+}
+
+.chip {
+  padding: 8px 18px;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(4px);
+  transition: all 0.3s;
+}
+
+.c-frontend  { background: #e84949; }
+.c-react     { background: #61dafb; color: #1a1a2e; }
+.c-js        { background: #f7df1e; color: #1a1a2e; }
+.c-uiux      { background: #4e45d5; }
+.c-webdesign { background: #343d68; }
+.c-marketing { background: #23a873; }
+.c-security  { background: #c03f46; }
+.c-video     { background: #3a8bd4; }
+
+@keyframes orbitSpinRight {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes orbitSpinLeft {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(-360deg); }
+}
+
 /* Hero Section Ends  */
 
 /* Projects Section  */
 .projectSection {
   margin-top: 4rem;
-  background-color: #e7e7e7;
+  background-color: #f5f0eb;
 }
 
 .projectTitle {
@@ -480,67 +598,87 @@ nav {
 .projectContainer {
   display: flex;
   flex-direction: column;
-  gap: 120px;
-  /* width: 100%; */
+  gap: 117px;
+  padding: 20px 0 60px;
 }
 
-#project1 {
-  background-image: url(./Images/projects/Project1.png);
-  right: 5%;
-}
-
-#project2 {
-  background-image: url(./Images/projects/Project2.png);
-  left: 5%;
-}
-
-#project3 {
-  background-image: url(./Images/projects/Project3.png);
-  right: 5%;
-}
-
-#project4 {
-  background-image: url(./Images/projects/Project4.png);
-  left: 5%;
-}
-#project5 {
-  background-image: url(./Images/projects/Project5.png);
-  right: 5%;
-}
-#project6 {
-  background-image: url(./Images/projects/Project6.png);
-  left: 5%;
-}
+#project1 { background-image: url(./Images/projects/Project1.png); }
+#project2 { background-image: url(./Images/projects/Project2.png); }
+#project3 { background-image: url(./Images/projects/Project3.png); }
+#project4 { background-image: url(./Images/projects/Project4.png); }
+#project5 { background-image: url(./Images/projects/Project5.png); }
+#project6 { background-image: url(./Images/projects/Project6.png); }
+#project7 { background-image: url(./Images/projects/Project7.png); }
+#project8 { background-image: url(./Images/projects/Project8.png); }
+#project9 { background-image: url(./Images/projects/Project9.png); }
+#project10 { background-image: url(./Images/projects/Project10.png); }
 
 .projectCard {
   width: 80%;
-  height: 550px;
-  background-size: cover;
+  aspect-ratio: 1917 / 966;
+  background-size: contain;
   background-repeat: no-repeat;
+  background-position: center;
+  background-color: #1a1a2e;
   position: relative;
-  box-shadow: 0px 0px 40px #1f1f1f;
-  margin: 2rem auto;
-  z-index: 2;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: visible;
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
+/* Popup effect on hover */
+.projectCard:hover {
+  transform: scale(1.03);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+}
+
+/* Rainbow animated border */
 .projectCard::before {
   content: "";
   position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  background: linear-gradient(45deg, #343d68, #343d68be, #343d687c);
+  inset: 0;
+  border-radius: 12px;
+  padding: 3px;
+  background: linear-gradient(90deg, var(--orange), var(--yellow), var(--green), var(--blue), var(--purple), var(--pink), var(--red));
+  background-size: 200%;
+  animation: animate 3s infinite linear;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Shadow overlay on default */
+.projectCard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(20,20,40,0.25) 0%, rgba(20,20,40,0.65) 100%);
   z-index: 1;
-  transition: 0.5s all;
-  transform-origin: left;
-  transform: scaleX(0);
+  transition: opacity 0.5s ease;
+  pointer-events: none;
 }
 
+/* On hover - rainbow speeds up, overlay clears */
 .projectCard:hover::before {
-  transform: scaleX(1);
+  animation: animate 1s infinite linear;
+}
+.projectCard:hover::after {
+  opacity: 0;
 }
 
+.projectCard .projectCardOverlay { display: none; }
+
+/* --- Number: hidden by default, appears on hover --- */
 .projectNumber {
   position: absolute;
   font-size: 200px;
@@ -550,97 +688,144 @@ nav {
   z-index: 10;
   transition: 0.8s;
 }
-
 .rightNumber {
   top: -45px;
   right: -45px;
 }
-
 .leftNumber {
   top: -45px;
   left: -45px;
 }
-
 .projectCard:hover .projectNumber {
   display: block;
 }
 
-.projectCard::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: #1f1f1f9a;
-  z-index: 0;
-}
-
+/* --- Content container: extends beyond card for outside elements --- */
 .projectContent {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  color: white;
-  padding: 2em;
-  bottom: 20%;
   position: absolute;
+  inset: 0;
   z-index: 5;
-  transition: all 0.4s;
+  pointer-events: none;
 }
+.projectContent > * { pointer-events: auto; }
 
-.leftProjectContent {
-  left: 5%;
-}
-
+.leftProjectContent,
 .rightProjectContent {
-  right: 5%;
+  left: 0; right: 0;
 }
 
+/* --- Heading: ABOVE card, top-left, always visible --- */
+.projectHeading {
+  position: absolute;
+  top: -55px;
+  left: 5px;
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1.2;
+  color: #333;
+  transition: all 0.4s ease;
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: -0.5px;
+}
+
+.projectCard:hover .projectHeading {
+  background: linear-gradient(90deg, #e84949, #ff8a65);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transform: scale(1.05);
+}
+
+/* --- Icons: ABOVE card, top-right, slide UP on hover --- */
 .projectSkillsContainer {
+  position: absolute;
+  top: -40px;
+  right: 5px;
   display: flex;
   flex-wrap: wrap;
-  max-width: 60%;
-  gap: 1em;
+  gap: 0.5em;
+  justify-content: flex-end;
+  max-width: 200px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s ease 0.05s;
+}
+
+.projectCard:hover .projectSkillsContainer {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .projectSkill {
-  width: 40px;
-}
-.projectHeading {
-  font-size: 50px;
-  font-weight: bold;
-  line-height: 3rem;
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
+/* --- Description: BELOW card, bottom-left, slide DOWN on hover --- */
 .projectSubHeading {
-  font-size: 16px;
-  font-style: italic;
-  width: 70%;
+  position: absolute;
+  bottom: -32px;
+  left: 5px;
+  font-size: 14px;
+  font-style: normal;
+  color: #555;
+  max-width: 60%;
+  opacity: 0;
+  transform: translateY(-15px);
+  transition: all 0.4s ease 0.1s;
+  line-height: 1.4;
 }
 
-.projectCard:hover .projectContent {
-  transform: scale(1.1);
+.projectCard:hover .projectSubHeading {
+  opacity: 1;
+  transform: translateY(0);
 }
 
+/* --- Icons: BELOW card, bottom-right, slide DOWN on hover (same as description) --- */
 .btnGroup {
+  position: absolute;
+  bottom: -42px;
+  right: 5px;
   display: flex;
-  gap: 0.9rem;
+  gap: 0.7rem;
   align-items: center;
+  opacity: 0;
+  transform: translateY(-15px);
+  transition: all 0.4s ease 0.1s;
+}
+
+.projectCard:hover .btnGroup {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .btnGroup .btnProject {
   border: none;
   outline: none;
+  border-radius: 6px;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  cursor: pointer;
+  display: none;
 }
+
 .icon {
   cursor: pointer;
   color: white;
-  font-size: 35px;
-  transition: all 0.4s;
+  font-size: 36px;
+  transition: all 0.3s;
 }
 
 .icon:hover {
   color: #e84949;
+}
+
+/* GitHub & Live Link icons inherit the same animation as btnGroup */
+.btnGroup > a {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
 }
 
 /* Project Section End  */
@@ -845,9 +1030,50 @@ footer {
   .imgContainer {
     margin-top: 2rem;
   }
+  /* Orbit responsive - tablet */
+  .orbit-hero-right {
+    --orbit-size: 340px;
+    --orbit-radius: 170px;
+    width: var(--orbit-size);
+    height: var(--orbit-size);
+    margin-top: 1rem;
+  }
+  .orbit-center-image {
+    width: 200px;
+    height: 250px;
+  }
+  .chip {
+    padding: 6px 14px;
+    font-size: 11px;
+    border-radius: 8px;
+  }
   .projectCard {
     width: 95%;
-    height: 400px;
+    height: 280px;
+  }
+  .projectNumber {
+    font-size: 120px;
+    top: -30px;
+  }
+  .rightNumber { right: -30px; }
+  .leftNumber { left: -30px; }
+  .projectHeading {
+    font-size: 22px;
+    top: -36px;
+  }
+  .projectSkillsContainer {
+    top: -36px;
+    max-width: 150px;
+  }
+  .projectSubHeading {
+    font-size: 12px;
+    bottom: -28px;
+    max-width: 55%;
+  }
+  .btnGroup {
+    bottom: 15px;
+    right: 15px;
+    gap: 0.5rem;
   }
   .projectTitle {
     font-size: 2.5em;
@@ -894,6 +1120,24 @@ footer {
     padding: 0 0.2rem;
     gap: 1.2rem;
   }
+  /* Orbit responsive - mobile */
+  .orbit-hero-right {
+    --orbit-size: 260px;
+    --orbit-radius: 130px;
+    width: var(--orbit-size);
+    height: var(--orbit-size);
+    margin-top: 0.5rem;
+  }
+  .orbit-center-image {
+    width: 160px;
+    height: 200px;
+  }
+  .chip {
+    padding: 4px 10px;
+    font-size: 9px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
   .userImage {
     width: 220px;
     height: 240px;
@@ -915,20 +1159,47 @@ footer {
     width: 100%;
   }
   .projectCard {
-    height: 220px;
+    width: 92%;
+    height: 200px;
     min-height: 180px;
-    font-size: 0.9em;
   }
+  .projectNumber {
+    font-size: 80px !important;
+    top: -25px !important;
+  }
+  .rightNumber { right: -20px !important; }
+  .leftNumber { left: -20px !important; }
   .projectHeading {
-    font-size: 1.2em;
-  }
-  .projectSubHeading {
-    font-size: 0.9em;
-    width: 100%;
+    font-size: 14px;
+    line-height: 1.2;
+    top: -28px;
   }
   .projectSkillsContainer {
-    max-width: 100%;
-    gap: 0.5em;
+    top: -28px;
+    max-width: 100px;
+    gap: 0.3em;
+  }
+  .projectSkill {
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .projectSubHeading {
+    font-size: 10px;
+    max-width: 60%;
+    line-height: 1.3;
+    bottom: -24px;
+  }
+  .btnGroup {
+    bottom: 10px;
+    right: 12px;
+    gap: 0.4rem;
+  }
+  .btnGroup .btn {
+    padding: 0.3rem 0.8rem;
+    font-size: 11px;
+  }
+  .icon {
+    font-size: 18px;
   }
   .skillsLogo {
     width: 40px;
@@ -966,14 +1237,8 @@ footer {
   }
 }
 
-/* Make project number and navigation smaller on smartphones */
+/* Navigation smaller on smartphones */
 @media (max-width: 600px) {
-  .projectNumber {
-    font-size: 2rem !important; /* 50% of typical 4rem or similar */
-    top: 10px;
-    left: 10px;
-    right: auto;
-  }
   .nav-links li a {
     font-size: 1rem !important;
     padding: 0.5em 0.7em !important;
@@ -992,5 +1257,138 @@ footer {
   }
   .logoText {
     font-size: 1.1rem !important;
+  }
+}
+
+/* Extra small screens - orbit */
+@media (max-width: 380px) {
+  .orbit-hero-right {
+    --orbit-size: 220px;
+    --orbit-radius: 110px;
+    width: var(--orbit-size);
+    height: var(--orbit-size);
+  }
+  .orbit-center-image {
+    width: 130px;
+    height: 165px;
+  }
+  .chip {
+    font-size: 8px;
+    padding: 3px 7px;
+  }
+}
+
+/* --- Responsive Design for Smartphones --- */
+@media (max-width: 768px) {
+  .projectContainer {
+    gap: 80px;
+    padding: 20px 0 40px;
+  }
+
+  .projectCard {
+    width: 90%;
+    border-radius: 10px;
+  }
+
+  .projectHeading {
+    font-size: 24px;
+    top: -42px;
+    left: 3px;
+  }
+
+  .projectNumber {
+    font-size: 100px;
+    top: -30px;
+  }
+  .rightNumber { right: -25px; }
+  .leftNumber { left: -25px; }
+
+  .projectSkillsContainer {
+    top: -35px;
+    right: 3px;
+    max-width: 150px;
+  }
+
+  .projectSkill {
+    width: 25px;
+    height: 25px;
+  }
+
+  .projectSubHeading {
+    font-size: 13px;
+    bottom: -35px;
+    left: 3px;
+    max-width: 65%;
+  }
+
+  .btnGroup {
+    bottom: -38px;
+    right: 3px;
+  }
+
+  .icon {
+    font-size: 30px;
+  }
+
+  .projectCard:hover {
+    transform: scale(1.02);
+  }
+}
+
+@media (max-width: 480px) {
+  .projectContainer {
+    gap: 90px;
+    padding: 15px 0 30px;
+  }
+
+  .projectCard {
+    width: 95%;
+    border-radius: 8px;
+  }
+
+  .projectHeading {
+    font-size: 20px;
+    top: -38px;
+    left: 2px;
+  }
+
+  .projectNumber {
+    font-size: 70px;
+    top: -20px;
+  }
+  .rightNumber { right: -15px; }
+  .leftNumber { left: -15px; }
+
+  .projectSkillsContainer {
+    top: -30px;
+    right: 2px;
+    max-width: 120px;
+    gap: 0.3em;
+  }
+
+  .projectSkill {
+    width: 22px;
+    height: 22px;
+  }
+
+  .projectSubHeading {
+    font-size: 12px;
+    bottom: -32px;
+    left: 2px;
+    max-width: 70%;
+  }
+
+  .btnGroup {
+    bottom: -35px;
+    right: 2px;
+    gap: 0.5rem;
+  }
+
+  .icon {
+    font-size: 26px;
+  }
+
+  .projectCard:hover {
+    transform: scale(1.01);
   }
 }
