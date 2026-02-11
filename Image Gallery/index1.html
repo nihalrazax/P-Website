@@ -78,6 +78,50 @@
         </figure>
       </div>
     </div>
+
+    <!-- Lightbox Overlay -->
+    <div class="lightbox" id="lightbox">
+      <div class="lightbox-inner">
+        <button class="lightbox-close" id="lightboxClose">&times;</button>
+        <figure class="lightbox-card">
+          <img src="" id="lightboxImg" alt="" />
+          <figcaption id="lightboxCaption"></figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <script>
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImg = document.getElementById('lightboxImg');
+      const lightboxCaption = document.getElementById('lightboxCaption');
+      const lightboxClose = document.getElementById('lightboxClose');
+
+      document.querySelectorAll('.card').forEach(function(card) {
+        card.addEventListener('click', function() {
+          const img = card.querySelector('img');
+          const caption = card.querySelector('figcaption');
+          lightboxImg.src = img.src;
+          lightboxCaption.textContent = caption ? caption.textContent : '';
+          lightbox.classList.add('active');
+        });
+      });
+
+      lightboxClose.addEventListener('click', function() {
+        lightbox.classList.remove('active');
+      });
+
+      lightbox.addEventListener('click', function(e) {
+        if (e.target === lightbox) {
+          lightbox.classList.remove('active');
+        }
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          lightbox.classList.remove('active');
+        }
+      });
+    </script>
   </body>
 </html>
 

@@ -16,6 +16,46 @@
 </head>
 
 <body>
+  <!-- Loading Screen -->
+  <div class="loader-screen" id="loader">
+    <div class="loader-content">
+      <div class="loader-code-text">
+        <div class="loader-code-line" data-line="1">const developer = {</div>
+        <div class="loader-code-line" data-line="2">  name: 'Aditya Rai',</div>
+        <div class="loader-code-line" data-line="3">  status: 'loading portfolio...'</div>
+        <div class="loader-code-line" data-line="4">};</div>
+      </div>
+      <div class="loader-spinner-wrapper">
+        <div class="loader-spinner"></div>
+      </div>
+      <div class="loader-progress-wrapper">
+        <div class="loader-progress-bar"></div>
+      </div>
+      <div class="loader-percentage" id="loaderPercent">0%</div>
+    </div>
+  </div>
+  <script>
+    (function() {
+      var loader = document.getElementById('loader');
+      var loaderPercent = document.getElementById('loaderPercent');
+      var progressBar = document.querySelector('.loader-progress-bar');
+      var progress = 0;
+      var interval = setInterval(function() {
+        progress += Math.random() * 12 + 3;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(interval);
+          loaderPercent.textContent = '100%';
+          progressBar.style.width = '100%';
+          setTimeout(function() { loader.classList.add('hidden'); }, 400);
+        } else {
+          loaderPercent.textContent = Math.floor(progress) + '%';
+          progressBar.style.width = Math.floor(progress) + '%';
+        }
+      }, 80);
+    })();
+  </script>
+
   <div id="wrapper">
     <!-- Night Theme Chooser removed -->
     <!-- Header Start -->
@@ -26,7 +66,10 @@
       </div>
       <nav>
         <ul class="nav-links">
-          <li><a href="#projects">Projects</a></li>
+          <li><a href="#projects">Websites</a></li>
+          <li><a href="#graphics">Graphics</a></li>
+          <li><a href="#socialmedia">Social Media</a></li>
+          <li><a href="#advertisements">Ads</a></li>
           <li><a href="#skills">Skills</a></li>
         </ul>
         <div class="nav-social-icons">
@@ -136,7 +179,7 @@
     <!-- Project Section Start -->
     <section id="projects" class="projectSection">
       <h2 class="projectTitle"> Websites</h2>
-      <div class="projectContainer">
+      <div class="projectContainer galleryGrid">
         <div class="projectCard" id="project1">
           <div class="projectCardOverlay"></div>
           <div class="projectNumber rightNumber">01</div>
@@ -153,10 +196,10 @@
             </p>
             <div class="btnGroup">
               <a href="" title="GitHubLink">
-                <i class="fa-brands fa-github icon"></i>
+                <img src="./Images/stack/Github.svg" class="btn-icon" alt="GitHub" />
               </a>
               <a href="https://github.com/aditya-k-rai" title="Live Link">
-                <i class="fa-solid fa-link icon"></i>
+                <img src="./Images/stack/link-icon.svg" class="btn-icon" alt="Live Link" />
               </a>
             </div>
           </div>
@@ -181,10 +224,10 @@
             </p>
             <div class="btnGroup">
               <a href="https://github.com/aditya-k-rai" title="GitHubLink">
-                <i class="fa-brands fa-github icon"></i>
+                <img src="./Images/stack/Github.svg" class="btn-icon" alt="GitHub" />
               </a>
               <a href="" title="Live Link">
-                <i class="fa-solid fa-link icon"></i>
+                <img src="./Images/stack/link-icon.svg" class="btn-icon" alt="Live Link" />
               </a>
             </div>
           </div>
@@ -208,10 +251,10 @@
             </p>
             <div class="btnGroup">
               <a href="https://github.com/aditya-k-rai" title="GitHubLink">
-                <i class="fa-brands fa-github icon"></i>
+                <img src="./Images/stack/Github.svg" class="btn-icon" alt="GitHub" />
               </a>
               <a href="" title="Live Link">
-                <i class="fa-solid fa-link icon"></i>
+                <img src="./Images/stack/link-icon.svg" class="btn-icon" alt="Live Link" />
               </a>
             </div>
           </div>
@@ -236,10 +279,10 @@
             </p>
             <div class="btnGroup">
               <a href="https://github.com/aditya-k-rai" title="GitHubLink">
-                <i class="fa-brands fa-github icon"></i>
+                <img src="./Images/stack/Github.svg" class="btn-icon" alt="GitHub" />
               </a>
               <a href="" title="Live Link">
-                <i class="fa-solid fa-link icon"></i>
+                <img src="./Images/stack/link-icon.svg" class="btn-icon" alt="Live Link" />
               </a>
             </div>
           </div>
@@ -265,10 +308,10 @@
             </p>
             <div class="btnGroup">
               <a href="https://github.com/aditya-k-rai" title="GitHubLink">
-                <i class="fa-brands fa-github icon"></i>
+                <img src="./Images/stack/Github.svg" class="btn-icon" alt="GitHub" />
               </a>
               <a href="" title="Live Link">
-                <i class="fa-solid fa-link icon"></i>
+                <img src="./Images/stack/link-icon.svg" class="btn-icon" alt="Live Link" />
               </a>
             </div>
           </div>
@@ -294,10 +337,10 @@
             </p>
             <div class="btnGroup">
               <a href="https://github.com/aditya-k-rai" title="GitHubLink">
-                <i class="fa-brands fa-github icon"></i>
+                <img src="./Images/stack/Github.svg" class="btn-icon" alt="GitHub" />
               </a>
               <a href="" title="Live Link">
-                <i class="fa-solid fa-link icon"></i>
+                <img src="./Images/stack/link-icon.svg" class="btn-icon" alt="Live Link" />
               </a>
             </div>
           </div>
@@ -318,10 +361,10 @@
             </p>
             <div class="btnGroup">
               <a href="" title="GitHubLink">
-                <i class="fa-brands fa-github icon"></i>
+                <img src="./Images/stack/Github.svg" class="btn-icon" alt="GitHub" />
               </a>
               <a href="" title="Live Link">
-                <i class="fa-solid fa-link icon"></i>
+                <img src="./Images/stack/link-icon.svg" class="btn-icon" alt="Live Link" />
               </a>
             </div>
           </div>
@@ -342,10 +385,10 @@
             </p>
             <div class="btnGroup">
               <a href="" title="GitHubLink">
-                <i class="fa-brands fa-github icon"></i>
+                <img src="./Images/stack/Github.svg" class="btn-icon" alt="GitHub" />
               </a>
               <a href="" title="Live Link">
-                <i class="fa-solid fa-link icon"></i>
+                <img src="./Images/stack/link-icon.svg" class="btn-icon" alt="Live Link" />
               </a>
             </div>
           </div>
@@ -366,10 +409,10 @@
             </p>
             <div class="btnGroup">
               <a href="" title="GitHubLink">
-                <i class="fa-brands fa-github icon"></i>
+                <img src="./Images/stack/Github.svg" class="btn-icon" alt="GitHub" />
               </a>
               <a href="" title="Live Link">
-                <i class="fa-solid fa-link icon"></i>
+                <img src="./Images/stack/link-icon.svg" class="btn-icon" alt="Live Link" />
               </a>
             </div>
           </div>
@@ -390,10 +433,10 @@
             </p>
             <div class="btnGroup">
               <a href="" title="GitHubLink">
-                <i class="fa-brands fa-github icon"></i>
+                <img src="./Images/stack/Github.svg" class="btn-icon" alt="GitHub" />
               </a>
               <a href="" title="Live Link">
-                <i class="fa-solid fa-link icon"></i>
+                <img src="./Images/stack/link-icon.svg" class="btn-icon" alt="Live Link" />
               </a>
             </div>
           </div>
@@ -402,6 +445,216 @@
       </div>
     </section>
     <!-- Project Section End  -->
+
+    <!-- Graphics Designing Section Start -->
+    <section id="graphics" class="projectSection">
+      <h2 class="projectTitle">Graphics Designing</h2>
+      <div class="projectContainer galleryGrid">
+        <div class="projectCard" id="graphics1">
+          <div class="projectCardOverlay"></div>
+          <div class="projectNumber rightNumber">01</div>
+          <div class="projectContent leftProjectContent">
+            <div class="projectSkillsContainer">
+            </div>
+            <h2 class="projectHeading">Graphics Project 1</h2>
+            <p class="projectSubHeading">
+              Add your project description here
+            </p>
+            <div class="btnGroup">
+              <a href="" title="GitHubLink">
+                <img src="./Images/stack/Github.svg" class="btn-icon" alt="GitHub" />
+              </a>
+              <a href="" title="Live Link">
+                <img src="./Images/stack/link-icon.svg" class="btn-icon" alt="Live Link" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="projectCard" id="graphics2">
+          <div class="projectCardOverlay"></div>
+          <div class="projectNumber leftNumber">02</div>
+          <div class="projectContent rightProjectContent">
+            <div class="projectSkillsContainer">
+            </div>
+            <h2 class="projectHeading">Graphics Project 2</h2>
+            <p class="projectSubHeading">
+              Add your project description here
+            </p>
+            <div class="btnGroup">
+              <a href="" title="GitHubLink">
+                <img src="./Images/stack/Github.svg" class="btn-icon" alt="GitHub" />
+              </a>
+              <a href="" title="Live Link">
+                <img src="./Images/stack/link-icon.svg" class="btn-icon" alt="Live Link" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="projectCard" id="graphics3">
+          <div class="projectCardOverlay"></div>
+          <div class="projectNumber rightNumber">03</div>
+          <div class="projectContent leftProjectContent">
+            <div class="projectSkillsContainer">
+            </div>
+            <h2 class="projectHeading">Graphics Project 3</h2>
+            <p class="projectSubHeading">
+              Add your project description here
+            </p>
+            <div class="btnGroup">
+              <a href="" title="GitHubLink">
+                <img src="./Images/stack/Github.svg" class="btn-icon" alt="GitHub" />
+              </a>
+              <a href="" title="Live Link">
+                <img src="./Images/stack/link-icon.svg" class="btn-icon" alt="Live Link" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Graphics Designing Section End -->
+
+    <!-- Social Media Section Start -->
+    <section id="socialmedia" class="projectSection">
+      <h2 class="projectTitle">Social Media</h2>
+      <div class="projectContainer galleryGrid">
+        <div class="projectCard" id="social1">
+          <div class="projectCardOverlay"></div>
+          <div class="projectNumber rightNumber">01</div>
+          <div class="projectContent leftProjectContent">
+            <div class="projectSkillsContainer">
+            </div>
+            <h2 class="projectHeading">Social Media Project 1</h2>
+            <p class="projectSubHeading">
+              Add your project description here
+            </p>
+            <div class="btnGroup">
+              <a href="" title="GitHubLink">
+                <img src="./Images/stack/Github.svg" class="btn-icon" alt="GitHub" />
+              </a>
+              <a href="" title="Live Link">
+                <img src="./Images/stack/link-icon.svg" class="btn-icon" alt="Live Link" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="projectCard" id="social2">
+          <div class="projectCardOverlay"></div>
+          <div class="projectNumber leftNumber">02</div>
+          <div class="projectContent rightProjectContent">
+            <div class="projectSkillsContainer">
+            </div>
+            <h2 class="projectHeading">Social Media Project 2</h2>
+            <p class="projectSubHeading">
+              Add your project description here
+            </p>
+            <div class="btnGroup">
+              <a href="" title="GitHubLink">
+                <img src="./Images/stack/Github.svg" class="btn-icon" alt="GitHub" />
+              </a>
+              <a href="" title="Live Link">
+                <img src="./Images/stack/link-icon.svg" class="btn-icon" alt="Live Link" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="projectCard" id="social3">
+          <div class="projectCardOverlay"></div>
+          <div class="projectNumber rightNumber">03</div>
+          <div class="projectContent leftProjectContent">
+            <div class="projectSkillsContainer">
+            </div>
+            <h2 class="projectHeading">Social Media Project 3</h2>
+            <p class="projectSubHeading">
+              Add your project description here
+            </p>
+            <div class="btnGroup">
+              <a href="" title="GitHubLink">
+                <img src="./Images/stack/Github.svg" class="btn-icon" alt="GitHub" />
+              </a>
+              <a href="" title="Live Link">
+                <img src="./Images/stack/link-icon.svg" class="btn-icon" alt="Live Link" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Social Media Section End -->
+
+    <!-- Advertisements Section Start -->
+    <section id="advertisements" class="projectSection">
+      <h2 class="projectTitle">Advertisements</h2>
+      <div class="projectContainer galleryGrid">
+        <div class="projectCard" id="ad1">
+          <div class="projectCardOverlay"></div>
+          <div class="projectNumber rightNumber">01</div>
+          <div class="projectContent leftProjectContent">
+            <div class="projectSkillsContainer">
+            </div>
+            <h2 class="projectHeading">Ad Project 1</h2>
+            <p class="projectSubHeading">
+              Add your project description here
+            </p>
+            <div class="btnGroup">
+              <a href="" title="GitHubLink">
+                <img src="./Images/stack/Github.svg" class="btn-icon" alt="GitHub" />
+              </a>
+              <a href="" title="Live Link">
+                <img src="./Images/stack/link-icon.svg" class="btn-icon" alt="Live Link" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="projectCard" id="ad2">
+          <div class="projectCardOverlay"></div>
+          <div class="projectNumber leftNumber">02</div>
+          <div class="projectContent rightProjectContent">
+            <div class="projectSkillsContainer">
+            </div>
+            <h2 class="projectHeading">Ad Project 2</h2>
+            <p class="projectSubHeading">
+              Add your project description here
+            </p>
+            <div class="btnGroup">
+              <a href="" title="GitHubLink">
+                <img src="./Images/stack/Github.svg" class="btn-icon" alt="GitHub" />
+              </a>
+              <a href="" title="Live Link">
+                <img src="./Images/stack/link-icon.svg" class="btn-icon" alt="Live Link" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="projectCard" id="ad3">
+          <div class="projectCardOverlay"></div>
+          <div class="projectNumber rightNumber">03</div>
+          <div class="projectContent leftProjectContent">
+            <div class="projectSkillsContainer">
+            </div>
+            <h2 class="projectHeading">Ad Project 3</h2>
+            <p class="projectSubHeading">
+              Add your project description here
+            </p>
+            <div class="btnGroup">
+              <a href="" title="GitHubLink">
+                <img src="./Images/stack/Github.svg" class="btn-icon" alt="GitHub" />
+              </a>
+              <a href="" title="Live Link">
+                <img src="./Images/stack/link-icon.svg" class="btn-icon" alt="Live Link" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Advertisements Section End -->
 
     <!-- Skill Section Start  -->
     <section class="skillContainer" id="skills">
@@ -665,6 +918,78 @@
 
   <!-- Script for Read More button functionality -->
   <script src="./script.js"></script>
+
+  <!-- Card Lightbox -->
+  <div class="card-lightbox" id="cardLightbox">
+    <div class="card-lightbox-inner" id="cardLightboxInner">
+      <button class="card-lightbox-close" id="cardLightboxClose">&times;</button>
+      <div class="card-lb-overlay"></div>
+      <div class="card-lb-body" id="cardLbBody"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var lightbox = document.getElementById('cardLightbox');
+      var inner = document.getElementById('cardLightboxInner');
+      var lbBody = document.getElementById('cardLbBody');
+      var closeBtn = document.getElementById('cardLightboxClose');
+
+      document.querySelectorAll('.projectCard').forEach(function (card) {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', function (e) {
+          if (e.target.closest('a, button')) return;
+
+          var style = window.getComputedStyle(card);
+          inner.style.backgroundImage = style.backgroundImage;
+          inner.style.backgroundColor = style.backgroundColor;
+          inner.style.backgroundSize = 'cover';
+          inner.style.backgroundPosition = 'center';
+
+          var heading = card.querySelector('.projectHeading');
+          var sub = card.querySelector('.projectSubHeading');
+          var btns = card.querySelector('.btnGroup');
+          var skills = card.querySelector('.projectSkillsContainer');
+
+          // Set text/image content via innerHTML
+          lbBody.innerHTML =
+            '<div class="card-lb-skills">' + (skills ? skills.innerHTML : '') + '</div>' +
+            '<h2 class="card-lb-heading">' + (heading ? heading.textContent : '') + '</h2>' +
+            '<p class="card-lb-sub">' + (sub ? sub.textContent.trim() : '') + '</p>' +
+            '<div class="card-lb-btns"></div>';
+
+          // Build button links via cloneNode to preserve FA Kit SVG exactly
+          if (btns) {
+            var lbBtnsContainer = lbBody.querySelector('.card-lb-btns');
+            btns.querySelectorAll('a').forEach(function (link) {
+              var newLink = link.cloneNode(true);
+              newLink.className = 'card-lb-link';
+              newLink.setAttribute('target', '_blank');
+              newLink.setAttribute('rel', 'noopener');
+              newLink.removeAttribute('style');
+              lbBtnsContainer.appendChild(newLink);
+            });
+          }
+
+          lightbox.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      closeBtn.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox) closeLightbox();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeLightbox();
+      });
+    })();
+  </script>
 </body>
 
 </html>
