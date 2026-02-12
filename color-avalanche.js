@@ -14,7 +14,6 @@
 
   var engine = Engine.create();
   var world = engine.world;
-
   var sWidth = section.offsetWidth;
   var sHeight = section.offsetHeight;
 
@@ -28,10 +27,12 @@
       background: 'transparent'
     }
   });
-  Render.run(render);
 
   var runner = Runner.create();
-  Runner.run(runner, engine);
+  var bodiesDOM = [];
+  var isVisible = false;
+  var isRunning = false;
+  var hasSpawned = false;
 
   // Color data
   var colorListItems = document.querySelectorAll('#ca-color-source li');
@@ -39,9 +40,7 @@
     return li.textContent.trim();
   });
 
-  var bodiesDOM = [];
-
-  // Audio
+  // Audio — only plays when section is visible
   var audioCtx = null;
   function getAudioCtx() {
     if (!audioCtx) {
@@ -51,6 +50,7 @@
   }
 
   function playCollisionSound(velocity) {
+    if (!isVisible) return; // No sound when not visible
     var ctx = getAudioCtx();
     if (ctx.state === 'suspended') ctx.resume();
     var intensity = Math.max(0, Math.min(velocity / 15, 1));
@@ -60,10 +60,8 @@
     var gainNode = ctx.createGain();
     osc.connect(gainNode);
     gainNode.connect(ctx.destination);
-
     osc.frequency.setValueAtTime(300 + Math.random() * 200, ctx.currentTime);
     osc.type = 'sine';
-
     var now = ctx.currentTime;
     gainNode.gain.setValueAtTime(0, now);
     gainNode.gain.linearRampToValueAtTime(intensity * 0.3, now + 0.01);
@@ -73,6 +71,7 @@
   }
 
   Events.on(engine, 'collisionStart', function (event) {
+    if (!isVisible) return; // Skip all collision sounds when off-screen
     var pairs = event.pairs;
     if (pairs.length > 8) return;
     for (var i = 0; i < pairs.length; i++) {
@@ -84,6 +83,21 @@
       playCollisionSound(speedA + speedB);
     }
   });
+
+  // Start/stop engine based on visibility
+  function startEngine() {
+    if (isRunning) return;
+    Render.run(render);
+    Runner.run(runner, engine);
+    isRunning = true;
+  }
+
+  function stopEngine() {
+    if (!isRunning) return;
+    Render.stop(render);
+    Runner.stop(runner);
+    isRunning = false;
+  }
 
   // Walls
   function createWalls() {
@@ -112,6 +126,9 @@
 
   // Spawn colors — fewer on mobile
   function spawnColors() {
+    if (hasSpawned) return;
+    hasSpawned = true;
+
     var w = section.offsetWidth;
     var padding = 50;
     var isMobile = window.innerWidth <= 600;
@@ -168,8 +185,13 @@
     });
   }
 
-  // Sync DOM to physics
+  // Sync DOM to physics — only when visible
+  var animFrameId = null;
   function updateLoop() {
+    if (!isVisible) {
+      animFrameId = null;
+      return;
+    }
     bodiesDOM.forEach(function (pair) {
       var pos = pair.body.position;
       var angle = pair.body.angle;
@@ -177,7 +199,7 @@
         'translate(' + (pos.x - pair.elem.offsetWidth / 2) + 'px, ' +
         (pos.y - pair.elem.offsetHeight / 2) + 'px) rotate(' + angle + 'rad)';
     });
-    requestAnimationFrame(updateLoop);
+    animFrameId = requestAnimationFrame(updateLoop);
   }
 
   // Mouse constraint for drag interaction
@@ -201,10 +223,24 @@
   sceneContainer.addEventListener('wheel', forwardScroll, { passive: true });
   section.addEventListener('wheel', forwardScroll, { passive: true });
 
-  // Init
+  // Create walls once
   createWalls();
-  spawnColors();
-  updateLoop();
+
+  // IntersectionObserver — only run physics when section is on screen
+  var observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      isVisible = entry.isIntersecting;
+      if (isVisible) {
+        if (!hasSpawned) spawnColors();
+        startEngine();
+        if (!animFrameId) updateLoop();
+      } else {
+        stopEngine();
+      }
+    });
+  }, { root: wrapper, threshold: 0.05 });
+
+  observer.observe(section);
 
   // Resize
   window.addEventListener('resize', function () {

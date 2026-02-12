@@ -737,25 +737,33 @@ nav {
   text-align: center;
   letter-spacing: -0.01em;
   margin: 0;
-
   color: rgba(255, 255, 255, 0.15);
-  background: linear-gradient(to right, #ffffff, #ffffff) no-repeat;
-  -webkit-background-clip: text;
-  background-clip: text;
-  background-size: 0%;
-  transition: background-size cubic-bezier(0.1, 0.5, 0.5, 1) 0.5s;
-
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
+  border-bottom: 1px solid #2f2b28;
+}
 
+/* Scroll-reveal gradient on revealed letters */
+.projectTitle .te-base {
+  background: linear-gradient(to right, #ffffff, #ffffff) no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 0%;
+  transition: background-size cubic-bezier(0.1, 0.5, 0.5, 1) 0.5s;
   animation-name: textEffectReveal;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
   animation-timeline: view();
   animation-range: entry 100% cover 50%;
+}
+
+/* Faded letters stay at base faded color */
+.projectTitle .te-fade {
+  color: rgba(255, 255, 255, 0.15);
 }
 
 @keyframes textEffectReveal {
@@ -764,8 +772,8 @@ nav {
   }
 }
 
-/* Hover overlay span inside projectTitle */
-.projectTitle.text-effect > span {
+/* Hover overlay inside projectTitle */
+.projectTitle.text-effect > .te-hover {
   position: absolute;
   inset: 0;
   padding: inherit;
@@ -781,33 +789,29 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  -webkit-text-fill-color: initial;
-  -webkit-background-clip: initial;
-  background-clip: initial;
-  background-image: none;
 }
 
-.projectTitle.text-effect:hover > span {
+.projectTitle.text-effect:hover > .te-hover {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
 }
 
 /* Alternating hover span colors: Yellow, Red, White */
-#projects .projectTitle.text-effect > span {
+#projects .projectTitle.text-effect > .te-hover {
   background-color: #FFD700;
   color: #0d0d0d;
 }
 
-#graphics .projectTitle.text-effect > span {
+#graphics .projectTitle.text-effect > .te-hover {
   background-color: #e84949;
   color: #ffffff;
 }
 
-#socialmedia .projectTitle.text-effect > span {
+#socialmedia .projectTitle.text-effect > .te-hover {
   background-color: #ffffff;
   color: #0d0d0d;
 }
 
-#advertisements .projectTitle.text-effect > span {
+#advertisements .projectTitle.text-effect > .te-hover {
   background-color: #FFD700;
   color: #0d0d0d;
 }
@@ -819,10 +823,486 @@ nav {
   padding: 20px 0 60px;
 }
 
-/* ── Graphics Designing placeholders ── */
-#graphics1 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
-#graphics2 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
-#graphics3 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+/* ── Graphics Designing Section - Redesigned ── */
+.gfx-division {
+  padding: 40px 5%;
+  border-bottom: 1px solid rgba(47, 43, 40, 0.2);
+}
+
+.gfx-division:last-child {
+  border-bottom: none;
+}
+
+.gfx-division-title {
+  font-family: 'Space Grotesk', 'Be Vietnam Pro', sans-serif;
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a1a2e;
+  text-align: center;
+  margin: 0 0 8px;
+}
+
+.gfx-division-desc {
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  margin: 0 0 30px;
+}
+
+/* Menu Tabs */
+.gfx-menu-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.gfx-menu-tab {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 24px;
+  border: 2px solid #1a1a2e;
+  border-radius: 8px;
+  background: transparent;
+  color: #1a1a2e;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.gfx-menu-tab:hover {
+  background: #1a1a2e;
+  color: #fff;
+}
+
+.gfx-menu-tab.active {
+  background: #e84949;
+  border-color: #e84949;
+  color: #fff;
+}
+
+/* Flipbook */
+.gfx-book-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gfx-book-container {
+  perspective: 2000px;
+  position: relative;
+  width: 600px;
+  height: 400px;
+  margin: 0 auto;
+}
+
+.gfx-page {
+  width: 300px;
+  height: 400px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform-origin: left center;
+  transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transform-style: preserve-3d;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.gfx-page canvas {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.gfx-page.flipped {
+  transform: rotateY(-180deg);
+  z-index: 0;
+}
+
+.gfx-page-front,
+.gfx-page-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.gfx-page-back {
+  transform: rotateY(180deg);
+}
+
+.gfx-book-controls {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-top: 24px;
+}
+
+.gfx-book-btn {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  background: #1a1a2e;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.gfx-book-btn:hover {
+  background: #e84949;
+  transform: scale(1.05);
+}
+
+.gfx-book-btn:disabled {
+  background: #999;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.gfx-page-indicator {
+  font-size: 14px;
+  color: #333;
+  min-width: 100px;
+  text-align: center;
+}
+
+.gfx-book-container.loading::after {
+  content: 'Loading PDF...';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 16px;
+  color: #666;
+  z-index: 100;
+}
+
+/* Image Galleries */
+.gfx-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.gfx-gallery-item {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #1a1a2e;
+  aspect-ratio: 3 / 4;
+  cursor: pointer;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.gfx-gallery-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  z-index: 10;
+}
+
+.gfx-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.gfx-gallery-item:hover img {
+  transform: scale(1.08);
+}
+
+/* Logo gallery - square with padding */
+.gfx-gallery-logos .gfx-logo-item {
+  aspect-ratio: 1 / 1;
+  background: #f9f6ef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.gfx-gallery-logos .gfx-logo-item img {
+  object-fit: contain;
+}
+
+/* Gallery Lightbox */
+.gfx-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+
+.gfx-lightbox.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.gfx-lightbox img {
+  max-width: 85vw;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 8px;
+  transform: scale(0.8);
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.gfx-lightbox.active img {
+  transform: scale(1);
+}
+
+.gfx-lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+  border: none;
+  font-size: 28px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease;
+}
+
+.gfx-lightbox-close:hover {
+  background: #e84949;
+}
+
+/* Fullscreen button accent */
+.gfx-fs-btn {
+  background: #e84949 !important;
+  margin-left: 12px;
+}
+
+.gfx-fs-btn:hover {
+  background: #c73636 !important;
+}
+
+/* Fullscreen Menu Overlay */
+.gfx-fs-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 6000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.gfx-fs-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.gfx-fs-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border: none;
+  font-size: 28px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s ease, transform 0.3s ease;
+  z-index: 10;
+}
+
+.gfx-fs-close:hover {
+  background: #e84949;
+  transform: scale(1.1);
+}
+
+.gfx-fs-page-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  touch-action: pan-y;
+}
+
+.gfx-fs-page-img {
+  max-width: 90vw;
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 6px;
+  box-shadow: 0 10px 60px rgba(0, 0, 0, 0.6);
+  transform: scale(0.85);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.gfx-fs-overlay.active .gfx-fs-page-img {
+  transform: scale(1);
+  opacity: 1;
+}
+
+.gfx-fs-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 16px 0 24px;
+  width: 100%;
+}
+
+.gfx-fs-nav-btn {
+  font-family: 'Be Vietnam Pro', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 28px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(8px);
+}
+
+.gfx-fs-nav-btn:hover {
+  background: #e84949;
+  border-color: #e84949;
+  transform: scale(1.05);
+}
+
+.gfx-fs-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.gfx-fs-indicator {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 15px;
+  min-width: 100px;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Hint text for double-tap / long-press */
+.gfx-fs-hint {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.35);
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* Swipe indicator arrows in fullscreen */
+.gfx-fs-swipe-left,
+.gfx-fs-swipe-right {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 40px;
+  color: rgba(255, 255, 255, 0.15);
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.gfx-fs-swipe-left {
+  left: 16px;
+}
+
+.gfx-fs-swipe-right {
+  right: 16px;
+}
+
+/* Graphics section responsive */
+@media (max-width: 900px) {
+  .gfx-division { padding: 30px 3%; }
+  .gfx-division-title { font-size: 26px; }
+  .gfx-book-container { width: 400px; height: 267px; }
+  .gfx-page { width: 200px; height: 267px; }
+  .gfx-gallery { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+}
+
+@media (max-width: 600px) {
+  .gfx-division { padding: 20px 4%; }
+  .gfx-division-title { font-size: 22px; }
+  .gfx-division-desc { font-size: 13px; }
+  .gfx-menu-tabs { gap: 8px; }
+  .gfx-menu-tab { padding: 8px 16px; font-size: 12px; }
+  .gfx-book-container { width: 280px; height: 373px; }
+  .gfx-page { width: 280px; height: 373px; }
+  .gfx-book-btn { padding: 8px 14px; font-size: 12px; }
+  .gfx-book-controls { flex-wrap: wrap; justify-content: center; }
+  .gfx-fs-btn { margin-left: 0 !important; margin-top: 8px; }
+  .gfx-gallery { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .gfx-lightbox img { max-width: 95vw; max-height: 80vh; }
+  /* Fullscreen responsive */
+  .gfx-fs-page-img { max-width: 96vw; max-height: 75vh; border-radius: 4px; }
+  .gfx-fs-nav-btn { padding: 10px 18px; font-size: 12px; }
+  .gfx-fs-indicator { font-size: 13px; min-width: 80px; }
+  .gfx-fs-controls { gap: 12px; padding: 12px 0 18px; }
+  .gfx-fs-close { top: 10px; right: 10px; width: 40px; height: 40px; font-size: 24px; }
+}
+
+@media (max-width: 480px) {
+  .gfx-book-container { width: 240px; height: 320px; }
+  .gfx-page { width: 240px; height: 320px; }
+  .gfx-gallery { grid-template-columns: 1fr; gap: 16px; }
+  .gfx-fs-page-img { max-width: 98vw; max-height: 70vh; }
+  .gfx-fs-nav-btn { padding: 8px 14px; font-size: 11px; }
+  .gfx-fs-controls { gap: 8px; padding: 10px 0 14px; }
+}
+
+/* Night theme - Graphics section */
+.night-theme .gfx-division { border-bottom-color: rgba(255, 255, 255, 0.1); }
+.night-theme .gfx-division-title { color: #f0f0f0; }
+.night-theme .gfx-division-desc { color: #bbb; }
+.night-theme .gfx-menu-tab { border-color: #555; color: #f0f0f0; }
+.night-theme .gfx-menu-tab:hover { background: #333; }
+.night-theme .gfx-menu-tab.active { background: #e84949; border-color: #e84949; }
+.night-theme .gfx-book-btn { background: #333; }
+.night-theme .gfx-book-btn:hover { background: #e84949; }
+.night-theme .gfx-page-indicator { color: #ccc; }
+.night-theme .gfx-gallery-item { background: #222; }
+.night-theme .gfx-gallery-logos .gfx-logo-item { background: #2a2a2a; }
 
 /* ── Color Avalanche Section ── */
 .color-avalanche-section {
@@ -1073,6 +1553,23 @@ nav {
 }
 
 .projectCard .projectCardOverlay { display: none; }
+
+/* College Project tag */
+.project-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(78, 69, 213, 0.85);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  z-index: 15;
+  letter-spacing: 0.5px;
+  backdrop-filter: blur(4px);
+  pointer-events: none;
+}
 
 /* --- Number: hidden by default, appears on hover --- */
 .projectNumber {
