@@ -52,7 +52,7 @@
 }
 
 .night-theme .projectTitle {
-  color: #e84949;
+  color: rgba(255, 255, 255, 0.15);
 }
 
 .night-theme .projectHeading {
@@ -73,7 +73,7 @@
 }
 
 .night-theme .projectNumber {
-  color: rgba(255, 255, 255, 0.15);
+  color: #fff;
 }
 
 .night-theme .icon {
@@ -731,11 +731,85 @@ nav {
 }
 
 .projectTitle {
-  color: #e84949;
   font-size: 90px;
-  line-height: 75px;
+  line-height: 100%;
   padding: 50px 0 30px;
   text-align: center;
+  letter-spacing: -0.01em;
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.15);
+  background: linear-gradient(to right, #ffffff, #ffffff) no-repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: 0%;
+  transition: background-size cubic-bezier(0.1, 0.5, 0.5, 1) 0.5s;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+
+  animation-name: textEffectReveal;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-timeline: view();
+  animation-range: entry 100% cover 50%;
+}
+
+@keyframes textEffectReveal {
+  to {
+    background-size: 100%;
+  }
+}
+
+/* Hover overlay span inside projectTitle */
+.projectTitle.text-effect > span {
+  position: absolute;
+  inset: 0;
+  padding: inherit;
+  color: #0d0d0d;
+  font-family: inherit;
+  font-weight: inherit;
+  font-style: inherit;
+  font-size: inherit;
+  letter-spacing: inherit;
+  clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
+  transform-origin: center;
+  transition: all cubic-bezier(0.1, 0.5, 0.5, 1) 0.4s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-text-fill-color: initial;
+  -webkit-background-clip: initial;
+  background-clip: initial;
+  background-image: none;
+}
+
+.projectTitle.text-effect:hover > span {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+/* Alternating hover span colors: Yellow, Red, White */
+#projects .projectTitle.text-effect > span {
+  background-color: #FFD700;
+  color: #0d0d0d;
+}
+
+#graphics .projectTitle.text-effect > span {
+  background-color: #e84949;
+  color: #ffffff;
+}
+
+#socialmedia .projectTitle.text-effect > span {
+  background-color: #ffffff;
+  color: #0d0d0d;
+}
+
+#advertisements .projectTitle.text-effect > span {
+  background-color: #FFD700;
+  color: #0d0d0d;
 }
 
 .projectContainer {
@@ -749,6 +823,170 @@ nav {
 #graphics1 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
 #graphics2 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
 #graphics3 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+
+/* ── Color Avalanche Section ── */
+.color-avalanche-section {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  min-height: 500px;
+  background-color: #0f0f11;
+  overflow: hidden;
+}
+
+.ca-scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.ca-color-body {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  cursor: grab;
+  user-select: none;
+  will-change: transform;
+  pointer-events: auto;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  transition: box-shadow 0.1s;
+  font-family: "Be Vietnam Pro", sans-serif;
+}
+
+.ca-color-body:active {
+  cursor: grabbing;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+}
+
+.ca-ui-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+  padding: 2rem;
+  box-sizing: border-box;
+  background: radial-gradient(circle at 50% 50%, transparent 80%, rgba(0, 0, 0, 0.4) 100%);
+}
+
+.ca-title {
+  font-size: 3rem;
+  font-weight: 900;
+  margin: 0;
+  background: linear-gradient(135deg, #fff 0%, #a5a5a5 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.ca-desc {
+  font-size: 1.1rem;
+  opacity: 0.7;
+  margin-top: 0.5rem;
+  max-width: 400px;
+  color: #ffffff;
+}
+
+.ca-controls {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  pointer-events: auto;
+}
+
+.ca-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  backdrop-filter: blur(10px);
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+}
+
+.ca-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.ca-btn:active {
+  transform: translateY(0);
+}
+
+.color-avalanche-section canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  pointer-events: auto;
+  z-index: 5;
+}
+
+/* Responsive - Tablet */
+@media (max-width: 900px) {
+  .color-avalanche-section {
+    height: 65vh;
+    min-height: 400px;
+  }
+  .ca-title {
+    font-size: 2.2rem;
+  }
+  .ca-desc {
+    font-size: 1rem;
+  }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 600px) {
+  .color-avalanche-section {
+    height: 55vh;
+    min-height: 350px;
+  }
+  .ca-ui-layer {
+    padding: 1.2rem;
+  }
+  .ca-title {
+    font-size: 1.6rem;
+  }
+  .ca-desc {
+    font-size: 0.85rem;
+    max-width: 260px;
+  }
+  .ca-controls {
+    margin-top: 1rem;
+    gap: 0.5rem;
+  }
+  .ca-btn {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.65rem;
+    border-radius: 8px;
+    letter-spacing: 0.5px;
+  }
+  .ca-color-body {
+    font-size: 11px;
+    letter-spacing: 0.3px;
+  }
+}
 
 /* ── Social Media placeholders ── */
 #social1 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
@@ -959,19 +1197,34 @@ nav {
   transform: translateY(0);
 }
 
-/* GitHub / Link image icons inside btnGroup */
+/* GitHub / Link image icons inside btnGroup (mask-image approach) */
 .btn-icon {
+  display: inline-block;
   width: 32px;
   height: 32px;
-  object-fit: contain;
-  filter: brightness(0) invert(0.15);
-  transition: filter 0.3s ease, transform 0.3s ease;
+  background-color: #fff;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
   cursor: pointer;
-  display: block;
+}
+
+.github-icon {
+  -webkit-mask-image: url('./Images/stack/Github.svg');
+  mask-image: url('./Images/stack/Github.svg');
+}
+
+.link-icon {
+  -webkit-mask-image: url('./Images/stack/link-icon.svg');
+  mask-image: url('./Images/stack/link-icon.svg');
 }
 
 .btnGroup a:hover .btn-icon {
-  filter: invert(34%) sepia(89%) saturate(700%) hue-rotate(320deg) brightness(105%) contrast(95%);
+  background-color: #e84949;
   transform: scale(1.15);
 }
 
@@ -1295,6 +1548,7 @@ footer {
   .projectTitle {
     font-size: 2.5em;
     padding: 30px 0 20px;
+    line-height: 100%;
   }
   .skillContainer {
     flex-direction: column;
@@ -1782,12 +2036,11 @@ footer {
 .card-lb-link .btn-icon {
   width: 36px;
   height: 36px;
-  filter: brightness(0) invert(1);
-  transition: filter 0.3s ease, transform 0.3s ease;
+  background-color: #fff;
 }
 
 .card-lb-link:hover .btn-icon {
-  filter: invert(34%) sepia(89%) saturate(700%) hue-rotate(320deg) brightness(105%) contrast(95%);
+  background-color: #e84949;
 }
 
 .card-lightbox-close {
