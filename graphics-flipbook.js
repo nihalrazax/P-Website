@@ -102,17 +102,25 @@
 
   function updateZIndex() {
     for (var i = 0; i < pages.length; i++) {
-      pages[i].style.zIndex = i < currentSpread ? i : pages.length - i;
+      // Flipped pages: lower index = further back on the left
+      // Unflipped pages: higher stacking so the top page is the current spread
+      pages[i].style.zIndex = i < currentSpread ? i + 1 : pages.length - i + 1;
     }
   }
 
   function flipNext() {
     if (currentSpread >= pages.length || isAnimating) return;
     isAnimating = true;
-    pages[currentSpread].classList.add('flipped');
+    var flipping = pages[currentSpread];
+    // Boost z-index of flipping page so it appears above others during animation
+    flipping.style.zIndex = pages.length + 10;
+    flipping.classList.add('flipped');
     currentSpread++;
-    updateZIndex();
-    setTimeout(function () { isAnimating = false; }, 800);
+    // Reset z-index after flip completes
+    setTimeout(function () {
+      updateZIndex();
+      isAnimating = false;
+    }, 1000);
     updateControls();
   }
 
@@ -120,9 +128,15 @@
     if (currentSpread <= 0 || isAnimating) return;
     isAnimating = true;
     currentSpread--;
-    pages[currentSpread].classList.remove('flipped');
-    updateZIndex();
-    setTimeout(function () { isAnimating = false; }, 800);
+    var flipping = pages[currentSpread];
+    // Boost z-index of flipping page so it appears above others during animation
+    flipping.style.zIndex = pages.length + 10;
+    flipping.classList.remove('flipped');
+    // Reset z-index after flip completes
+    setTimeout(function () {
+      updateZIndex();
+      isAnimating = false;
+    }, 1000);
     updateControls();
   }
 
@@ -153,13 +167,15 @@
     loadPdf(firstTab.getAttribute('data-menu'));
   }
 
-  // ── Fullscreen Menu Viewer ──
+  // ── Fullscreen 3D Flipbook Viewer ──
   var fsOverlay = null;
-  var fsPageImg = null;
   var fsPrevBtn = null;
   var fsNextBtn = null;
   var fsIndicator = null;
-  var fsCurrentPage = 0;
+  var fsBookContainer = null;
+  var fsPages = [];
+  var fsCurrentSpread = 0;
+  var fsIsAnimating = false;
   var fsIsOpen = false;
 
   function createFsOverlay() {
@@ -169,18 +185,16 @@
     fsOverlay.innerHTML =
       '<button class="gfx-fs-close">&times;</button>' +
       '<div class="gfx-fs-page-wrapper">' +
-        '<span class="gfx-fs-swipe-left">&#10094;</span>' +
-        '<canvas class="gfx-fs-page-img"></canvas>' +
-        '<span class="gfx-fs-swipe-right">&#10095;</span>' +
+        '<div class="gfx-fs-book-container"></div>' +
       '</div>' +
       '<div class="gfx-fs-controls">' +
         '<button class="gfx-fs-nav-btn" id="gfx-fs-prev">&#10094; Prev</button>' +
-        '<span class="gfx-fs-indicator" id="gfx-fs-indicator">1 / 1</span>' +
+        '<span class="gfx-fs-indicator" id="gfx-fs-indicator">Page 1 / 1</span>' +
         '<button class="gfx-fs-nav-btn" id="gfx-fs-next">Next &#10095;</button>' +
       '</div>';
     document.body.appendChild(fsOverlay);
 
-    fsPageImg = fsOverlay.querySelector('.gfx-fs-page-img');
+    fsBookContainer = fsOverlay.querySelector('.gfx-fs-book-container');
     fsPrevBtn = fsOverlay.querySelector('#gfx-fs-prev');
     fsNextBtn = fsOverlay.querySelector('#gfx-fs-next');
     fsIndicator = fsOverlay.querySelector('#gfx-fs-indicator');
@@ -189,20 +203,20 @@
 
     closeBtn.addEventListener('click', closeFsViewer);
     fsOverlay.addEventListener('click', function (e) {
-      if (e.target === fsOverlay) closeFsViewer();
+      if (e.target === fsOverlay || e.target === wrapper) closeFsViewer();
     });
-    fsPrevBtn.addEventListener('click', function () { fsSwitchPage(-1); });
-    fsNextBtn.addEventListener('click', function () { fsSwitchPage(1); });
+    fsPrevBtn.addEventListener('click', function () { fsFlipPrev(); });
+    fsNextBtn.addEventListener('click', function () { fsFlipNext(); });
 
     // Keyboard navigation
     document.addEventListener('keydown', function (e) {
       if (!fsIsOpen) return;
       if (e.key === 'Escape') closeFsViewer();
-      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') fsSwitchPage(-1);
-      else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') fsSwitchPage(1);
+      else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') fsFlipPrev();
+      else if (e.key === 'ArrowRight' || e.key === 'ArrowDown') fsFlipNext();
     });
 
-    // Swipe gesture on fullscreen page
+    // Swipe gesture on fullscreen book
     var touchStartX = 0;
     var touchStartY = 0;
     var isSwiping = false;
@@ -215,37 +229,125 @@
       }
     }, { passive: true });
 
-    wrapper.addEventListener('touchmove', function (e) {
-      // allow default scroll if vertical
-    }, { passive: true });
-
     wrapper.addEventListener('touchend', function (e) {
       if (!isSwiping) return;
       isSwiping = false;
-      var touchEndX = e.changedTouches[0].clientX;
-      var touchEndY = e.changedTouches[0].clientY;
-      var diffX = touchEndX - touchStartX;
-      var diffY = touchEndY - touchStartY;
-
-      // Only process horizontal swipes (more X movement than Y)
+      var diffX = e.changedTouches[0].clientX - touchStartX;
+      var diffY = e.changedTouches[0].clientY - touchStartY;
       if (Math.abs(diffX) > 50 && Math.abs(diffX) > Math.abs(diffY)) {
-        if (diffX < 0) {
-          fsSwitchPage(1); // Swipe left = next
-        } else {
-          fsSwitchPage(-1); // Swipe right = prev
-        }
+        if (diffX < 0) fsFlipNext();
+        else fsFlipPrev();
       }
     }, { passive: true });
+
+    wrapper.addEventListener('touchmove', function () {
+      // Cancel swipe if too much vertical movement
+    }, { passive: true });
+  }
+
+  function fsBuildBook() {
+    fsBookContainer.innerHTML = '';
+    fsPages = [];
+    for (var i = 0; i < renderedCanvases.length; i += 2) {
+      var spreadIdx = Math.floor(i / 2);
+      var pageDiv = document.createElement('div');
+      pageDiv.className = 'gfx-page';
+      pageDiv.setAttribute('data-spread', spreadIdx);
+
+      var front = document.createElement('div');
+      front.className = 'gfx-page-front';
+      // Clone canvas content
+      var frontCanvas = document.createElement('canvas');
+      frontCanvas.width = renderedCanvases[i].width;
+      frontCanvas.height = renderedCanvases[i].height;
+      frontCanvas.getContext('2d').drawImage(renderedCanvases[i], 0, 0);
+      front.appendChild(frontCanvas);
+
+      var back = document.createElement('div');
+      back.className = 'gfx-page-back';
+      if (renderedCanvases[i + 1]) {
+        var backCanvas = document.createElement('canvas');
+        backCanvas.width = renderedCanvases[i + 1].width;
+        backCanvas.height = renderedCanvases[i + 1].height;
+        backCanvas.getContext('2d').drawImage(renderedCanvases[i + 1], 0, 0);
+        back.appendChild(backCanvas);
+      }
+
+      pageDiv.appendChild(front);
+      pageDiv.appendChild(back);
+      fsBookContainer.appendChild(pageDiv);
+      fsPages.push(pageDiv);
+
+      // Click on page to flip
+      (function (idx) {
+        pageDiv.addEventListener('click', function (e) {
+          e.stopPropagation();
+          if (fsIsAnimating) return;
+          if (idx === fsCurrentSpread) fsFlipNext();
+          else if (idx === fsCurrentSpread - 1) fsFlipPrev();
+        });
+      })(spreadIdx);
+    }
+
+    // Apply flipped state up to current spread
+    for (var j = 0; j < fsCurrentSpread; j++) {
+      fsPages[j].classList.add('flipped');
+    }
+    fsUpdateZIndex();
+  }
+
+  function fsUpdateZIndex() {
+    for (var i = 0; i < fsPages.length; i++) {
+      fsPages[i].style.zIndex = i < fsCurrentSpread ? i + 1 : fsPages.length - i + 1;
+    }
+  }
+
+  function fsFlipNext() {
+    if (fsCurrentSpread >= fsPages.length || fsIsAnimating) return;
+    fsIsAnimating = true;
+    var flipping = fsPages[fsCurrentSpread];
+    flipping.style.zIndex = fsPages.length + 10;
+    flipping.classList.add('flipped');
+    fsCurrentSpread++;
+    setTimeout(function () {
+      fsUpdateZIndex();
+      fsIsAnimating = false;
+    }, 1000);
+    fsUpdateControls();
+  }
+
+  function fsFlipPrev() {
+    if (fsCurrentSpread <= 0 || fsIsAnimating) return;
+    fsIsAnimating = true;
+    fsCurrentSpread--;
+    var flipping = fsPages[fsCurrentSpread];
+    flipping.style.zIndex = fsPages.length + 10;
+    flipping.classList.remove('flipped');
+    setTimeout(function () {
+      fsUpdateZIndex();
+      fsIsAnimating = false;
+    }, 1000);
+    fsUpdateControls();
+  }
+
+  function fsUpdateControls() {
+    fsPrevBtn.disabled = fsCurrentSpread <= 0;
+    fsNextBtn.disabled = fsCurrentSpread >= fsPages.length;
+    var startPage = fsCurrentSpread * 2 + 1;
+    var total = currentPdf ? currentPdf.numPages : 1;
+    var endPage = Math.min(startPage + 1, total);
+    fsIndicator.textContent = 'Page ' + startPage +
+      (startPage !== endPage ? '-' + endPage : '') + ' / ' + total;
   }
 
   function openFsViewer() {
     if (!renderedCanvases.length || !currentPdf) return;
     createFsOverlay();
-    // Start at the current spread's first page
-    fsCurrentPage = currentSpread * 2;
-    if (fsCurrentPage >= renderedCanvases.length) fsCurrentPage = 0;
+    // Sync to the current spread of the inline flipbook
+    fsCurrentSpread = currentSpread;
+    fsBuildBook();
+    fsUpdateControls();
     fsIsOpen = true;
-    fsRenderPage();
     fsOverlay.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
@@ -257,40 +359,6 @@
     document.body.style.overflow = '';
   }
 
-  function fsRenderPage() {
-    if (!renderedCanvases[fsCurrentPage]) return;
-    var src = renderedCanvases[fsCurrentPage];
-    // Copy the source canvas to the display canvas
-    fsPageImg.width = src.width;
-    fsPageImg.height = src.height;
-    var ctx = fsPageImg.getContext('2d');
-    ctx.clearRect(0, 0, fsPageImg.width, fsPageImg.height);
-    ctx.drawImage(src, 0, 0);
-
-    var total = currentPdf ? currentPdf.numPages : 1;
-    fsIndicator.textContent = (fsCurrentPage + 1) + ' / ' + total;
-    fsPrevBtn.disabled = fsCurrentPage <= 0;
-    fsNextBtn.disabled = fsCurrentPage >= renderedCanvases.length - 1;
-  }
-
-  function fsSwitchPage(dir) {
-    var next = fsCurrentPage + dir;
-    if (next < 0 || next >= renderedCanvases.length) return;
-    fsCurrentPage = next;
-
-    // Animate transition
-    fsPageImg.style.opacity = '0';
-    fsPageImg.style.transform = dir > 0 ? 'translateX(-30px) scale(0.95)' : 'translateX(30px) scale(0.95)';
-    setTimeout(function () {
-      fsRenderPage();
-      fsPageImg.style.transform = dir > 0 ? 'translateX(30px) scale(0.95)' : 'translateX(-30px) scale(0.95)';
-      // Force reflow
-      void fsPageImg.offsetWidth;
-      fsPageImg.style.opacity = '1';
-      fsPageImg.style.transform = 'translateX(0) scale(1)';
-    }, 150);
-  }
-
   // Full Size button
   if (fsBtn) {
     fsBtn.addEventListener('click', openFsViewer);
@@ -300,7 +368,7 @@
   var lastTapTime = 0;
   var longPressTimer = null;
 
-  container.addEventListener('touchstart', function (e) {
+  container.addEventListener('touchstart', function () {
     // Long press: start timer
     longPressTimer = setTimeout(function () {
       longPressTimer = null;

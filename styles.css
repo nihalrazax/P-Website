@@ -890,11 +890,50 @@ nav {
 }
 
 .gfx-book-container {
-  perspective: 2000px;
+  perspective: 1800px;
   position: relative;
-  width: 600px;
+  width: 300px;
   height: 400px;
   margin: 0 auto;
+  transition: width 0.6s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+.gfx-book-container.gfx-book-open {
+  width: 600px;
+}
+
+/* Center spine shadow */
+.gfx-book-container::before {
+  content: '';
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 96%;
+  background: linear-gradient(90deg, rgba(0,0,0,0.15), rgba(0,0,0,0.05) 40%, transparent 50%, rgba(0,0,0,0.05) 60%, rgba(0,0,0,0.15));
+  z-index: 50;
+  pointer-events: none;
+  border-radius: 2px;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.gfx-book-container.gfx-book-open::before {
+  opacity: 1;
+}
+
+/* Book base shadow */
+.gfx-book-container::after {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 10%;
+  width: 80%;
+  height: 20px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.25) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
 }
 
 .gfx-page {
@@ -902,9 +941,10 @@ nav {
   height: 400px;
   position: absolute;
   top: 0;
-  right: 0;
+  left: 50%;
   transform-origin: left center;
-  transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: transform 1s cubic-bezier(0.4, 0.0, 0.2, 1),
+              box-shadow 0.6s ease;
   transform-style: preserve-3d;
   z-index: 1;
   cursor: pointer;
@@ -929,14 +969,21 @@ nav {
   height: 100%;
   backface-visibility: hidden;
   background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  border: 1px solid #e0e0e0;
   overflow: hidden;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.15);
+  border-radius: 0 4px 4px 0;
+}
+
+.gfx-page-front {
+  box-shadow: 4px 2px 16px rgba(0, 0, 0, 0.2),
+              inset -3px 0 8px rgba(0, 0, 0, 0.06);
 }
 
 .gfx-page-back {
   transform: rotateY(180deg);
+  border-radius: 4px 0 0 4px;
+  box-shadow: -4px 2px 16px rgba(0, 0, 0, 0.2),
+              inset 3px 0 8px rgba(0, 0, 0, 0.06);
 }
 
 .gfx-book-controls {
@@ -984,10 +1031,13 @@ nav {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(245, 240, 235, 0.95);
   font-size: 16px;
   color: #666;
   z-index: 100;
+  border-radius: 6px;
+  bottom: 0;
+  height: 100%;
 }
 
 /* Image Galleries */
@@ -1156,25 +1206,67 @@ nav {
   width: 100%;
   overflow: hidden;
   position: relative;
-  touch-action: pan-y;
 }
 
-.gfx-fs-page-img {
-  max-width: 90vw;
-  max-height: 80vh;
-  object-fit: contain;
-  border-radius: 6px;
-  box-shadow: 0 10px 60px rgba(0, 0, 0, 0.6);
-  transform: scale(0.85);
+/* Fullscreen 3D Flipbook */
+.gfx-fs-book-container {
+  perspective: 2200px;
+  position: relative;
+  width: 860px;
+  height: 570px;
+  transform: scale(0.8);
   opacity: 0;
-  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease;
-  user-select: none;
-  -webkit-user-drag: none;
+  transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.4s ease;
 }
 
-.gfx-fs-overlay.active .gfx-fs-page-img {
+.gfx-fs-overlay.active .gfx-fs-book-container {
   transform: scale(1);
   opacity: 1;
+}
+
+/* Spine shadow for fullscreen book */
+.gfx-fs-book-container::before {
+  content: '';
+  position: absolute;
+  top: 2%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 96%;
+  background: linear-gradient(90deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03) 40%, transparent 50%, rgba(255,255,255,0.03) 60%, rgba(255,255,255,0.08));
+  z-index: 50;
+  pointer-events: none;
+  border-radius: 2px;
+}
+
+/* Book base shadow fullscreen */
+.gfx-fs-book-container::after {
+  content: '';
+  position: absolute;
+  bottom: -16px;
+  left: 10%;
+  width: 80%;
+  height: 24px;
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.5) 0%, transparent 70%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Pages inside fullscreen book reuse .gfx-page styles */
+.gfx-fs-book-container .gfx-page {
+  width: 430px;
+  height: 570px;
+  left: 50%;
+}
+
+.gfx-fs-book-container .gfx-page-front {
+  box-shadow: 4px 2px 20px rgba(0, 0, 0, 0.4),
+              inset -3px 0 10px rgba(0, 0, 0, 0.08);
+}
+
+.gfx-fs-book-container .gfx-page-back {
+  box-shadow: -4px 2px 20px rgba(0, 0, 0, 0.4),
+              inset 3px 0 10px rgba(0, 0, 0, 0.08);
 }
 
 .gfx-fs-controls {
@@ -1222,34 +1314,24 @@ nav {
 
 /* Hint text for double-tap / long-press */
 .gfx-fs-hint {
+  font-size: 11px;
+  color: #999;
+  text-align: center;
+  margin-top: 10px;
+  pointer-events: none;
+}
+
+/* Swipe hint text in fullscreen */
+.gfx-fs-page-wrapper::after {
+  content: 'Swipe or click pages to flip';
   position: absolute;
   bottom: 8px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 11px;
-  color: rgba(255, 255, 255, 0.35);
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.2);
+  pointer-events: none;
   white-space: nowrap;
-  pointer-events: none;
-}
-
-/* Swipe indicator arrows in fullscreen */
-.gfx-fs-swipe-left,
-.gfx-fs-swipe-right {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 40px;
-  color: rgba(255, 255, 255, 0.15);
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-.gfx-fs-swipe-left {
-  left: 16px;
-}
-
-.gfx-fs-swipe-right {
-  right: 16px;
 }
 
 /* Graphics section responsive */
@@ -1257,8 +1339,11 @@ nav {
   .gfx-division { padding: 30px 3%; }
   .gfx-division-title { font-size: 26px; }
   .gfx-book-container { width: 400px; height: 267px; }
-  .gfx-page { width: 200px; height: 267px; }
+  .gfx-page { width: 200px; height: 267px; left: 50%; }
   .gfx-gallery { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  /* Fullscreen book - tablet */
+  .gfx-fs-book-container { width: 90vw; height: 65vh; }
+  .gfx-fs-book-container .gfx-page { width: 45vw; height: 65vh; left: 50%; }
 }
 
 @media (max-width: 600px) {
@@ -1268,14 +1353,21 @@ nav {
   .gfx-menu-tabs { gap: 8px; }
   .gfx-menu-tab { padding: 8px 16px; font-size: 12px; }
   .gfx-book-container { width: 280px; height: 373px; }
-  .gfx-page { width: 280px; height: 373px; }
+  .gfx-book-container::before { display: none; }
+  .gfx-page { width: 280px; height: 373px; left: 0; }
+  .gfx-page-front { border-radius: 4px; }
+  .gfx-page-back { border-radius: 4px; }
   .gfx-book-btn { padding: 8px 14px; font-size: 12px; }
   .gfx-book-controls { flex-wrap: wrap; justify-content: center; }
   .gfx-fs-btn { margin-left: 0 !important; margin-top: 8px; }
   .gfx-gallery { grid-template-columns: repeat(2, 1fr); gap: 12px; }
   .gfx-lightbox img { max-width: 95vw; max-height: 80vh; }
   /* Fullscreen responsive */
-  .gfx-fs-page-img { max-width: 96vw; max-height: 75vh; border-radius: 4px; }
+  .gfx-fs-book-container { width: 90vw; height: 60vh; }
+  .gfx-fs-book-container .gfx-page { width: 45vw; height: 60vh; left: 50%; }
+  .gfx-fs-book-container::before { display: none; }
+  .gfx-fs-book-container .gfx-page-front,
+  .gfx-fs-book-container .gfx-page-back { border-radius: 4px; }
   .gfx-fs-nav-btn { padding: 10px 18px; font-size: 12px; }
   .gfx-fs-indicator { font-size: 13px; min-width: 80px; }
   .gfx-fs-controls { gap: 12px; padding: 12px 0 18px; }
@@ -1284,9 +1376,10 @@ nav {
 
 @media (max-width: 480px) {
   .gfx-book-container { width: 240px; height: 320px; }
-  .gfx-page { width: 240px; height: 320px; }
+  .gfx-page { width: 240px; height: 320px; left: 0; }
   .gfx-gallery { grid-template-columns: 1fr; gap: 16px; }
-  .gfx-fs-page-img { max-width: 98vw; max-height: 70vh; }
+  .gfx-fs-book-container { width: 92vw; height: 55vh; }
+  .gfx-fs-book-container .gfx-page { width: 92vw; height: 55vh; left: 0; }
   .gfx-fs-nav-btn { padding: 8px 14px; font-size: 11px; }
   .gfx-fs-controls { gap: 8px; padding: 10px 0 14px; }
 }
@@ -1301,6 +1394,10 @@ nav {
 .night-theme .gfx-book-btn { background: #333; }
 .night-theme .gfx-book-btn:hover { background: #e84949; }
 .night-theme .gfx-page-indicator { color: #ccc; }
+.night-theme .gfx-page-front { border-color: #333; }
+.night-theme .gfx-page-back { border-color: #333; }
+.night-theme .gfx-book-container::before { background: linear-gradient(90deg, rgba(255,255,255,0.06), transparent 40%, transparent 60%, rgba(255,255,255,0.06)); }
+.night-theme .gfx-fs-hint { color: #666; }
 .night-theme .gfx-gallery-item { background: #222; }
 .night-theme .gfx-gallery-logos .gfx-logo-item { background: #2a2a2a; }
 
