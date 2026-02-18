@@ -37,7 +37,10 @@
   // Color data
   var colorListItems = document.querySelectorAll('#ca-color-source li');
   var colors = Array.from(colorListItems).map(function (li) {
-    return li.textContent.trim();
+    return {
+      name: li.textContent.trim(),
+      color: li.dataset.color || li.textContent.trim()
+    };
   });
 
   // Audio — only plays when section is visible
@@ -141,25 +144,25 @@
     var shuffled = colors.slice().sort(function () { return 0.5 - Math.random(); });
     var selected = shuffled.slice(0, pillCount);
 
-    selected.forEach(function (colorName) {
+    selected.forEach(function (color) {
       var x = Math.random() * (w - padding * 2) + padding;
       var y = -Math.random() * 2000 - 200;
-      var boxWidth = colorName.length * charWidth + boxPad;
+      var boxWidth = color.name.length * charWidth + boxPad;
 
       var body = Bodies.rectangle(x, y, boxWidth, pillHeight, {
         angle: Math.random() * 0.5 - 0.25,
         restitution: 0.5,
         friction: 0.05,
-        label: colorName
+        label: color.name
       });
 
       var elem = document.createElement('div');
       elem.classList.add('ca-color-body');
-      elem.textContent = colorName;
+      elem.textContent = color.name;
       elem.style.width = boxWidth + 'px';
       elem.style.height = pillHeight + 'px';
       elem.style.fontSize = pillFontSize + 'px';
-      elem.style.backgroundColor = colorName;
+      elem.style.backgroundColor = color.color;
 
       sceneContainer.appendChild(elem);
 
