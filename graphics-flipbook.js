@@ -60,7 +60,69 @@
     });
   }
 
+  var isSingleSpread = false;
+
   function buildBook(canvases) {
+    isSingleSpread = canvases.length <= 2;
+
+    if (isSingleSpread) {
+      var isTwoPage = canvases.length === 2;
+      var pageDiv = document.createElement('div');
+      pageDiv.className = 'gfx-page gfx-single-page ' + (isTwoPage ? 'gfx-flip' : 'gfx-spin');
+      pageDiv.setAttribute('data-spread', 0);
+
+      var front = document.createElement('div');
+      front.className = 'gfx-page-front';
+      front.appendChild(canvases[0]);
+
+      var back = document.createElement('div');
+      back.className = 'gfx-page-back';
+      if (canvases[1]) {
+        // 2-page PDF: back shows page 2
+        back.appendChild(canvases[1]);
+      } else {
+        // 1-page PDF: clone same content for back
+        var backCanvas = document.createElement('canvas');
+        backCanvas.width = canvases[0].width;
+        backCanvas.height = canvases[0].height;
+        backCanvas.getContext('2d').drawImage(canvases[0], 0, 0);
+        back.appendChild(backCanvas);
+      }
+
+      pageDiv.appendChild(front);
+      pageDiv.appendChild(back);
+      container.appendChild(pageDiv);
+      pages.push(pageDiv);
+
+      if (isTwoPage) {
+        // 2-page PDF: toggle between front and back on click
+        pageDiv.addEventListener('click', function () {
+          if (isAnimating) return;
+          isAnimating = true;
+          pageDiv.classList.toggle('flipped');
+          updateControls();
+          setTimeout(function () {
+            isAnimating = false;
+          }, 1200);
+        });
+      } else {
+        // 1-page PDF: 360-degree spin
+        pageDiv.addEventListener('click', function () {
+          if (isAnimating) return;
+          isAnimating = true;
+          pageDiv.classList.add('flipped');
+          setTimeout(function () {
+            pageDiv.classList.remove('flipped');
+            isAnimating = false;
+          }, 1200);
+        });
+      }
+
+      // No book-open class for single spread
+      container.classList.remove('gfx-book-open');
+      return;
+    }
+
     for (var i = 0; i < canvases.length; i += 2) {
       var spreadIdx = Math.floor(i / 2);
       var pageDiv = document.createElement('div');
@@ -141,6 +203,20 @@
   }
 
   function updateControls() {
+    if (isSingleSpread) {
+      prevBtn.disabled = true;
+      nextBtn.disabled = true;
+      var total = currentPdf ? currentPdf.numPages : 1;
+      if (total === 1) {
+        indicator.textContent = 'Page 1 / 1';
+      } else {
+        // Show which side is visible for 2-page PDFs
+        var singlePage = container.querySelector('.gfx-single-page');
+        var isFlipped = singlePage && singlePage.classList.contains('flipped');
+        indicator.textContent = isFlipped ? 'Page 2 / 2 (Back)' : 'Page 1 / 2 (Front)';
+      }
+      return;
+    }
     prevBtn.disabled = currentSpread <= 0;
     nextBtn.disabled = currentSpread >= pages.length;
     var startPage = currentSpread * 2 + 1;
@@ -248,6 +324,63 @@
   function fsBuildBook() {
     fsBookContainer.innerHTML = '';
     fsPages = [];
+
+    if (isSingleSpread) {
+      var isTwoPage = renderedCanvases.length >= 2;
+      var pageDiv = document.createElement('div');
+      pageDiv.className = 'gfx-page gfx-single-page ' + (isTwoPage ? 'gfx-flip' : 'gfx-spin');
+      pageDiv.setAttribute('data-spread', 0);
+
+      var front = document.createElement('div');
+      front.className = 'gfx-page-front';
+      var frontCanvas = document.createElement('canvas');
+      frontCanvas.width = renderedCanvases[0].width;
+      frontCanvas.height = renderedCanvases[0].height;
+      frontCanvas.getContext('2d').drawImage(renderedCanvases[0], 0, 0);
+      front.appendChild(frontCanvas);
+
+      var back = document.createElement('div');
+      back.className = 'gfx-page-back';
+      var backSrc = renderedCanvases[1] || renderedCanvases[0];
+      var backCanvas = document.createElement('canvas');
+      backCanvas.width = backSrc.width;
+      backCanvas.height = backSrc.height;
+      backCanvas.getContext('2d').drawImage(backSrc, 0, 0);
+      back.appendChild(backCanvas);
+
+      pageDiv.appendChild(front);
+      pageDiv.appendChild(back);
+      fsBookContainer.appendChild(pageDiv);
+      fsPages.push(pageDiv);
+
+      if (isTwoPage) {
+        // 2-page PDF: toggle between front and back on click
+        pageDiv.addEventListener('click', function (e) {
+          e.stopPropagation();
+          if (fsIsAnimating) return;
+          fsIsAnimating = true;
+          pageDiv.classList.toggle('flipped');
+          fsUpdateControls();
+          setTimeout(function () {
+            fsIsAnimating = false;
+          }, 1200);
+        });
+      } else {
+        // 1-page PDF: 360-degree spin
+        pageDiv.addEventListener('click', function (e) {
+          e.stopPropagation();
+          if (fsIsAnimating) return;
+          fsIsAnimating = true;
+          pageDiv.classList.add('flipped');
+          setTimeout(function () {
+            pageDiv.classList.remove('flipped');
+            fsIsAnimating = false;
+          }, 1200);
+        });
+      }
+      return;
+    }
+
     for (var i = 0; i < renderedCanvases.length; i += 2) {
       var spreadIdx = Math.floor(i / 2);
       var pageDiv = document.createElement('div');
@@ -256,7 +389,6 @@
 
       var front = document.createElement('div');
       front.className = 'gfx-page-front';
-      // Clone canvas content
       var frontCanvas = document.createElement('canvas');
       frontCanvas.width = renderedCanvases[i].width;
       frontCanvas.height = renderedCanvases[i].height;
@@ -331,6 +463,19 @@
   }
 
   function fsUpdateControls() {
+    if (isSingleSpread) {
+      fsPrevBtn.disabled = true;
+      fsNextBtn.disabled = true;
+      var total = currentPdf ? currentPdf.numPages : 1;
+      if (total === 1) {
+        fsIndicator.textContent = 'Page 1 / 1';
+      } else {
+        var singlePage = fsBookContainer.querySelector('.gfx-single-page');
+        var isFlipped = singlePage && singlePage.classList.contains('flipped');
+        fsIndicator.textContent = isFlipped ? 'Page 2 / 2 (Back)' : 'Page 1 / 2 (Front)';
+      }
+      return;
+    }
     fsPrevBtn.disabled = fsCurrentSpread <= 0;
     fsNextBtn.disabled = fsCurrentSpread >= fsPages.length;
     var startPage = fsCurrentSpread * 2 + 1;
