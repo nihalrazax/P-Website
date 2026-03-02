@@ -1397,6 +1397,183 @@ nav {
 .night-theme .gfx-gallery-item { background: #222; }
 .night-theme .gfx-gallery-logos .gfx-logo-item { background: #2a2a2a; }
 
+/* ── Poster & Banner 3D Carousel ── */
+.pb-carousel-section {
+  position: relative;
+  overflow: hidden;
+  background: #f5f0eb;
+  border-radius: 0;
+  padding: 40px 0 0;
+}
+
+.pb-carousel-section .pb-title,
+.pb-carousel-section .pb-desc {
+  position: relative;
+  z-index: 2;
+}
+
+.pb-carousel-section .pb-title {
+  color: #1a1a2e;
+}
+
+.pb-carousel-section .pb-desc {
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.pb-carousel-track {
+  --left: -200rem;
+  position: relative;
+  min-width: calc(10rem * var(--total));
+  height: 22rem;
+}
+
+.pb-carousel-item {
+  position: absolute;
+  width: 18rem;
+  height: 21rem;
+  left: 100%;
+  display: flex;
+  justify-content: center;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  animation: pb-scroll-left var(--time) linear infinite;
+  animation-delay: calc(var(--time) / var(--total) * (var(--i) - 1) - var(--time));
+  will-change: left;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.pb-carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: #f5f0eb;
+  transform: rotateY(-45deg);
+  transition: 0.5s ease-in-out;
+  mask: linear-gradient(black 85%, transparent 100%);
+  -webkit-mask: linear-gradient(black 85%, transparent 100%);
+}
+
+.pb-carousel-item:hover img {
+  transform: rotateY(0deg) translateY(-1rem);
+}
+
+@keyframes pb-scroll-left {
+  to {
+    left: var(--left);
+  }
+}
+
+/* Responsive - Tablet */
+@media (max-width: 900px) {
+  .pb-carousel-section { padding: 30px 0 0; }
+  .pb-carousel-track { height: 18rem; }
+  .pb-carousel-item { width: 14rem; height: 17rem; }
+}
+
+/* Responsive - Mobile */
+@media (max-width: 600px) {
+  .pb-carousel-section { padding: 24px 0 0; }
+  .pb-carousel-track { height: 15rem; }
+  .pb-carousel-item { width: 12rem; height: 14rem; }
+}
+
+@media (max-width: 480px) {
+  .pb-carousel-section { padding: 20px 0 0; }
+  .pb-carousel-track { height: 13rem; }
+  .pb-carousel-item { width: 10rem; height: 12rem; }
+}
+
+/* Night theme - Carousel */
+.night-theme .pb-carousel-section { background: linear-gradient(180deg, #181818 0%, #1f1f1f 50%, #181818 100%); }
+.night-theme .pb-carousel-section .pb-title { color: #f0f0f0; }
+.night-theme .pb-carousel-section .pb-desc { color: #bbb; }
+.night-theme .pb-carousel-item img { background-color: #1a1a1a; }
+
+/* ── Vertical 3D Gallery (Poster Designs) ── */
+.vg-wrapper {
+  --vg-index: calc(1vw + 1vh);
+  --vg-transition: cubic-bezier(.1, .7, 0, 1);
+  --vg-gap-base: .2rem;
+  --vg-shift: 0px;
+  height: calc(var(--vg-index) * 20);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.vg-items {
+  display: flex;
+  gap: var(--vg-gap, var(--vg-gap-base));
+  perspective: calc(var(--vg-index) * 35);
+  perspective-origin: 50% 50%;
+  transform: translateX(var(--vg-shift));
+  transform-style: preserve-3d;
+  will-change: transform;
+  overflow: visible;
+  transition: transform .6s var(--vg-transition);
+  padding-inline: 48px;
+  margin-inline: -48px;
+}
+.vg-items.vg-hovering { --vg-gap: calc(var(--vg-gap-base) / 2); }
+
+.vg-item {
+  position: relative;
+  width: calc(var(--vg-index) * 3);
+  height: calc(var(--vg-index) * 18);
+  background: #ddd center/cover no-repeat;
+  cursor: pointer;
+  transition: transform 1.25s var(--vg-transition), width .5s var(--vg-transition);
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  will-change: transform, width;
+  outline: none;
+  border-radius: 12px;
+  flex: 0 0 auto;
+  user-select: none;
+}
+
+/* Hover bands */
+.vg-item.vg-hover-main { transform: translateZ(calc(var(--vg-index) * 10)); z-index: 10; }
+.vg-item.vg-right-1    { transform: translateZ(calc(var(--vg-index) * 8.5))  rotateY(35deg);  z-index: 9; }
+.vg-item.vg-right-2    { transform: translateZ(calc(var(--vg-index) * 5.6))  rotateY(40deg);  z-index: 8; }
+.vg-item.vg-right-3    { transform: translateZ(calc(var(--vg-index) * 2.5))  rotateY(30deg);  z-index: 7; }
+.vg-item.vg-right-4    { transform: translateZ(calc(var(--vg-index) * 0.6))  rotateY(15deg);  z-index: 6; }
+.vg-item.vg-left-1     { transform: translateZ(calc(var(--vg-index) * 8.5))  rotateY(-35deg); z-index: 9; }
+.vg-item.vg-left-2     { transform: translateZ(calc(var(--vg-index) * 5.6))  rotateY(-40deg); z-index: 8; }
+.vg-item.vg-left-3     { transform: translateZ(calc(var(--vg-index) * 2.5))  rotateY(-30deg); z-index: 7; }
+.vg-item.vg-left-4     { transform: translateZ(calc(var(--vg-index) * 0.6))  rotateY(-15deg); z-index: 6; }
+
+/* Open state */
+.vg-items.vg-is-open .vg-item { transition: transform .8s var(--vg-transition), width .6s var(--vg-transition); }
+.vg-item.vg-is-open {
+  width: 20vw;
+  z-index: 100;
+  transform: translateZ(calc(var(--vg-index) * 10));
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .vg-wrapper { height: calc(var(--vg-index) * 22); }
+  .vg-item { width: calc(var(--vg-index) * 3.5); height: calc(var(--vg-index) * 20); }
+  .vg-item.vg-is-open { width: 30vw; }
+}
+@media (max-width: 600px) {
+  .vg-wrapper { height: calc(var(--vg-index) * 24); }
+  .vg-item { width: calc(var(--vg-index) * 4); height: calc(var(--vg-index) * 22); }
+  .vg-item.vg-is-open { width: 45vw; }
+}
+@media (max-width: 480px) {
+  .vg-wrapper { height: calc(var(--vg-index) * 26); }
+  .vg-item { width: calc(var(--vg-index) * 5); height: calc(var(--vg-index) * 24); }
+  .vg-item.vg-is-open { width: 55vw; }
+}
+
+/* Night theme - Vertical Gallery */
+.night-theme .vg-item { background-color: #222; }
+
 /* ── Color Avalanche Section ── */
 .color-avalanche-section {
   position: relative;
@@ -2667,5 +2844,136 @@ footer {
   }
   .card-lb-sub {
     font-size: 0.78rem;
+  }
+}
+
+/* ============================================
+   Social Share FAB Button
+   ============================================ */
+.share-toggle-btn {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #fff;
+  color: #333;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 4000;
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.15);
+  transition: 1.25s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.share-toggle-btn.active {
+  transform: rotate(360deg);
+  box-shadow:
+    0 6px 8px rgba(0, 0, 0, 0.15),
+    0 0 0 2px #333,
+    0 0 0 8px #fff;
+}
+
+/* Share Overlay */
+.share-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.88);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 3999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.share-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Share Menu - Centered Circle */
+.share-menu {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.share-menu li {
+  position: absolute;
+  left: 0;
+  list-style: none;
+  transition: 0.5s;
+  transform: rotate(calc(360deg / 8 * var(--i)));
+  transform-origin: 140px;
+  scale: 0;
+  transition-delay: calc(0.05s * var(--i));
+}
+
+.share-overlay.active .share-menu li {
+  scale: 1;
+}
+
+.share-menu li a {
+  position: relative;
+  display: flex;
+  transform: rotate(calc(360deg / -8 * var(--i)));
+  width: 60px;
+  height: 60px;
+  background-color: #fff;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 1.75rem;
+  color: var(--clr);
+  box-shadow: 0 3px 4px rgba(0, 0, 0, 0.15);
+  transition: 0.5s;
+  text-decoration: none;
+}
+
+.share-menu li:hover a {
+  font-size: 2.5rem;
+  box-shadow:
+    0 0 0 2px var(--clr),
+    0 0 0 6px #fff;
+}
+
+/* Mobile adjustments */
+@media (max-width: 600px) {
+  .share-toggle-btn {
+    bottom: 20px;
+    right: 20px;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+  }
+
+  .share-menu {
+    width: 240px;
+    height: 240px;
+  }
+
+  .share-menu li {
+    transform-origin: 120px;
+  }
+
+  .share-menu li a {
+    width: 50px;
+    height: 50px;
+    font-size: 1.4rem;
+  }
+
+  .share-menu li:hover a {
+    font-size: 2rem;
   }
 }
