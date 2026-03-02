@@ -405,6 +405,7 @@ nav {
   align-items: center;
   position: relative;
   width: 1200px;
+  max-width: 100%;
 }
 
 .infoContainer {
@@ -1495,7 +1496,7 @@ nav {
 .vg-wrapper {
   --vg-index: calc(1vw + 1vh);
   --vg-transition: cubic-bezier(.1, .7, 0, 1);
-  --vg-gap-base: .2rem;
+  --vg-gap-base: .1rem;
   --vg-shift: 0px;
   height: calc(var(--vg-index) * 20);
   display: flex;
@@ -2975,5 +2976,276 @@ footer {
 
   .share-menu li:hover a {
     font-size: 2rem;
+  }
+}
+
+/* ============================================
+   Smartphone Responsive (375px - 480px)
+   ============================================ */
+@media (max-width: 480px) {
+
+  /* ── Header / Navigation ── */
+  header {
+    padding: 8px 10px;
+    gap: 0.3rem;
+  }
+  header .logo img {
+    width: 28px !important;
+    height: 28px !important;
+  }
+  .logoText {
+    font-size: 0.95rem !important;
+    margin-left: -0.5rem;
+  }
+  nav {
+    gap: 0.5rem;
+    width: 100%;
+    justify-content: center;
+  }
+  .nav-links {
+    gap: 0.3em !important;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .nav-links li a {
+    font-size: 0.8rem !important;
+    padding: 0.35em 0.5em !important;
+  }
+  .nav-social-icons {
+    gap: 0.4rem;
+  }
+  .nav-social-icons .nav-icon-img {
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  /* ── Hero Section ── */
+  .heroSection {
+    padding: 0 0.5rem;
+    gap: 0.8rem;
+    margin: 2rem auto;
+    padding-bottom: 4rem;
+  }
+  .fadedText {
+    font-size: 1.6em;
+  }
+  .heading {
+    font-size: 18px;
+    line-height: 20px;
+  }
+  .subHeading {
+    font-size: 20px;
+    line-height: 22px;
+  }
+  .desc {
+    font-size: 12px;
+    width: 100%;
+  }
+  .btn {
+    padding: 0.6rem 1.5rem;
+    font-size: 13px;
+  }
+
+  /* ── Orbit ── */
+  .orbit-hero-right {
+    --orbit-size: 230px;
+    --orbit-radius: 115px;
+    width: var(--orbit-size);
+    height: var(--orbit-size);
+  }
+  .orbit-center-image {
+    width: 140px;
+    height: 175px;
+  }
+  .chip {
+    font-size: 8px;
+    padding: 3px 8px;
+  }
+
+  /* ── Project Section Titles ── */
+  .projectTitle {
+    font-size: 1.8em;
+    padding: 20px 0 15px;
+  }
+
+  /* ── Gallery Grid ── */
+  .projectContainer.galleryGrid {
+    gap: 60px;
+    padding: 15px 4% 40px;
+  }
+  .projectContainer.galleryGrid .projectHeading {
+    font-size: 14px;
+    top: -26px;
+  }
+  .projectContainer.galleryGrid .projectNumber {
+    font-size: 45px;
+  }
+  .projectContainer.galleryGrid .projectSubHeading {
+    font-size: 10px;
+    bottom: -22px;
+  }
+  .projectContainer.galleryGrid .btnGroup {
+    bottom: -28px;
+  }
+  .projectContainer.galleryGrid .icon {
+    font-size: 20px;
+  }
+
+  /* ── Project Cards (non-gallery) ── */
+  .projectCard {
+    width: 96%;
+    min-height: 160px;
+  }
+  .project-tag {
+    font-size: 9px;
+    padding: 3px 7px;
+    top: 8px;
+    left: 8px;
+  }
+
+  /* ── Graphics Section ── */
+  .gfx-division {
+    padding: 20px 3%;
+  }
+  .gfx-division-title {
+    font-size: 20px;
+  }
+  .gfx-division-desc {
+    font-size: 12px;
+    margin-bottom: 20px;
+  }
+
+  /* ── Color Avalanche ── */
+  .color-avalanche-section {
+    height: 45vh;
+    min-height: 300px;
+  }
+  .ca-title {
+    font-size: 1.3rem;
+  }
+  .ca-desc {
+    font-size: 0.75rem;
+    max-width: 220px;
+  }
+  .ca-btn {
+    padding: 0.4rem 0.7rem;
+    font-size: 0.6rem;
+  }
+
+  /* ── Skill Section ── */
+  .skillContainer {
+    padding: 1.5rem 0.8rem;
+    margin: 4rem auto;
+    gap: 20px;
+  }
+  .skillHeading {
+    font-size: 1.2em;
+    line-height: 1.3;
+  }
+  .skillHeading span {
+    font-size: 1.6em;
+  }
+  .skillSubHeading {
+    width: 100%;
+    font-size: 13px;
+  }
+  .skillsLogo {
+    width: 32px;
+  }
+  .rightSkillContainer {
+    gap: 0.8rem;
+  }
+  .skillFadedText {
+    font-size: 2em;
+    right: 0;
+    bottom: -5%;
+  }
+
+  /* ── Services Section ── */
+  .servicesSection {
+    padding: 2rem 0.5rem;
+  }
+  .serviceTitle {
+    font-size: 1.8em;
+    margin-bottom: 1rem;
+  }
+  .servicesContainer {
+    gap: 0.8rem;
+  }
+  .serviceCard {
+    max-width: 100%;
+    min-width: 0;
+    padding: 1rem 0.6rem;
+  }
+  .serviceIcon {
+    font-size: 2em;
+  }
+  .serviceCard h3 {
+    font-size: 1.1em;
+  }
+  .serviceCard p {
+    font-size: 0.85em;
+  }
+
+  /* ── Footer ── */
+  footer {
+    padding: 2rem 0.8rem 1.5rem;
+  }
+  .footerFadedText {
+    font-size: 1.5em;
+  }
+  .footerLegal {
+    font-size: 0.7em;
+  }
+  .center-footer {
+    font-size: 0.7em;
+  }
+
+  /* ── Card Lightbox ── */
+  .card-lightbox-inner {
+    width: 95vw;
+    border-radius: 10px;
+  }
+  .card-lb-body {
+    padding: 16px 20px;
+  }
+  .card-lb-heading {
+    font-size: 1rem;
+  }
+  .card-lb-sub {
+    font-size: 0.7rem;
+  }
+  .card-lightbox-close {
+    width: 36px;
+    height: 36px;
+    font-size: 20px;
+    top: 10px;
+    right: 10px;
+  }
+
+  /* ── Share FAB ── */
+  .share-toggle-btn {
+    bottom: 15px;
+    right: 15px;
+    width: 44px;
+    height: 44px;
+    font-size: 1.3rem;
+  }
+  .share-menu {
+    width: 200px;
+    height: 200px;
+  }
+  .share-menu li {
+    transform-origin: 100px;
+  }
+  .share-menu li a {
+    width: 42px;
+    height: 42px;
+    font-size: 1.1rem;
+  }
+
+  /* ── Get Started Button ── */
+  .get-started-btn-container {
+    margin-bottom: 1.5rem;
   }
 }
