@@ -61,8 +61,7 @@
     <!-- Header Start -->
     <header>
       <div class="logo">
-        <img src="./Images/userAsset/Alogo.jpeg" alt="#" />
-        <h2 class="logoText" style="padding-left: 12px;">ditya Rai</h2>
+        <img src="./Images/userAsset/ALRLogo.png" alt="ALR" class="header-logo-img" />
       </div>
       <nav>
         <ul class="nav-links">
@@ -78,7 +77,33 @@
 
     <!-- Hero Section Start  -->
     <section class="heroSection">
-      <h3 class="fadedText absolute" style="padding-bottom: 16px;">Aditya Rai</h3>
+      <svg class="fadedText absolute water-text-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 720 120" style="padding-bottom: 16px;">
+        <defs>
+          <pattern id="water" width=".25" height="1.1" patternContentUnits="objectBoundingBox">
+            <path fill="#0077be" d="M0.25,1H0c0,0,0-0.659,0-0.916c0.083-0.303,0.158,0.334,0.25,0C0.25,0.327,0.25,1,0.25,1z"/>
+          </pattern>
+          <text id="water-txt" x="10" y="90" style="font-weight:bold;font-size:90px;font-family:'Space Grotesk',Helvetica,sans-serif">Aditya Rai</text>
+          <mask id="water-mask">
+            <use xlink:href="#water-txt" fill="#ffffff"/>
+          </mask>
+        </defs>
+        <g id="water-eff">
+          <use xlink:href="#water-txt" class="water-base-fill"/>
+          <rect class="water-fill" mask="url(#water-mask)" fill="url(#water)" x="-300" y="50" width="1200" height="120" opacity="0.3">
+            <animate attributeType="xml" attributeName="x" from="-300" to="0" repeatCount="indefinite" dur="3s"/>
+          </rect>
+          <rect class="water-fill" mask="url(#water-mask)" fill="url(#water)" y="45" width="1600" height="120" opacity="0.3">
+            <animate attributeType="xml" attributeName="x" from="-400" to="0" repeatCount="indefinite" dur="4s"/>
+          </rect>
+          <rect class="water-fill" mask="url(#water-mask)" fill="url(#water)" y="55" width="800" height="120" opacity="0.3">
+            <animate attributeType="xml" attributeName="x" from="-200" to="0" repeatCount="indefinite" dur="2.4s"/>
+          </rect>
+          <rect class="water-fill" mask="url(#water-mask)" fill="url(#water)" y="55" width="2000" height="120" opacity="0.3">
+            <animate attributeType="xml" attributeName="x" from="-500" to="0" repeatCount="indefinite" dur="3.8s"/>
+          </rect>
+        </g>
+        <use xlink:href="#water-eff" opacity="0.9"/>
+      </svg>
       <div class="infoContainer">
         <div class="heading">Hi! Aditya Rai</div>
         <div class="heading subHeading">
@@ -588,67 +613,75 @@
     <!-- Social Media Section Start -->
     <section id="socialmedia" class="projectSection">
       <h2 class="projectTitle text-effect"><span class="te-line"><span class="te-base">Social Medi</span><span class="te-fade">a</span></span><span class="te-hover">Social Media</span></h2>
-      <div class="projectContainer galleryGrid">
-        <div class="projectCard" id="social1">
-          <div class="projectCardOverlay"></div>
-          <div class="projectNumber rightNumber">01</div>
-          <div class="projectContent leftProjectContent">
-            <div class="projectSkillsContainer">
-            </div>
-            <h2 class="projectHeading">Social Media Project 1</h2>
-            <p class="projectSubHeading">
-              Add your project description here
-            </p>
-            <div class="btnGroup">
-              <a href="" title="GitHubLink">
-                <span class="btn-icon github-icon"></span>
-              </a>
-              <a href="" title="Live Link">
-                <span class="btn-icon link-icon"></span>
-              </a>
-            </div>
+      <!-- Subsection 1: Reels -->
+      <div class="sm-division" id="sm-reels">
+        <h3 class="sm-division-title">Reels</h3>
+        <p class="sm-division-desc">Portrait video content for social media platforms</p>
+
+        <div class="sm-carousel sm-carousel--portrait" id="sm-reels-carousel">
+          <div class="sm-carousel__viewport">
+            <ul class="sm-carousel__track">
+              <li class="sm-carousel__card" data-index="0">
+                <video class="sm-carousel__video" preload="metadata" muted loop playsinline
+                  src="Images/Graphics/Social%20Media/Reels/Landscape%20Interior%20Designer%20of%20Facebook%20Portait%20Videos%20(5).mp4"></video>
+              </li>
+              <li class="sm-carousel__card" data-index="1">
+                <video class="sm-carousel__video" preload="metadata" muted loop playsinline
+                  src="Images/Graphics/Social%20Media/Reels/Landscape%20Interior%20Designer%20of%20Facebook%20Portait%20Videos.mp4"></video>
+              </li>
+              <li class="sm-carousel__card" data-index="2">
+                <video class="sm-carousel__video" preload="metadata" muted loop playsinline
+                  src="Images/Graphics/Social%20Media/Reels/Potrait%20Interior%20Designer%20of%20Facebook%20Portait%20Videos.mp4"></video>
+              </li>
+              <li class="sm-carousel__card" data-index="3">
+                <video class="sm-carousel__video" preload="metadata" muted loop playsinline
+                  src="Images/Graphics/Social%20Media/Reels/Where%20comfort%20meets%20class%20%E2%80%94%20transforming%20washrooms%20into%20your%20favorite%20space%20at%20home.%20%23AarnaInter.mp4"></video>
+              </li>
+              <li class="sm-carousel__card" data-index="4">
+                <video class="sm-carousel__video" preload="metadata" muted loop playsinline
+                  src="Images/Graphics/Social%20Media/Reels/Where%20divinity%20meets%20design%20%E2%80%94%20a%20sacred%20space%20crafted%20with%20soul.%22%23AarnaConstructions%20%23TempleInter.mp4"></video>
+              </li>
+              <li class="sm-carousel__card" data-index="5">
+                <video class="sm-carousel__video" preload="metadata" muted loop playsinline
+                  src="Images/Graphics/Social%20Media/Reels/Where%20functionality%20meets%20finesse%20%E2%80%94%20transforming%20kitchens%2C%20transforming%20lives.%20%23AarnaInteriors%20%23.mp4"></video>
+              </li>
+            </ul>
+          </div>
+          <div class="sm-carousel__controls">
+            <button class="sm-carousel__btn sm-carousel__btn--prev" aria-label="Previous reel">&#10094; PREV</button>
+            <button class="sm-carousel__btn sm-carousel__btn--playpause" aria-label="Pause"><i class="fa-solid fa-pause"></i></button>
+            <span class="sm-carousel__indicator">1 / 6</span>
+            <button class="sm-carousel__btn sm-carousel__btn--next" aria-label="Next reel">NEXT &#10095;</button>
+            <button class="sm-carousel__btn sm-carousel__btn--mute" aria-label="Unmute"><i class="fa-solid fa-volume-xmark"></i></button>
           </div>
         </div>
+      </div>
 
-        <div class="projectCard" id="social2">
-          <div class="projectCardOverlay"></div>
-          <div class="projectNumber leftNumber">02</div>
-          <div class="projectContent rightProjectContent">
-            <div class="projectSkillsContainer">
-            </div>
-            <h2 class="projectHeading">Social Media Project 2</h2>
-            <p class="projectSubHeading">
-              Add your project description here
-            </p>
-            <div class="btnGroup">
-              <a href="" title="GitHubLink">
-                <span class="btn-icon github-icon"></span>
-              </a>
-              <a href="" title="Live Link">
-                <span class="btn-icon link-icon"></span>
-              </a>
-            </div>
+      <!-- Subsection 2: Ad Creative Video -->
+      <div class="sm-division" id="sm-ads">
+        <h3 class="sm-division-title">Ad Creative Video</h3>
+        <p class="sm-division-desc">Landscape advertisement videos and creative content</p>
+
+        <div class="sm-carousel sm-carousel--landscape" id="sm-ads-carousel">
+          <div class="sm-carousel__viewport">
+            <ul class="sm-carousel__track">
+              <li class="sm-carousel__card" data-index="0">
+                <div class="sm-carousel__placeholder">Coming Soon</div>
+              </li>
+              <li class="sm-carousel__card" data-index="1">
+                <div class="sm-carousel__placeholder">Coming Soon</div>
+              </li>
+              <li class="sm-carousel__card" data-index="2">
+                <div class="sm-carousel__placeholder">Coming Soon</div>
+              </li>
+            </ul>
           </div>
-        </div>
-
-        <div class="projectCard" id="social3">
-          <div class="projectCardOverlay"></div>
-          <div class="projectNumber rightNumber">03</div>
-          <div class="projectContent leftProjectContent">
-            <div class="projectSkillsContainer">
-            </div>
-            <h2 class="projectHeading">Social Media Project 3</h2>
-            <p class="projectSubHeading">
-              Add your project description here
-            </p>
-            <div class="btnGroup">
-              <a href="" title="GitHubLink">
-                <span class="btn-icon github-icon"></span>
-              </a>
-              <a href="" title="Live Link">
-                <span class="btn-icon link-icon"></span>
-              </a>
-            </div>
+          <div class="sm-carousel__controls">
+            <button class="sm-carousel__btn sm-carousel__btn--prev" aria-label="Previous ad">&#10094; PREV</button>
+            <button class="sm-carousel__btn sm-carousel__btn--playpause" aria-label="Pause"><i class="fa-solid fa-pause"></i></button>
+            <span class="sm-carousel__indicator">1 / 3</span>
+            <button class="sm-carousel__btn sm-carousel__btn--next" aria-label="Next ad">NEXT &#10095;</button>
+            <button class="sm-carousel__btn sm-carousel__btn--mute" aria-label="Unmute"><i class="fa-solid fa-volume-xmark"></i></button>
           </div>
         </div>
       </div>
@@ -819,12 +852,93 @@
       </a>
     </div>
 
+    <!-- Sanskrit Shloka Section -->
+    <section class="shloka-section" id="shlokaSection">
+      <div class="shloka-noise"></div>
+      <div class="shloka-container" id="shlokaContainer" style="--horizontal: 1; --vertical: 1;">
+        <div class="shloka-flipcard" id="shlokaFlipcard">
+          <div class="shloka-flip-inner">
+            <!-- Front: Sanskrit verse with glowing power words -->
+            <div class="shloka-flip-front">
+              <p class="shloka-line"><span class="pw" style="--pw-color: #FFE066;">उत्साहो</span> <span class="pw" style="--pw-color: #FF2D87;">बलवान्</span> <span class="pw" style="--pw-color: #BF40FF;">आर्य</span> <span class="shloka-normal">नास्त्युत्साहात्परं</span> <span class="pw" style="--pw-color: #00F0FF;">बलम्</span> <span class="shloka-normal">|</span></p>
+              <p class="shloka-line"><span class="pw" style="--pw-color: #39FF14;">सोत्साहस्य</span> <span class="shloka-normal">हि</span> <span class="pw" style="--pw-color: #4D9FFF;">लोकेषु</span> <span class="shloka-normal">न किञ्चिदपि</span> <span class="pw" style="--pw-color: #FF6B2B;">दुर्लभम्</span> <span class="shloka-normal">||</span></p>
+              <p class="shloka-hint">click to reveal meaning</p>
+            </div>
+            <!-- Back: Full English meaning -->
+            <div class="shloka-flip-back">
+              <p class="shloka-meaning">Enthusiasm is supreme strength, O Noble one; there is no power greater than enthusiasm.<br><br>For the one who is full of enthusiasm, nothing in this world is difficult to attain.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+    (function() {
+      // ── Light-trail copies (faithful to attached effect) ──
+      var COPIES = 30;
+      document.querySelectorAll('.pw').forEach(function(pw) {
+        var text = pw.textContent.trim();
+        for (var i = 0; i < COPIES; i++) {
+          var copy = document.createElement('span');
+          copy.className = 'pw-copy';
+          copy.style.setProperty('--index', i + 1);
+          copy.textContent = text;
+          pw.appendChild(copy);
+        }
+      });
+
+      // ── Mouse tracking for light direction (rAF-throttled for 60fps) ──
+      var section = document.getElementById('shlokaSection');
+      var container = document.getElementById('shlokaContainer');
+      var ticking = false;
+
+      if (section && container) {
+        section.addEventListener('mousemove', function(e) {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(function() {
+            var rect = section.getBoundingClientRect();
+            var x = e.clientX - rect.left;
+            var y = e.clientY - rect.top;
+            var horizontal, vertical;
+            if (x > rect.width / 2) {
+              horizontal = ((x - rect.width / 2) / (rect.width / 2)) * -1;
+            } else {
+              horizontal = (rect.width / 2 - x) / (rect.width / 2);
+            }
+            if (y > rect.height / 2) {
+              vertical = ((y - rect.height / 2) / (rect.height / 2)) * -1;
+            } else {
+              vertical = (rect.height / 2 - y) / (rect.height / 2);
+            }
+            container.style.setProperty('--horizontal', horizontal);
+            container.style.setProperty('--vertical', vertical);
+            ticking = false;
+          });
+        });
+        section.addEventListener('mouseleave', function() {
+          container.style.setProperty('--horizontal', 0);
+          container.style.setProperty('--vertical', 0);
+        });
+      }
+
+      // ── Click toggle for whole-verse flip ──
+      var flipcard = document.getElementById('shlokaFlipcard');
+      if (flipcard) {
+        flipcard.addEventListener('click', function() {
+          flipcard.classList.toggle('flipped');
+        });
+      }
+    })();
+    </script>
+
     <!-- Footer Section Start  -->
     <footer>
       <div class="container footerContainer">
         <div class="footerFadedText">AKR</div>
         <div class="footerLegal center-footer">
-          <span>© 2025 Aditya Rai. All rights reserved.</span>
+          <span>© 2026 Aditya Rai. All rights reserved.</span>
           <span>Terms &amp; Conditions | Privacy Policy</span>
         </div>
       </div>
@@ -1286,6 +1400,229 @@
     window.addEventListener('resize', metric);
     metric();
     container.addEventListener('dragstart', e=>e.preventDefault());
+  })();
+  </script>
+
+  <!-- Social Media 3D Card Carousel -->
+  <script>
+  (function () {
+    function initCarousel(carouselEl) {
+      var cards = Array.from(carouselEl.querySelectorAll('.sm-carousel__card'));
+      var prevBtn = carouselEl.querySelector('.sm-carousel__btn--prev');
+      var nextBtn = carouselEl.querySelector('.sm-carousel__btn--next');
+      var playPauseBtn = carouselEl.querySelector('.sm-carousel__btn--playpause');
+      var muteBtn = carouselEl.querySelector('.sm-carousel__btn--mute');
+      var indicator = carouselEl.querySelector('.sm-carousel__indicator');
+      var total = cards.length;
+      if (total === 0) return;
+
+      var activeIndex = 0;
+      var isPlaying = true;   // auto-advance state
+      var isMuted = true;     // audio state
+      var autoTimer = null;
+      var isHovering = false; // hover-to-play-full state
+
+      function getActiveVideo() {
+        var card = cards[activeIndex];
+        return card ? card.querySelector('.sm-carousel__video') : null;
+      }
+
+      function updatePositions() {
+        cards.forEach(function (card, i) {
+          var diff = i - activeIndex;
+          if (diff > total / 2) diff -= total;
+          if (diff < -total / 2) diff += total;
+          card.setAttribute('data-pos', diff);
+
+          var video = card.querySelector('.sm-carousel__video');
+          if (!video) return;
+
+          if (diff === 0) {
+            video.muted = isMuted;
+            video.loop = !isHovering;
+            var p = video.play();
+            if (p !== undefined) p.catch(function () {});
+          } else {
+            video.pause();
+            video.loop = true;
+          }
+        });
+        if (indicator) indicator.textContent = (activeIndex + 1) + ' / ' + total;
+      }
+
+      function goNext() {
+        activeIndex = (activeIndex + 1) % total;
+        updatePositions();
+        resetAutoTimer();
+      }
+
+      function goPrev() {
+        activeIndex = (activeIndex - 1 + total) % total;
+        updatePositions();
+        resetAutoTimer();
+      }
+
+      // ── Auto-advance every 3 seconds ──
+      function startAutoTimer() {
+        stopAutoTimer();
+        if (isPlaying && !isHovering) {
+          autoTimer = setInterval(function () {
+            activeIndex = (activeIndex + 1) % total;
+            updatePositions();
+          }, 3000);
+        }
+      }
+
+      function stopAutoTimer() {
+        if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+      }
+
+      function resetAutoTimer() {
+        if (isPlaying && !isHovering) startAutoTimer();
+      }
+
+      // ── Hover: pause timer, let video play full, then advance ──
+      cards.forEach(function (card, i) {
+        var video = card.querySelector('.sm-carousel__video');
+
+        card.addEventListener('mouseenter', function () {
+          if (i !== activeIndex || !isPlaying) return;
+          isHovering = true;
+          stopAutoTimer();
+          if (video) {
+            video.loop = false;
+          }
+        });
+
+        card.addEventListener('mouseleave', function () {
+          if (!isHovering) return;
+          isHovering = false;
+          var v = getActiveVideo();
+          if (v) v.loop = true;
+          if (isPlaying) startAutoTimer();
+        });
+
+        if (video) {
+          video.addEventListener('ended', function () {
+            if (isHovering && i === activeIndex && isPlaying) {
+              isHovering = false;
+              goNext();
+            }
+          });
+        }
+      });
+
+      // ── Play / Pause (auto-advance + video) ──
+      if (playPauseBtn) {
+        playPauseBtn.addEventListener('click', function () {
+          isPlaying = !isPlaying;
+          if (isPlaying) {
+            playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+            playPauseBtn.setAttribute('aria-label', 'Pause');
+            var v = getActiveVideo();
+            if (v) v.play().catch(function () {});
+            startAutoTimer();
+          } else {
+            playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+            playPauseBtn.setAttribute('aria-label', 'Play');
+            var v = getActiveVideo();
+            if (v) v.pause();
+            stopAutoTimer();
+          }
+        });
+      }
+
+      // ── Mute / Unmute ──
+      if (muteBtn) {
+        muteBtn.addEventListener('click', function () {
+          isMuted = !isMuted;
+          if (isMuted) {
+            muteBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+            muteBtn.setAttribute('aria-label', 'Unmute');
+          } else {
+            muteBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+            muteBtn.setAttribute('aria-label', 'Mute');
+          }
+          var v = getActiveVideo();
+          if (v) v.muted = isMuted;
+        });
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', goPrev);
+      if (nextBtn) nextBtn.addEventListener('click', goNext);
+
+      carouselEl.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); goPrev(); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); goNext(); }
+      });
+
+      // Touch swipe
+      var touchStartX = 0;
+      carouselEl.addEventListener('touchstart', function (e) {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      carouselEl.addEventListener('touchend', function (e) {
+        var diff = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) goNext();
+          else goPrev();
+        }
+      }, { passive: true });
+
+      // Click: non-center → navigate, center → play/pause
+      cards.forEach(function (card, i) {
+        card.addEventListener('click', function () {
+          if (i !== activeIndex) {
+            isHovering = false;
+            activeIndex = i;
+            updatePositions();
+            resetAutoTimer();
+          } else {
+            // Toggle play/pause on active video
+            var v = getActiveVideo();
+            if (!v) return;
+            if (v.paused) {
+              v.play().catch(function () {});
+              if (playPauseBtn) playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+              isPlaying = true;
+              startAutoTimer();
+            } else {
+              v.pause();
+              if (playPauseBtn) playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+              isPlaying = false;
+              stopAutoTimer();
+            }
+          }
+        });
+      });
+
+      // Pause videos when section out of view
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) {
+            isHovering = false;
+            stopAutoTimer();
+            cards.forEach(function (card) {
+              var v = card.querySelector('.sm-carousel__video');
+              if (v) v.pause();
+            });
+          } else {
+            if (isPlaying) {
+              var v = getActiveVideo();
+              if (v) v.play().catch(function () {});
+              startAutoTimer();
+            }
+          }
+        });
+      }, { threshold: 0.3 });
+      observer.observe(carouselEl);
+
+      updatePositions();
+      startAutoTimer();
+    }
+
+    document.querySelectorAll('.sm-carousel').forEach(initCarousel);
   })();
   </script>
 </body>
