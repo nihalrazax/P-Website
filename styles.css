@@ -804,6 +804,7 @@ nav {
 .projectSection {
   margin-top: 4rem;
   background-color: #f5f0eb;
+  overflow: hidden;
 }
 
 .projectTitle {
@@ -2142,8 +2143,9 @@ nav {
   width: 100%;
   max-width: 1100px;
   margin: 20px auto 0;
-  padding: 0 clamp(10px, 3vw, 24px);
+  padding: 0 clamp(12px, 4vw, 24px);
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 .perf-marketing .pm-subtitle {
@@ -2242,9 +2244,10 @@ nav {
 .perf-marketing .pm-legend {
   display: flex;
   align-items: center;
-  gap: clamp(4px, 1.2vw, 14px);
+  gap: clamp(4px, 1vw, 10px);
   flex-wrap: wrap;
   margin-bottom: 12px;
+  justify-content: flex-start;
 }
 
 .perf-marketing .pm-legend-item {
@@ -2315,8 +2318,8 @@ nav {
 
 .perf-marketing .pm-metrics-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: clamp(6px, 1vw, 10px);
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(8px, 1.2vw, 12px);
 }
 
 .perf-marketing .pm-metric-card {
@@ -2380,9 +2383,9 @@ nav {
 
 .perf-marketing .pm-cpc-roas-row {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: clamp(8px, 1vw, 10px);
-  margin-top: clamp(8px, 1vw, 10px);
+  grid-template-columns: repeat(2, 1fr);
+  gap: clamp(8px, 1.2vw, 12px);
+  margin-top: clamp(8px, 1.2vw, 12px);
 }
 
 .perf-marketing .pm-cpc-roas-card {
@@ -2420,6 +2423,39 @@ nav {
 }
 
 /* ── Performance Marketing Responsive ── */
+
+/* Tablet landscape / small desktop */
+@media (max-width: 900px) {
+  .perf-marketing .pm-metrics-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Tablet portrait */
+@media (max-width: 768px) {
+  .perf-marketing {
+    padding: 0 clamp(10px, 4vw, 20px);
+  }
+  .perf-marketing .pm-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .perf-marketing .pm-cpc-roas-row {
+    grid-template-columns: 1fr;
+  }
+  .perf-marketing .pm-legend {
+    gap: 6px;
+    justify-content: center;
+  }
+  .perf-marketing .pm-legend-item {
+    font-size: 10px;
+    padding: 3px 6px;
+  }
+  .perf-marketing .pm-chart-area {
+    height: clamp(160px, 30vw, 220px);
+  }
+}
+
+/* Mobile */
 @media (max-width: 640px) {
   .perf-marketing .pm-section-header {
     flex-direction: column;
@@ -2436,14 +2472,43 @@ nav {
     flex-direction: row;
     gap: 8px;
   }
+  .perf-marketing .pm-metric-card {
+    padding: 10px 10px 8px;
+  }
+  .perf-marketing .pm-cpc-roas-card {
+    padding: 10px 10px 8px;
+  }
 }
 
-@media (max-width: 380px) {
+/* Small mobile */
+@media (max-width: 420px) {
   .perf-marketing .pm-metrics-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  .perf-marketing .pm-metric-value {
+    font-size: 18px;
   }
   .perf-marketing .pm-legend {
     justify-content: center;
+    gap: 4px;
+  }
+  .perf-marketing .pm-legend-item {
+    font-size: 9px;
+    padding: 2px 4px;
+  }
+  .perf-marketing .pm-chart-area {
+    height: 140px;
+  }
+  .perf-marketing .pm-subtitle {
+    font-size: 16px;
+  }
+}
+
+/* Very small mobile */
+@media (max-width: 340px) {
+  .perf-marketing .pm-metrics-grid {
+    grid-template-columns: 1fr;
   }
 }
 
