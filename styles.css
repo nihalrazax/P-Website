@@ -2137,10 +2137,315 @@ nav {
 
 /* (Social Media placeholders removed — now using sm-carousel) */
 
-/* ── Advertisements placeholders ── */
-#ad1 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
-#ad2 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
-#ad3 { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); }
+/* ── Performance Marketing Subsection ── */
+.perf-marketing {
+  width: 100%;
+  max-width: 1100px;
+  margin: 20px auto 0;
+  padding: 0 clamp(10px, 3vw, 24px);
+  box-sizing: border-box;
+}
+
+.perf-marketing .pm-subtitle {
+  font-size: clamp(16px, 3vw, 24px);
+  font-weight: 700;
+  color: #e0e0e0;
+  text-align: center;
+  margin-bottom: clamp(12px, 2vw, 20px);
+  letter-spacing: 1px;
+}
+
+.perf-marketing .pm-disclaimer {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: rgba(232, 146, 10, 0.08);
+  border: 1.5px solid rgba(240, 217, 181, 0.25);
+  border-left: 4px solid #e8920a;
+  border-radius: 10px;
+  padding: clamp(8px, 1.5vw, 14px) clamp(10px, 2vw, 18px);
+  margin-bottom: clamp(12px, 2vw, 18px);
+  font-size: clamp(10.5px, 1.4vw, 12.5px);
+  color: #d4a96a;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.perf-marketing .pm-disclaimer-title {
+  font-weight: 800;
+  color: #e8920a;
+  font-size: clamp(10px, 1.2vw, 12px);
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+}
+
+.perf-marketing .pm-disclaimer-quote {
+  font-style: italic;
+}
+
+.perf-marketing .pm-disclaimer-note {
+  color: #a07040;
+  font-size: clamp(9.5px, 1.1vw, 11px);
+  display: block;
+  margin-top: 2px;
+}
+
+.perf-marketing .pm-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: clamp(10px, 1.5vw, 14px);
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.perf-marketing .pm-section-title {
+  font-size: clamp(12px, 1.6vw, 15px);
+  font-weight: 700;
+  color: #e0e0e0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.perf-marketing .pm-live-badge {
+  background: rgba(240, 240, 248, 0.1);
+  color: #aaa;
+  font-size: 10px;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.perf-marketing .pm-time-pills {
+  display: flex;
+  gap: 4px;
+}
+
+.perf-marketing .pm-time-pill {
+  font-size: clamp(10px, 1.2vw, 11px);
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  color: #888;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  background: transparent;
+  border: none;
+}
+
+.perf-marketing .pm-time-pill.active {
+  background: #e0e0e0;
+  color: #1a1a2e;
+}
+
+.perf-marketing .pm-legend {
+  display: flex;
+  align-items: center;
+  gap: clamp(4px, 1.2vw, 14px);
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.perf-marketing .pm-legend-item {
+  display: flex;
+  align-items: center;
+  gap: clamp(3px, 0.5vw, 5px);
+  font-size: clamp(9px, 1.2vw, 11px);
+  font-weight: 600;
+  color: #aaa;
+  cursor: pointer;
+  padding: clamp(2px, 0.5vw, 4px) clamp(4px, 0.8vw, 8px);
+  border-radius: 6px;
+  transition: background 0.2s, opacity 0.3s;
+  user-select: none;
+}
+.perf-marketing .pm-legend-item:hover { background: rgba(255, 255, 255, 0.05); }
+.perf-marketing .pm-legend-item.dimmed { opacity: 0.3; }
+
+.perf-marketing .pm-legend-dot {
+  width: clamp(6px, 0.8vw, 8px);
+  height: clamp(6px, 0.8vw, 8px);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.perf-marketing .pm-chart-card {
+  background: rgba(26, 26, 46, 0.6);
+  border-radius: clamp(10px, 1.6vw, 16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: clamp(10px, 2vw, 20px) clamp(10px, 2vw, 20px) clamp(8px, 1.5vw, 14px);
+  margin-bottom: clamp(10px, 1.5vw, 14px);
+  position: relative;
+  backdrop-filter: blur(8px);
+}
+
+.perf-marketing .pm-chart-area {
+  position: relative;
+  width: 100%;
+  height: clamp(140px, 22vw, 240px);
+}
+
+.perf-marketing .pm-chart-area canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.perf-marketing .pm-chart-tooltip {
+  position: absolute;
+  background: #1a1a2e;
+  color: white;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 11px;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 10;
+  min-width: 130px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+.perf-marketing .pm-chart-tooltip.visible { opacity: 1; }
+.perf-marketing .pm-tooltip-label { font-size: 10px; color: #aaa; margin-bottom: 6px; font-weight: 600; }
+.perf-marketing .pm-tooltip-row { display: flex; align-items: center; gap: 6px; margin-top: 3px; }
+.perf-marketing .pm-tooltip-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.perf-marketing .pm-tooltip-name { color: #ccc; font-size: 10px; }
+.perf-marketing .pm-tooltip-val { margin-left: auto; font-weight: 700; font-size: 11px; }
+
+.perf-marketing .pm-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: clamp(6px, 1vw, 10px);
+}
+
+.perf-marketing .pm-metric-card {
+  background: rgba(26, 26, 46, 0.6);
+  border-radius: clamp(10px, 1.4vw, 14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: clamp(10px, 1.6vw, 16px) clamp(10px, 1.4vw, 14px) clamp(8px, 1.2vw, 12px);
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+.perf-marketing .pm-metric-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.perf-marketing .pm-metric-icon {
+  font-size: clamp(16px, 2vw, 20px);
+  margin-bottom: clamp(4px, 0.8vw, 8px);
+  display: block;
+}
+
+.perf-marketing .pm-metric-label {
+  font-size: clamp(8.5px, 1vw, 10px);
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+.perf-marketing .pm-metric-value {
+  font-size: clamp(18px, 2.6vw, 26px);
+  font-weight: 800;
+  color: #e0e0e0;
+  line-height: 1;
+  letter-spacing: -0.5px;
+  margin-bottom: 5px;
+  transition: color 0.3s;
+}
+
+.perf-marketing .pm-metric-change {
+  font-size: clamp(9px, 1.1vw, 11px);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.perf-marketing .pm-metric-change.up { color: #16a34a; }
+.perf-marketing .pm-metric-change.down { color: #dc2626; }
+
+.perf-marketing .pm-mini-spark {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 70px;
+  height: 36px;
+  opacity: 0.25;
+}
+
+.perf-marketing .pm-cpc-roas-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(8px, 1vw, 10px);
+  margin-top: clamp(8px, 1vw, 10px);
+}
+
+.perf-marketing .pm-cpc-roas-card {
+  background: rgba(26, 26, 46, 0.6);
+  border-radius: clamp(10px, 1.4vw, 14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: clamp(10px, 1.6vw, 16px) clamp(10px, 1.4vw, 14px) clamp(8px, 1.2vw, 12px);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  backdrop-filter: blur(8px);
+}
+
+.perf-marketing .pm-cpc-header,
+.perf-marketing .pm-roas-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.perf-marketing .pm-cpc-label-group,
+.perf-marketing .pm-roas-label-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.perf-marketing .pm-cpc-sub,
+.perf-marketing .pm-roas-sub {
+  font-size: clamp(9px, 1vw, 10px);
+  color: #777;
+  font-weight: 400;
+}
+
+/* ── Performance Marketing Responsive ── */
+@media (max-width: 640px) {
+  .perf-marketing .pm-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  .perf-marketing .pm-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .perf-marketing .pm-cpc-roas-row {
+    grid-template-columns: 1fr;
+  }
+  .perf-marketing .pm-disclaimer {
+    flex-direction: row;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 380px) {
+  .perf-marketing .pm-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  .perf-marketing .pm-legend {
+    justify-content: center;
+  }
+}
 
 #project1 { background-image: url(./Images/projects/Project1.png); }
 #project2 { background-image: url(./Images/projects/Project2.png); }
