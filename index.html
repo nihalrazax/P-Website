@@ -17,6 +17,9 @@
 
   <!-- Favicon  -->
   <link rel="shortcut icon" href="./Images/userAsset/icon.ico" type="image/x-icon" />
+
+  <!-- Three.js for Advertisement section liquid-gradient background -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 
 <body>
@@ -71,15 +74,31 @@
       <div class="logo">
         <img src="./Images/userAsset/ALRLogo.png" alt="ALR" class="header-logo-img" />
       </div>
-      <nav>
+      <nav class="glass-nav">
+        <span class="glass-filter" aria-hidden="true"></span>
+        <span class="glass-overlay" aria-hidden="true"></span>
+        <span class="glass-specular" aria-hidden="true"></span>
         <ul class="nav-links">
+          <li><a href="#about">About</a></li>
           <li><a href="#projects">Websites</a></li>
           <li><a href="#graphics">Graphics</a></li>
           <li><a href="#socialmedia">Social Media</a></li>
           <li><a href="#advertisements">Ads</a></li>
+          <li><a href="#itSpecialist">IT Specialist</a></li>
           <li><a href="#skills">Skills</a></li>
         </ul>
       </nav>
+
+      <!-- SVG lens filter for the liquid-glass nav -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute;overflow:hidden;" aria-hidden="true">
+        <filter id="glassLensFilter" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox">
+          <feComponentTransfer in="SourceAlpha" result="alpha">
+            <feFuncA type="identity" />
+          </feComponentTransfer>
+          <feGaussianBlur in="alpha" stdDeviation="50" result="blur" />
+          <feDisplacementMap in="SourceGraphic" in2="blur" scale="50" xChannelSelector="A" yChannelSelector="A" />
+        </filter>
+      </svg>
     </header>
     <!-- Header End  -->
 
@@ -121,7 +140,7 @@
           I’m a Front-end Web developer and here is my portfolio website. Here
           you’ll learn about my journey as a Web developer. 
         </p> <a href="https://www.linkedin.com/in/aditya-k-rai">
-        <div class="btn">Hire Me</div></a>
+        <div class="btn">Connect +</div></a>
       </div>
       <div class="orbit-hero-right">
         <!-- Center Image -->
@@ -140,53 +159,60 @@
           <div class="orbit-slot" style="--angle: 0deg;">
             <div class="orbit-counter-rotator">
               <div class="orbit-orientation-fixer">
-                <div class="chip c-frontend">Search Engine Optimazation</div>
+                <div class="chip c-frontend">SEO + AEO + ASO</div>
               </div>
             </div>
           </div>
-          <div class="orbit-slot" style="--angle: 45deg;">  
+          <div class="orbit-slot" style="--angle: 40deg;">
             <div class="orbit-counter-rotator">
               <div class="orbit-orientation-fixer">
                 <div class="chip c-react">Social Media</div>
               </div>
             </div>
           </div>
-          <div class="orbit-slot" style="--angle: 90deg;">
+          <div class="orbit-slot" style="--angle: 80deg;">
             <div class="orbit-counter-rotator">
               <div class="orbit-orientation-fixer">
                 <div class="chip c-js">Advertisements</div>
               </div>
             </div>
           </div>
-          <div class="orbit-slot" style="--angle: 135deg;">
+          <div class="orbit-slot" style="--angle: 120deg;">
+            <div class="orbit-counter-rotator">
+              <div class="orbit-orientation-fixer">
+                <div class="chip c-ai">AI Enthusiast</div>
+              </div>
+            </div>
+          </div>
+          <div class="orbit-slot" style="--angle: 160deg;">
             <div class="orbit-counter-rotator">
               <div class="orbit-orientation-fixer">
                 <div class="chip c-uiux">Graphics Designing</div>
               </div>
             </div>
           </div>
-          <div class="orbit-slot" style="--angle: 180deg;">
+          <div class="orbit-slot" style="--angle: 200deg;">
             <div class="orbit-counter-rotator">
               <div class="orbit-orientation-fixer">
                 <div class="chip c-webdesign">Web Developer</div>
               </div>
             </div>
           </div>
-          <div class="orbit-slot" style="--angle: 225deg;">
+          <div class="orbit-slot" style="--angle: 240deg;">
             <div class="orbit-counter-rotator">
               <div class="orbit-orientation-fixer">
-                <div class="chip c-marketing">Digital Marketing</div>
+                <div class="chip c-marketing">IT Specialist</div>
               </div>
             </div>
           </div>
-          <div class="orbit-slot" style="--angle: 270deg;">
+          <div class="orbit-slot" style="--angle: 280deg;">
             <div class="orbit-counter-rotator">
               <div class="orbit-orientation-fixer">
                 <div class="chip c-security">Cybersecurity</div>
               </div>
             </div>
           </div>
-          <div class="orbit-slot" style="--angle: 315deg;">
+          <div class="orbit-slot" style="--angle: 320deg;">
             <div class="orbit-counter-rotator">
               <div class="orbit-orientation-fixer">
                 <div class="chip c-video">Video Editing</div>
@@ -197,6 +223,98 @@
       </div>
     </section>
     <!-- Hero Section End  -->
+
+    <!-- About Section Start -->
+    <section id="about" class="projectSection">
+      <h2 class="projectTitle text-effect"><span class="te-line"><span class="te-base">About</span><span class="te-fade"> Me</span></span><span class="te-hover">About Me</span></h2>
+
+      <div class="about-grid">
+        <div class="about-tv-wrap">
+          <iframe class="tv-frame" src="./tv.html" title="Interactive TV set" loading="lazy" scrolling="no"></iframe>
+        </div>
+        <div class="about-copy ak-resume">
+          <div class="ak-head">
+            <div class="ak-identity">
+              <h3 class="ak-name">Aditya Kumar Rai</h3>
+              <div class="ak-role">Full Stack Web Developer &middot; Digital Marketer &middot; IT Specialist</div>
+            </div>
+            <div class="ak-chips-row">
+              <span class="ak-mini-chip">24 yrs</span>
+              <a class="ak-mini-chip ak-mini-chip--link" href="https://www.ccsuniversity.ac.in/" target="_blank" rel="noopener" title="Chaudhary Charan Singh University, Meerut">
+                <img src="./Images/Graphics/Icons/Chaudhary_Charan_Singh_University_logo.png" alt="" class="ak-mini-chip-logo" loading="lazy" decoding="async" />
+                <span>BCA &middot; CCSU</span>
+              </a>
+              <a class="ak-mini-chip ak-mini-chip--link" href="https://www.njmskasia.com/" target="_blank" rel="noopener" title="Nav Jeevan Mission School, Kasia">
+                <img src="./Images/Graphics/Icons/NJMS%20School%20LOGO%20.png" alt="" class="ak-mini-chip-logo" loading="lazy" decoding="async" />
+                <span>10+2 &middot; NJMS, CBSE</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="ak-panels ak-split">
+            <div class="ak-panel is-shown" data-ak-panel="profile">
+              <div class="ak-panel-title">Profile</div>
+              <p class="ak-para">Full-stack developer, digital marketer, and IT specialist &mdash; I treat curiosity like a workbench. Build, break, fix, repeat &mdash; and stay for the part where it finally clicks.</p>
+              <p class="ak-para">BCA graduate, CCSU Meerut. Shipping production work across e-commerce, hospitality, construction, AI, and EV brands &mdash; code, campaigns, and creative under one roof.</p>
+              <div class="ak-interests">
+                <div class="ak-section-label">Areas of Interest</div>
+                <div class="ak-interests-tags">
+                  <span>Full-Stack Dev</span>
+                  <span>Digital Marketing</span>
+                  <span>AI &amp; Creative Tools</span>
+                  <span>Network Security</span>
+                  <span>UI / UX Design</span>
+                  <span>SEO &amp; Growth</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="ak-panel is-shown" data-ak-panel="journey">
+              <div class="ak-panel-title">Journey</div>
+              <div class="ak-timeline">
+                <div class="ak-t-item">
+                  <div class="ak-t-dot"></div>
+                  <div class="ak-t-period">Mar 2026 &mdash; Present</div>
+                  <div class="ak-t-role">Full Stack Developer</div>
+                  <div class="ak-t-company">Silveri &middot; E-commerce Jewelry</div>
+                </div>
+                <div class="ak-t-item">
+                  <div class="ak-t-dot"></div>
+                  <div class="ak-t-period">Mar &mdash; Apr 2026</div>
+                  <div class="ak-t-role">Frontend Developer (React)</div>
+                  <div class="ak-t-company">Lotwaala Platform &middot; Freelance</div>
+                </div>
+                <div class="ak-t-item">
+                  <div class="ak-t-dot"></div>
+                  <div class="ak-t-period">Sep 2025 &mdash; Apr 2026</div>
+                  <div class="ak-t-role">Web Developer and Digital Marketer</div>
+                  <div class="ak-t-company">Trackovo AI Technology</div>
+                </div>
+                <div class="ak-t-item">
+                  <div class="ak-t-dot"></div>
+                  <div class="ak-t-period">Aug 2025 &mdash; Apr 2026</div>
+                  <div class="ak-t-role">Full Stack Developer and Digital Marketer</div>
+                  <div class="ak-t-company">Aarna Constructions</div>
+                </div>
+                <div class="ak-t-item">
+                  <div class="ak-t-dot"></div>
+                  <div class="ak-t-period">Jan &mdash; Jul 2025</div>
+                  <div class="ak-t-role">Web Developer, Designer and Digital Marketer</div>
+                  <div class="ak-t-company">Freelance &middot; Hospitality Brands</div>
+                </div>
+                <div class="ak-t-item">
+                  <div class="ak-t-dot"></div>
+                  <div class="ak-t-period">Aug &mdash; Nov 2024</div>
+                  <div class="ak-t-role">Web Support &amp; Tech Executive</div>
+                  <div class="ak-t-company">Ryoto Electrix Pvt. Ltd.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- About Section End -->
 
     <!-- Project Section Start -->
     <section id="projects" class="projectSection">
@@ -712,7 +830,36 @@
 
     <!-- Advertisements Section Start -->
     <section id="advertisements" class="projectSection">
+      <!-- Liquid Gradient Background -->
+      <div class="lg-stage" aria-hidden="true">
+        <canvas class="lg-canvas" id="lg-canvas"></canvas>
+      </div>
+
       <h2 class="projectTitle text-effect"><span class="te-line"><span class="te-base">Advertisement</span><span class="te-fade">s</span></span><span class="te-hover">Advertisements</span></h2>
+
+      <!-- Liquid Gradient Controls (side rails) -->
+      <button type="button" class="lg-toggle-adjuster" id="lg-toggle-adjuster">Adjust Colors</button>
+      <div class="lg-color-controls">
+        <button type="button" class="lg-color-btn active" data-lg-scheme="1">Scheme 1</button>
+        <button type="button" class="lg-color-btn" data-lg-scheme="2">Scheme 2</button>
+        <button type="button" class="lg-color-btn" data-lg-scheme="3">Scheme 3</button>
+        <button type="button" class="lg-color-btn" data-lg-scheme="4">Scheme 4</button>
+        <button type="button" class="lg-color-btn" data-lg-scheme="5">Scheme 5</button>
+      </div>
+      <div class="lg-adjuster-panel" id="lg-adjuster-panel" role="dialog" aria-label="Color Adjuster">
+        <div class="lg-adjuster-header">
+          <span class="lg-adjuster-title">Color Adjuster</span>
+          <button type="button" class="lg-adjuster-close" id="lg-adjuster-close" aria-label="Close">&times;</button>
+        </div>
+        <div class="lg-picker-group"><span class="lg-picker-label">Color 1</span><div class="lg-picker-row"><input type="color" class="lg-picker-input" id="lg-pick-1" data-lg-color="1" /><input type="text" class="lg-picker-value" id="lg-val-1" readonly /><button type="button" class="lg-copy-btn" data-lg-copy="1">Copy</button></div></div>
+        <div class="lg-picker-group"><span class="lg-picker-label">Color 2</span><div class="lg-picker-row"><input type="color" class="lg-picker-input" id="lg-pick-2" data-lg-color="2" /><input type="text" class="lg-picker-value" id="lg-val-2" readonly /><button type="button" class="lg-copy-btn" data-lg-copy="2">Copy</button></div></div>
+        <div class="lg-picker-group"><span class="lg-picker-label">Color 3</span><div class="lg-picker-row"><input type="color" class="lg-picker-input" id="lg-pick-3" data-lg-color="3" /><input type="text" class="lg-picker-value" id="lg-val-3" readonly /><button type="button" class="lg-copy-btn" data-lg-copy="3">Copy</button></div></div>
+        <div class="lg-picker-group"><span class="lg-picker-label">Color 4</span><div class="lg-picker-row"><input type="color" class="lg-picker-input" id="lg-pick-4" data-lg-color="4" /><input type="text" class="lg-picker-value" id="lg-val-4" readonly /><button type="button" class="lg-copy-btn" data-lg-copy="4">Copy</button></div></div>
+        <div class="lg-picker-group"><span class="lg-picker-label">Color 5</span><div class="lg-picker-row"><input type="color" class="lg-picker-input" id="lg-pick-5" data-lg-color="5" /><input type="text" class="lg-picker-value" id="lg-val-5" readonly /><button type="button" class="lg-copy-btn" data-lg-copy="5">Copy</button></div></div>
+        <div class="lg-picker-group"><span class="lg-picker-label">Color 6</span><div class="lg-picker-row"><input type="color" class="lg-picker-input" id="lg-pick-6" data-lg-color="6" /><input type="text" class="lg-picker-value" id="lg-val-6" readonly /><button type="button" class="lg-copy-btn" data-lg-copy="6">Copy</button></div></div>
+        <button type="button" class="lg-export-btn" id="lg-export-all">Export All Colors</button>
+      </div>
+
       <!-- Performance Marketing Subsection -->
       <div class="perf-marketing">
         <h3 class="pm-subtitle">Performance Marketing</h3>
@@ -826,7 +973,7 @@
                 </div>
               </div>
               <div style="text-align:right;">
-                <div class="pm-metric-value" id="pm-mv-cpc" style="font-size:22px;">$1.84</div>
+                <div class="pm-metric-value" id="pm-mv-cpc" style="font-size:22px;">₹1.84</div>
                 <div class="pm-metric-change down" id="pm-mc2-cpc" style="justify-content:flex-end;">↓ 4.2%</div>
               </div>
             </div>
@@ -860,6 +1007,147 @@
 
     </section>
     <!-- Advertisements Section End -->
+
+    <!-- IT Specialist Section Start -->
+    <section id="itSpecialist" class="projectSection">
+      <canvas class="it-bg-canvas" aria-hidden="true"></canvas>
+      <h2 class="projectTitle text-effect"><span class="te-line"><span class="te-base">IT Special</span><span class="te-fade">ist</span></span><span class="te-hover">IT Specialist</span></h2>
+
+      <div class="it-wrap">
+        <p class="it-intro">Multi-skilled IT professional with expertise in System Administration, Technical Troubleshooting, Cybersecurity fundamentals, and Data Recovery. Experienced in handling OS-level issues, device connectivity, and forensic data analysis using tools like Autopsy and TestDisk.</p>
+
+        <!-- Problems I Solve -->
+        <div class="it-solve">
+          <div class="it-solve-label">Problems I Solve</div>
+          <div class="it-solve-grid">
+            <div class="it-solve-card" data-solve="1">
+              <span class="it-solve-icon">🔓</span>
+              <div class="it-solve-text">
+                <div class="it-solve-title">Windows Lock Bypass</div>
+                <div class="it-solve-desc">Recover files from password-locked Windows.</div>
+              </div>
+            </div>
+            <div class="it-solve-card" data-solve="2">
+              <span class="it-solve-icon">🩹</span>
+              <div class="it-solve-text">
+                <div class="it-solve-title">Corrupt Windows Fix</div>
+                <div class="it-solve-desc">Repair broken installs, registry, and crash loops.</div>
+              </div>
+            </div>
+            <div class="it-solve-card" data-solve="3">
+              <span class="it-solve-icon">🔁</span>
+              <div class="it-solve-text">
+                <div class="it-solve-title">Boot Error Recovery</div>
+                <div class="it-solve-desc">Windows &amp; Linux boot repair, bootloader rebuild.</div>
+              </div>
+            </div>
+            <div class="it-solve-card" data-solve="4">
+              <span class="it-solve-icon">📡</span>
+              <div class="it-solve-text">
+                <div class="it-solve-title">Wi-Fi &amp; Network Fix</div>
+                <div class="it-solve-desc">Dead connections, router setup, security testing.</div>
+              </div>
+            </div>
+            <div class="it-solve-card" data-solve="5">
+              <span class="it-solve-icon">🧠</span>
+              <div class="it-solve-text">
+                <div class="it-solve-title">Data Recovery</div>
+                <div class="it-solve-desc">Autopsy + TestDisk for damaged or deleted files.</div>
+              </div>
+            </div>
+            <div class="it-solve-card" data-solve="6">
+              <span class="it-solve-icon">🔌</span>
+              <div class="it-solve-text">
+                <div class="it-solve-title">ESP32 / IoT Scripting</div>
+                <div class="it-solve-desc">Microcontroller code for IoT &amp; networking.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categorized Specializations -->
+        <div class="it-categories">
+          <article class="it-cat" data-cat="1">
+            <div class="it-cat-head">
+              <span class="it-cat-badge">01</span>
+              <span class="it-cat-emoji">💻</span>
+            </div>
+            <h4 class="it-cat-title">System Administration &amp; OS Management</h4>
+            <p class="it-cat-why">Operating systems, installations, and system-level issues &mdash; handled end to end.</p>
+            <ul class="it-cat-skills">
+              <li>Windows Install &amp; Config</li>
+              <li>Linux Environment Handling</li>
+              <li>OS Troubleshooting</li>
+              <li>Boot Issues &amp; Crash Recovery</li>
+              <li>Driver Installation &amp; Fixes</li>
+              <li>Corrupted File Repair</li>
+              <li>Modified / Chinese Windows</li>
+              <li>Performance Optimization</li>
+              <li>Software Setup</li>
+              <li>Disk &amp; Partition Handling</li>
+            </ul>
+          </article>
+
+          <article class="it-cat" data-cat="2">
+            <div class="it-cat-head">
+              <span class="it-cat-badge">02</span>
+              <span class="it-cat-emoji">🔌</span>
+            </div>
+            <h4 class="it-cat-title">Technical Support &amp; Device Troubleshooting</h4>
+            <p class="it-cat-why">Real devices, real problems &mdash; software and connection fixes across gadgets.</p>
+            <ul class="it-cat-skills">
+              <li>End-to-End Troubleshooting</li>
+              <li>VR Headset Setup</li>
+              <li>Controller &amp; Wearable Fixes</li>
+              <li>Monitor-to-System Issues</li>
+              <li>Network Issue Diagnosis</li>
+              <li>Cross-Device Integration</li>
+              <li>Compatibility Fixes</li>
+              <li>Real-Time Debugging</li>
+            </ul>
+          </article>
+
+          <article class="it-cat" data-cat="3">
+            <div class="it-cat-head">
+              <span class="it-cat-badge">03</span>
+              <span class="it-cat-emoji">🔐</span>
+            </div>
+            <h4 class="it-cat-title">Cybersecurity &amp; Networking</h4>
+            <p class="it-cat-why">Networks, security fundamentals, and ethical testing concepts.</p>
+            <ul class="it-cat-skills">
+              <li>Network Security Basics</li>
+              <li>Wi-Fi Security Testing (WPA &middot; WPS)</li>
+              <li>Network Troubleshooting</li>
+              <li>Vulnerability Awareness</li>
+              <li>ESP32 Scripting (IoT)</li>
+              <li>Penetration Testing Concepts</li>
+              <li>Authentication &amp; Access Control</li>
+              <li>System Security Hygiene</li>
+            </ul>
+          </article>
+
+          <article class="it-cat" data-cat="4">
+            <div class="it-cat-head">
+              <span class="it-cat-badge">04</span>
+              <span class="it-cat-emoji">🧠</span>
+            </div>
+            <h4 class="it-cat-title">Data Recovery &amp; Digital Forensics</h4>
+            <p class="it-cat-why">Advanced recovery from damaged, corrupted, or locked systems.</p>
+            <ul class="it-cat-skills">
+              <li>Damaged System Recovery</li>
+              <li>File Recovery Without OS</li>
+              <li>Disk Analysis</li>
+              <li>Autopsy &amp; TestDisk</li>
+              <li>Deleted File Restore</li>
+              <li>Storage Device Investigation</li>
+              <li>File System Forensics</li>
+              <li>Windows Security Bypass &amp; Extract</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+    <!-- IT Specialist Section End -->
 
     <!-- Skill Section Start  -->
     <section class="skillContainer" id="skills">
@@ -1047,6 +1335,658 @@
       </div>
     </footer>
   </div>
+
+  <!-- Section Navigation (left side) -->
+  <div class="section-nav" id="sectionNav" aria-label="Section navigation">
+    <button class="section-nav-btn" id="sectionNavUp" title="Tap: previous section • Hold: go to top" aria-label="Previous section (hold to go to top)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button class="section-nav-btn" id="sectionNavDown" title="Tap: next section • Hold: go to bottom" aria-label="Next section (hold to go to bottom)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+
+  <!-- Section Navigation Script -->
+  <script>
+    (function () {
+      var upBtn = document.getElementById('sectionNavUp');
+      var downBtn = document.getElementById('sectionNavDown');
+      if (!upBtn || !downBtn) return;
+
+      var HOLD_MS = 500;
+
+      function getAnchors() {
+        return Array.prototype.slice.call(
+          document.querySelectorAll('#wrapper > section, #wrapper > footer')
+        );
+      }
+
+      function currentIndex(anchors) {
+        var y = window.scrollY + window.innerHeight * 0.25;
+        var idx = 0;
+        for (var i = 0; i < anchors.length; i++) {
+          if (anchors[i].offsetTop <= y) idx = i;
+        }
+        return idx;
+      }
+
+      function scrollToEl(el) {
+        if (!el) return;
+        window.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
+      }
+
+      function goPrev() {
+        var anchors = getAnchors();
+        var i = currentIndex(anchors);
+        scrollToEl(anchors[Math.max(0, i - 1)]);
+      }
+
+      function goNext() {
+        var anchors = getAnchors();
+        var i = currentIndex(anchors);
+        scrollToEl(anchors[Math.min(anchors.length - 1, i + 1)]);
+      }
+
+      function goTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function goBottom() {
+        var h = Math.max(
+          document.body.scrollHeight,
+          document.documentElement.scrollHeight
+        );
+        window.scrollTo({ top: h, behavior: 'smooth' });
+      }
+
+      function attachHold(btn, onTap, onHold) {
+        var holdTimer = null;
+        var didHold = false;
+
+        function begin() {
+          didHold = false;
+          btn.classList.add('is-pressed');
+          clearTimeout(holdTimer);
+          holdTimer = setTimeout(function () {
+            didHold = true;
+            btn.classList.add('is-held');
+            onHold();
+          }, HOLD_MS);
+        }
+
+        function finish() {
+          clearTimeout(holdTimer);
+          btn.classList.remove('is-pressed', 'is-held');
+        }
+
+        btn.addEventListener('pointerdown', function (e) {
+          if (e.pointerType === 'mouse' && e.button !== 0) return;
+          begin();
+        });
+        btn.addEventListener('pointerup', finish);
+        btn.addEventListener('pointerleave', finish);
+        btn.addEventListener('pointercancel', finish);
+
+        btn.addEventListener('click', function (e) {
+          if (didHold) {
+            didHold = false;
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+          }
+          onTap();
+        });
+
+        btn.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+      }
+
+      attachHold(upBtn, goPrev, goTop);
+      attachHold(downBtn, goNext, goBottom);
+    })();
+  </script>
+
+  <!-- About Resume Tabs -->
+  <script>
+    (function () {
+      var tabs = document.querySelectorAll('.ak-tab');
+      var panels = document.querySelectorAll('.ak-panel');
+      if (!tabs.length || !panels.length) return;
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          var target = tab.getAttribute('data-ak-tab');
+          tabs.forEach(function (t) { t.classList.toggle('active', t === tab); });
+          panels.forEach(function (p) {
+            p.classList.toggle('active', p.getAttribute('data-ak-panel') === target);
+          });
+        });
+      });
+    })();
+  </script>
+
+  <!-- Advertisement Section · Liquid Gradient (Three.js) -->
+  <script>
+    (function () {
+      function boot() {
+        if (typeof THREE === 'undefined') { return setTimeout(boot, 120); }
+        var canvas = document.getElementById('lg-canvas');
+        var section = document.getElementById('advertisements');
+        if (!canvas || !section) return;
+
+        function TouchTexture() {
+          this.size = 64;
+          this.width = this.height = this.size;
+          this.maxAge = 64;
+          this.radius = 0.25 * this.size;
+          this.speed = 1 / this.maxAge;
+          this.trail = [];
+          this.last = null;
+          this.canvas = document.createElement('canvas');
+          this.canvas.width = this.width;
+          this.canvas.height = this.height;
+          this.ctx = this.canvas.getContext('2d');
+          this.ctx.fillStyle = 'black';
+          this.ctx.fillRect(0, 0, this.width, this.height);
+          this.texture = new THREE.Texture(this.canvas);
+        }
+        TouchTexture.prototype.update = function () {
+          this.ctx.fillStyle = 'black';
+          this.ctx.fillRect(0, 0, this.width, this.height);
+          var speed = this.speed;
+          for (var i = this.trail.length - 1; i >= 0; i--) {
+            var p = this.trail[i];
+            var f = p.force * speed * (1 - p.age / this.maxAge);
+            p.x += p.vx * f; p.y += p.vy * f; p.age++;
+            if (p.age > this.maxAge) this.trail.splice(i, 1); else this.drawPoint(p);
+          }
+          this.texture.needsUpdate = true;
+        };
+        TouchTexture.prototype.addTouch = function (pt) {
+          var force = 0, vx = 0, vy = 0, last = this.last;
+          if (last) {
+            var dx = pt.x - last.x, dy = pt.y - last.y;
+            if (dx === 0 && dy === 0) return;
+            var dd = dx * dx + dy * dy, d = Math.sqrt(dd);
+            vx = dx / d; vy = dy / d;
+            force = Math.min(dd * 20000, 2.0);
+          }
+          this.last = { x: pt.x, y: pt.y };
+          this.trail.push({ x: pt.x, y: pt.y, age: 0, force: force, vx: vx, vy: vy });
+        };
+        TouchTexture.prototype.drawPoint = function (p) {
+          var pos = { x: p.x * this.width, y: (1 - p.y) * this.height };
+          var intensity;
+          if (p.age < this.maxAge * 0.3) intensity = Math.sin((p.age / (this.maxAge * 0.3)) * (Math.PI / 2));
+          else { var t = 1 - (p.age - this.maxAge * 0.3) / (this.maxAge * 0.7); intensity = -t * (t - 2); }
+          intensity *= p.force;
+          var color = (((p.vx + 1) / 2) * 255) + ',' + (((p.vy + 1) / 2) * 255) + ',' + (intensity * 255);
+          var offset = this.size * 5;
+          this.ctx.shadowOffsetX = offset;
+          this.ctx.shadowOffsetY = offset;
+          this.ctx.shadowBlur = this.radius;
+          this.ctx.shadowColor = 'rgba(' + color + ',' + (0.2 * intensity) + ')';
+          this.ctx.beginPath();
+          this.ctx.fillStyle = 'rgba(255,0,0,1)';
+          this.ctx.arc(pos.x - offset, pos.y - offset, this.radius, 0, Math.PI * 2);
+          this.ctx.fill();
+        };
+
+        var VERTEX = 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }';
+        var FRAGMENT = [
+          'uniform float uTime;',
+          'uniform vec2 uResolution;',
+          'uniform vec3 uColor1;uniform vec3 uColor2;uniform vec3 uColor3;uniform vec3 uColor4;uniform vec3 uColor5;uniform vec3 uColor6;',
+          'uniform float uSpeed;uniform float uIntensity;uniform sampler2D uTouchTexture;uniform float uGrainIntensity;',
+          'uniform vec3 uDarkBase;uniform float uGradientSize;uniform float uGradientCount;uniform float uColor1Weight;uniform float uColor2Weight;',
+          'varying vec2 vUv;',
+          '#define PI 3.14159265359',
+          'float grain(vec2 uv,float time){ vec2 g=uv*uResolution*0.5; return fract(sin(dot(g+time,vec2(12.9898,78.233)))*43758.5453)*2.0-1.0; }',
+          'vec3 getGradientColor(vec2 uv,float time){',
+          '  float gr = uGradientSize;',
+          '  vec2 c1=vec2(0.5+sin(time*uSpeed*0.4)*0.4,0.5+cos(time*uSpeed*0.5)*0.4);',
+          '  vec2 c2=vec2(0.5+cos(time*uSpeed*0.6)*0.5,0.5+sin(time*uSpeed*0.45)*0.5);',
+          '  vec2 c3=vec2(0.5+sin(time*uSpeed*0.35)*0.45,0.5+cos(time*uSpeed*0.55)*0.45);',
+          '  vec2 c4=vec2(0.5+cos(time*uSpeed*0.5)*0.4,0.5+sin(time*uSpeed*0.4)*0.4);',
+          '  vec2 c5=vec2(0.5+sin(time*uSpeed*0.7)*0.35,0.5+cos(time*uSpeed*0.6)*0.35);',
+          '  vec2 c6=vec2(0.5+cos(time*uSpeed*0.45)*0.5,0.5+sin(time*uSpeed*0.65)*0.5);',
+          '  float i1=1.0-smoothstep(0.0,gr,length(uv-c1));',
+          '  float i2=1.0-smoothstep(0.0,gr,length(uv-c2));',
+          '  float i3=1.0-smoothstep(0.0,gr,length(uv-c3));',
+          '  float i4=1.0-smoothstep(0.0,gr,length(uv-c4));',
+          '  float i5=1.0-smoothstep(0.0,gr,length(uv-c5));',
+          '  float i6=1.0-smoothstep(0.0,gr,length(uv-c6));',
+          '  vec2 ru=uv-0.5; float a1=time*uSpeed*0.15; ru=vec2(ru.x*cos(a1)-ru.y*sin(a1),ru.x*sin(a1)+ru.y*cos(a1))+0.5;',
+          '  float rad=1.0-smoothstep(0.0,0.8,length(ru-0.5));',
+          '  vec3 color=vec3(0.0);',
+          '  color+=uColor1*i1*(0.55+0.45*sin(time*uSpeed))*uColor1Weight;',
+          '  color+=uColor2*i2*(0.55+0.45*cos(time*uSpeed*1.2))*uColor2Weight;',
+          '  color+=uColor3*i3*(0.55+0.45*sin(time*uSpeed*0.8))*uColor1Weight;',
+          '  color+=uColor4*i4*(0.55+0.45*cos(time*uSpeed*1.3))*uColor2Weight;',
+          '  color+=uColor5*i5*(0.55+0.45*sin(time*uSpeed*1.1))*uColor1Weight;',
+          '  color+=uColor6*i6*(0.55+0.45*cos(time*uSpeed*0.9))*uColor2Weight;',
+          '  color+=mix(uColor1,uColor3,rad)*0.4*uColor1Weight;',
+          '  color=clamp(color,vec3(0.0),vec3(1.0))*uIntensity;',
+          '  float lum=dot(color,vec3(0.299,0.587,0.114));',
+          '  color=mix(vec3(lum),color,1.3);',
+          '  color=pow(color,vec3(0.92));',
+          '  float b=length(color); float mf=max(b*1.2,0.15);',
+          '  color=mix(uDarkBase,color,mf);',
+          '  float mb=1.0, br=length(color); if(br>mb) color=color*(mb/br);',
+          '  return color;',
+          '}',
+          'void main(){',
+          '  vec2 uv=vUv;',
+          '  vec4 tt=texture2D(uTouchTexture,uv);',
+          '  float vx=-(tt.r*2.0-1.0); float vy=-(tt.g*2.0-1.0); float it=tt.b;',
+          '  uv.x+=vx*0.8*it; uv.y+=vy*0.8*it;',
+          '  float dist=length(uv-vec2(0.5));',
+          '  uv+=vec2(sin(dist*20.0-uTime*3.0)*0.04*it + sin(dist*15.0-uTime*2.0)*0.03*it);',
+          '  vec3 color=getGradientColor(uv,uTime);',
+          '  color+=grain(uv,uTime)*uGrainIntensity;',
+          '  float ts=uTime*0.5;',
+          '  color.r+=sin(ts)*0.02; color.g+=cos(ts*1.4)*0.02; color.b+=sin(ts*1.2)*0.02;',
+          '  float b2=length(color); color=mix(uDarkBase,color,max(b2*1.2,0.15));',
+          '  color=clamp(color,vec3(0.0),vec3(1.0));',
+          '  float br2=length(color); if(br2>1.0) color=color*(1.0/br2);',
+          '  gl_FragColor=vec4(color,1.0);',
+          '}'
+        ].join('\n');
+
+        var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: false, powerPreference: 'high-performance', alpha: false, stencil: false, depth: false });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1));
+        renderer.setSize(section.clientWidth, section.clientHeight, false);
+
+        var scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x0a0e27);
+        var camera = new THREE.PerspectiveCamera(45, section.clientWidth / Math.max(1, section.clientHeight), 0.1, 1000);
+        camera.position.z = 50;
+        var clock = new THREE.Clock();
+        var tt = new TouchTexture();
+
+        var uniforms = {
+          uTime: { value: 0 },
+          uResolution: { value: new THREE.Vector2(section.clientWidth, section.clientHeight) },
+          uColor1: { value: new THREE.Vector3(0.945, 0.353, 0.133) },
+          uColor2: { value: new THREE.Vector3(0.039, 0.055, 0.153) },
+          uColor3: { value: new THREE.Vector3(0.945, 0.353, 0.133) },
+          uColor4: { value: new THREE.Vector3(0.039, 0.055, 0.153) },
+          uColor5: { value: new THREE.Vector3(0.945, 0.353, 0.133) },
+          uColor6: { value: new THREE.Vector3(0.039, 0.055, 0.153) },
+          uSpeed: { value: 1.2 },
+          uIntensity: { value: 1.8 },
+          uTouchTexture: { value: tt.texture },
+          uGrainIntensity: { value: 0.08 },
+          uDarkBase: { value: new THREE.Vector3(0.039, 0.055, 0.153) },
+          uGradientSize: { value: 1.0 },
+          uGradientCount: { value: 6.0 },
+          uColor1Weight: { value: 1.0 },
+          uColor2Weight: { value: 1.0 }
+        };
+
+        function getViewSize() {
+          var fov = (camera.fov * Math.PI) / 180;
+          var h = Math.abs(camera.position.z * Math.tan(fov / 2) * 2);
+          return { width: h * camera.aspect, height: h };
+        }
+        var vs = getViewSize();
+        var geometry = new THREE.PlaneGeometry(vs.width, vs.height, 1, 1);
+        var material = new THREE.ShaderMaterial({ uniforms: uniforms, vertexShader: VERTEX, fragmentShader: FRAGMENT });
+        var mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+
+        var schemes = {
+          1: { c1: [0.945, 0.353, 0.133], c2: [0.039, 0.055, 0.153], base: [0.039, 0.055, 0.153], size: 0.45, count: 12, speed: 1.5, w1: 0.5, w2: 1.8, mode: 'ab' },
+          2: { c1: [1.0, 0.424, 0.314], c2: [0.251, 0.878, 0.816], base: [0.039, 0.055, 0.153], size: 1.0, count: 6, speed: 1.2, w1: 1.0, w2: 1.0, mode: 'ab' },
+          3: { c1: [0.945, 0.353, 0.133], c2: [0.039, 0.055, 0.153], c3: [0.251, 0.878, 0.816], base: [0.039, 0.055, 0.153], size: 1.0, count: 6, speed: 1.2, w1: 1.0, w2: 1.0, mode: 'triple' },
+          4: { c1: [0.949, 0.4, 0.2], c2: [0.176, 0.42, 0.427], c3: [0.82, 0.686, 0.612], base: [1, 1, 1], size: 1.0, count: 6, speed: 1.2, w1: 1.0, w2: 1.0, mode: 'triple' },
+          5: { c1: [0.945, 0.353, 0.133], c2: [0.0, 0.259, 0.22], c3: [0.945, 0.353, 0.133], c4: [0.0, 0.0, 0.0], c5: [0.945, 0.353, 0.133], c6: [0.0, 0.0, 0.0], base: [0.039, 0.055, 0.153], size: 0.45, count: 12, speed: 1.5, w1: 0.5, w2: 1.8, mode: 'six' }
+        };
+
+        function setScheme(n) {
+          var s = schemes[n]; if (!s) return;
+          var U = uniforms;
+          if (s.mode === 'triple') {
+            U.uColor1.value.set(s.c1[0], s.c1[1], s.c1[2]);
+            U.uColor2.value.set(s.c2[0], s.c2[1], s.c2[2]);
+            U.uColor3.value.set(s.c3[0], s.c3[1], s.c3[2]);
+            U.uColor4.value.set(s.c1[0], s.c1[1], s.c1[2]);
+            U.uColor5.value.set(s.c2[0], s.c2[1], s.c2[2]);
+            U.uColor6.value.set(s.c3[0], s.c3[1], s.c3[2]);
+          } else if (s.mode === 'six') {
+            U.uColor1.value.set(s.c1[0], s.c1[1], s.c1[2]);
+            U.uColor2.value.set(s.c2[0], s.c2[1], s.c2[2]);
+            U.uColor3.value.set(s.c3[0], s.c3[1], s.c3[2]);
+            U.uColor4.value.set(s.c4[0], s.c4[1], s.c4[2]);
+            U.uColor5.value.set(s.c5[0], s.c5[1], s.c5[2]);
+            U.uColor6.value.set(s.c6[0], s.c6[1], s.c6[2]);
+          } else {
+            U.uColor1.value.set(s.c1[0], s.c1[1], s.c1[2]);
+            U.uColor2.value.set(s.c2[0], s.c2[1], s.c2[2]);
+            U.uColor3.value.set(s.c1[0], s.c1[1], s.c1[2]);
+            U.uColor4.value.set(s.c2[0], s.c2[1], s.c2[2]);
+            U.uColor5.value.set(s.c1[0], s.c1[1], s.c1[2]);
+            U.uColor6.value.set(s.c2[0], s.c2[1], s.c2[2]);
+          }
+          U.uDarkBase.value.set(s.base[0], s.base[1], s.base[2]);
+          U.uGradientSize.value = s.size;
+          U.uGradientCount.value = s.count;
+          U.uSpeed.value = s.speed;
+          U.uColor1Weight.value = s.w1;
+          U.uColor2Weight.value = s.w2;
+          scene.background = new THREE.Color((Math.round(s.base[0] * 255) << 16) | (Math.round(s.base[1] * 255) << 8) | Math.round(s.base[2] * 255));
+          updatePickers();
+        }
+
+        var running = false, rafId = 0;
+        function tick() {
+          if (!running) return;
+          var delta = Math.min(clock.getDelta(), 0.1);
+          tt.update();
+          uniforms.uTime.value += delta;
+          renderer.render(scene, camera);
+          rafId = requestAnimationFrame(tick);
+        }
+        function start() { if (running) return; running = true; clock.getDelta(); tick(); }
+        function stop() { running = false; if (rafId) cancelAnimationFrame(rafId); }
+
+        var resizeTO;
+        function resize() {
+          var w = section.clientWidth, h = section.clientHeight;
+          if (!w || !h) return;
+          renderer.setSize(w, h, false);
+          camera.aspect = w / h;
+          camera.updateProjectionMatrix();
+          var v = getViewSize();
+          mesh.geometry.dispose();
+          mesh.geometry = new THREE.PlaneGeometry(v.width, v.height, 1, 1);
+          uniforms.uResolution.value.set(w, h);
+        }
+        window.addEventListener('resize', function () { clearTimeout(resizeTO); resizeTO = setTimeout(resize, 120); });
+
+        section.addEventListener('mousemove', function (e) {
+          var r = section.getBoundingClientRect();
+          tt.addTouch({ x: (e.clientX - r.left) / r.width, y: 1 - (e.clientY - r.top) / r.height });
+        });
+        section.addEventListener('touchmove', function (e) {
+          var t = e.touches[0]; if (!t) return;
+          var r = section.getBoundingClientRect();
+          tt.addTouch({ x: (t.clientX - r.left) / r.width, y: 1 - (t.clientY - r.top) / r.height });
+        }, { passive: true });
+
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+              if (en.isIntersecting && !document.hidden) start();
+              else stop();
+            });
+          }, { threshold: 0 });
+          io.observe(section);
+        } else { start(); }
+        document.addEventListener('visibilitychange', function () {
+          if (document.hidden) stop();
+          else {
+            var r = section.getBoundingClientRect();
+            if (r.bottom > 0 && r.top < window.innerHeight) start();
+          }
+        });
+
+        // Controls: scheme buttons
+        var schemeBtns = section.querySelectorAll('.lg-color-btn');
+        schemeBtns.forEach(function (b) {
+          b.addEventListener('click', function () {
+            schemeBtns.forEach(function (x) { x.classList.remove('active'); });
+            b.classList.add('active');
+            setScheme(parseInt(b.getAttribute('data-lg-scheme'), 10));
+          });
+        });
+
+        // Controls: adjuster panel
+        var toggle = document.getElementById('lg-toggle-adjuster');
+        var panel = document.getElementById('lg-adjuster-panel');
+        var closeBtn = document.getElementById('lg-adjuster-close');
+        toggle.addEventListener('click', function () {
+          panel.classList.add('open');
+          toggle.classList.add('hidden');
+          updatePickers();
+        });
+        closeBtn.addEventListener('click', function () {
+          panel.classList.remove('open');
+          toggle.classList.remove('hidden');
+        });
+
+        function rgbToHex(r, g, b) {
+          function h(n) { var x = Math.round(n * 255).toString(16); return x.length === 1 ? '0' + x : x; }
+          return '#' + h(r) + h(g) + h(b);
+        }
+        function hexToRgb(h) {
+          var m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(h);
+          return m ? { r: parseInt(m[1], 16) / 255, g: parseInt(m[2], 16) / 255, b: parseInt(m[3], 16) / 255 } : null;
+        }
+        function updatePickers() {
+          var vals = [uniforms.uColor1.value, uniforms.uColor2.value, uniforms.uColor3.value, uniforms.uColor4.value, uniforms.uColor5.value, uniforms.uColor6.value];
+          for (var i = 0; i < 6; i++) {
+            var hex = rgbToHex(vals[i].x, vals[i].y, vals[i].z);
+            var p = document.getElementById('lg-pick-' + (i + 1));
+            var v = document.getElementById('lg-val-' + (i + 1));
+            if (p) p.value = hex;
+            if (v) v.value = hex.toUpperCase();
+          }
+        }
+        for (var i = 1; i <= 6; i++) {
+          (function (idx) {
+            var p = document.getElementById('lg-pick-' + idx);
+            var v = document.getElementById('lg-val-' + idx);
+            if (!p || !v) return;
+            p.addEventListener('input', function (e) {
+              var rgb = hexToRgb(e.target.value);
+              if (!rgb) return;
+              uniforms['uColor' + idx].value.set(rgb.r, rgb.g, rgb.b);
+              v.value = e.target.value.toUpperCase();
+            });
+          })(i);
+        }
+        section.querySelectorAll('.lg-copy-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var idx = btn.getAttribute('data-lg-copy');
+            var v = document.getElementById('lg-val-' + idx);
+            if (v && navigator.clipboard) {
+              navigator.clipboard.writeText(v.value).then(function () {
+                btn.textContent = 'Copied';
+                btn.classList.add('copied');
+                setTimeout(function () { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1600);
+              });
+            }
+          });
+        });
+        var exportBtn = document.getElementById('lg-export-all');
+        if (exportBtn) {
+          exportBtn.addEventListener('click', function () {
+            var arr = [];
+            for (var i = 1; i <= 6; i++) { arr.push(document.getElementById('lg-val-' + i).value); }
+            var txt = 'Color Scheme:\n' + arr.map(function (c, i) { return 'Color ' + (i + 1) + ': ' + c; }).join('\n') +
+                      '\n\nHex Array: [' + arr.map(function (c) { return '"' + c + '"'; }).join(', ') + ']';
+            if (navigator.clipboard) {
+              navigator.clipboard.writeText(txt).then(function () {
+                exportBtn.textContent = 'Copied';
+                exportBtn.classList.add('copied');
+                setTimeout(function () { exportBtn.textContent = 'Export All Colors'; exportBtn.classList.remove('copied'); }, 1800);
+              });
+            }
+          });
+        }
+
+        setScheme(1);
+        resize();
+      }
+
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+      else boot();
+    })();
+  </script>
+
+  <!-- IT Specialist Section Liquid Lights Background -->
+  <script>
+    (function () {
+      var section = document.getElementById('itSpecialist');
+      if (!section) return;
+      var canvas = section.querySelector('.it-bg-canvas');
+      if (!canvas || !canvas.getContext) return;
+      var ctx = canvas.getContext('2d');
+
+      var arr = [];
+      var cnt = 0;
+      var _w = 0, _h = 0;
+      var running = false;
+      var rafId = 0;
+
+      function resize() {
+        var rect = section.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
+        // Cap DPR at 1 to halve render cost on retina — blur effect hides any softness
+        var dpr = Math.min(1, window.devicePixelRatio || 1);
+        canvas.width = Math.max(1, Math.round(rect.width * dpr));
+        canvas.height = Math.max(1, Math.round(rect.height * dpr));
+        canvas.style.width = rect.width + 'px';
+        canvas.style.height = rect.height + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        _w = rect.width * 0.5;
+        _h = rect.height * 0.5;
+      }
+
+      function rndCol() {
+        var r = Math.floor(Math.random() * 180);
+        var g = Math.floor(Math.random() * 60);
+        var b = Math.floor(Math.random() * 100);
+        return 'rgb(' + r + ',' + g + ',' + b + ')';
+      }
+
+      function rng(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      function draw() {
+        if (!_w || !_h) { resize(); if (!_w || !_h) return; }
+
+        var spread = Math.max(_w, _h);
+        arr.push({
+          x: rng(_w - spread, _w + spread),
+          y: rng(_h - spread, _h + spread),
+          r: rng(28, 90),
+          spX: rng(-1, 1),
+          spY: rng(-1, 1),
+          col: rndCol(),
+          shadow: rndCol()
+        });
+        while (arr.length > 45) arr.shift();
+
+        ctx.clearRect(0, 0, _w * 2, _h * 2);
+
+        // Set shadow params once (they don't change per splat)
+        ctx.shadowBlur = 35;
+        ctx.shadowOffsetX = 2;
+        ctx.shadowOffsetY = 2;
+        ctx.globalCompositeOperation = 'lighter';
+
+        for (var i = 0; i < arr.length; i++) {
+          var s = arr[i];
+          ctx.fillStyle = s.col;
+          ctx.shadowColor = s.shadow;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2, true);
+          ctx.fill();
+
+          s.x += s.spX;
+          s.y += s.spY;
+          s.r *= 0.965;
+        }
+      }
+
+      // Frame-rate independent throttle: draw at most ~8 fps
+      var lastDraw = 0;
+      var DRAW_INTERVAL = 125; // ms
+      function anim(ts) {
+        if (!running) return;
+        if (!lastDraw || ts - lastDraw >= DRAW_INTERVAL) {
+          lastDraw = ts;
+          draw();
+        }
+        rafId = requestAnimationFrame(anim);
+      }
+
+      function start() {
+        if (running) return;
+        running = true;
+        lastDraw = 0;
+        resize();
+        rafId = requestAnimationFrame(anim);
+      }
+
+      function stop() {
+        running = false;
+        if (rafId) cancelAnimationFrame(rafId);
+      }
+
+      var resizeTO;
+      function onResize() {
+        clearTimeout(resizeTO);
+        resizeTO = setTimeout(resize, 120);
+      }
+      window.addEventListener('resize', onResize);
+
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting && !document.hidden) start();
+            else stop();
+          });
+        });
+        io.observe(section);
+      } else {
+        start();
+      }
+
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) stop();
+        else if (section.getBoundingClientRect().top < window.innerHeight && section.getBoundingClientRect().bottom > 0) start();
+      });
+    })();
+  </script>
+
+  <!-- Orbit Chip Color Cycle -->
+  <script>
+    (function () {
+      var chips = document.querySelectorAll('.orbit-animation-ring .chip');
+      if (!chips.length) return;
+
+      var palette = [
+        '#e84949', '#ea580c', '#eab308', '#22c55e',
+        '#14b8a6', '#0891b2', '#3b82f6', '#4f46e5',
+        '#8b5cf6', '#ec4899', '#f43f5e', '#475569'
+      ];
+      var STEP_MS = 3000;
+
+      function textColorFor(hex) {
+        var r = parseInt(hex.slice(1, 3), 16);
+        var g = parseInt(hex.slice(3, 5), 16);
+        var b = parseInt(hex.slice(5, 7), 16);
+        var lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+        return lum > 0.62 ? '#1a1a2e' : '#ffffff';
+      }
+
+      var tick = 0;
+      function apply() {
+        for (var i = 0; i < chips.length; i++) {
+          var color = palette[(tick + i) % palette.length];
+          chips[i].style.background = color;
+          chips[i].style.color = textColorFor(color);
+        }
+        tick = (tick + 1) % palette.length;
+      }
+
+      apply();
+      setInterval(apply, STEP_MS);
+    })();
+  </script>
 
   <!-- Social Share FAB Button -->
   <button class="share-toggle-btn" id="shareToggle">
@@ -2006,8 +2946,8 @@
         pmCpcValues[p.name] = Math.max(0.30, pmCpcValues[p.name] + (Math.random() - 0.5) * 0.04);
       });
       var newAvg = PM_PLATFORMS.map(function(p) { return pmCpcValues[p.name]; }).reduce(function(a, b) { return a + b; }, 0) / PM_PLATFORMS.length;
-      var prev = parseFloat(document.getElementById('pm-mv-cpc').textContent.replace('$', '')) || newAvg;
-      document.getElementById('pm-mv-cpc').textContent = '$' + newAvg.toFixed(2);
+      var prev = parseFloat(document.getElementById('pm-mv-cpc').textContent.replace('₹', '')) || newAvg;
+      document.getElementById('pm-mv-cpc').textContent = '₹' + newAvg.toFixed(2);
       var pct = ((newAvg - prev) / prev * 100);
       var el = document.getElementById('pm-mc2-cpc');
       el.textContent = (pct >= 0 ? '↑ ' : '↓ ') + Math.abs(pct).toFixed(1) + '%';
@@ -2016,7 +2956,7 @@
       var barEl = document.getElementById('pm-cpc-bars');
       barEl.innerHTML = PM_PLATFORMS.map(function(p) {
         var pct2 = pmCpcValues[p.name] / maxCpc * 100;
-        return '<div style="display:flex;align-items:center;gap:6px;"><span style="font-size:9px;color:#888;font-weight:600;width:72px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + p.name + '</span><div style="flex:1;background:rgba(255,255,255,0.06);border-radius:3px;height:5px;overflow:hidden;"><div style="width:' + pct2 + '%;height:100%;background:' + p.color + ';border-radius:3px;transition:width 0.5s;"></div></div><span style="font-size:9px;font-weight:700;color:#ccc;width:32px;text-align:right;">$' + pmCpcValues[p.name].toFixed(2) + '</span></div>';
+        return '<div style="display:flex;align-items:center;gap:6px;"><span style="font-size:9px;color:#888;font-weight:600;width:72px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + p.name + '</span><div style="flex:1;background:rgba(255,255,255,0.06);border-radius:3px;height:5px;overflow:hidden;"><div style="width:' + pct2 + '%;height:100%;background:' + p.color + ';border-radius:3px;transition:width 0.5s;"></div></div><span style="font-size:9px;font-weight:700;color:#ccc;width:32px;text-align:right;">₹' + pmCpcValues[p.name].toFixed(2) + '</span></div>';
       }).join('');
     }
 
