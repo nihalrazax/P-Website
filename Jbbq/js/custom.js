@@ -7,6 +7,55 @@ function getYear() {
 
 getYear();
 
+// ============================================
+// Booking Form - Client-side validation & submission
+// Replaces submit_booking.php with Google Apps Script
+// ============================================
+
+// TODO: Replace this URL with your deployed Google Apps Script web app URL
+// To deploy: Open google-script.gs in Google Apps Script Editor > Deploy > New Deployment > Web App
+var GOOGLE_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_WEB_APP_URL';
+
+function validateBookingData(data) {
+    var errors = [];
+
+    if (!data.name || data.name.trim().length < 3) {
+        errors.push("Name is required and must be at least 3 characters");
+    }
+
+    if (!data.phone || !/^[0-9]{10}$/.test(data.phone)) {
+        errors.push("Valid 10-digit phone number is required");
+    }
+
+    if (!data.date) {
+        errors.push("Date is required");
+    }
+
+    return errors;
+}
+
+function submitBooking(formData) {
+    var errors = validateBookingData(formData);
+
+    if (errors.length > 0) {
+        alert(errors.join("\n"));
+        return;
+    }
+
+    fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+    })
+    .then(function () {
+        alert('Your booking request has been submitted successfully!');
+    })
+    .catch(function () {
+        alert('Something went wrong. Please try again.');
+    });
+}
+
 // toggle overlay menu
 function openNav() {
     document.getElementById("myNav").classList.toggle("menu_width");

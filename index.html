@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -9,47 +9,128 @@
 
   <!-- Link CSS  -->
   <link rel="stylesheet" href="./styles.css" />
+
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <!-- Favicon  -->
   <link rel="shortcut icon" href="./Images/userAsset/icon.ico" type="image/x-icon" />
+
+  <!-- Three.js for Advertisement section liquid-gradient background -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 
 <body>
+  <!-- Loading Screen -->
+  <div class="loader-screen" id="loader">
+    <div class="loader-content">
+      <div class="loader-code-text">
+        <div class="loader-code-line" data-line="1">const developer = {</div>
+        <div class="loader-code-line" data-line="2">  name: 'Aditya Rai',</div>
+        <div class="loader-code-line" data-line="3">  status: 'loading portfolio...'</div>
+        <div class="loader-code-line" data-line="4">};</div>
+      </div>
+      <div class="loader-spinner-wrapper">
+        <div class="loader-spinner"></div>
+      </div>
+      <div class="loader-progress-wrapper">
+        <div class="loader-progress-bar"></div>
+      </div>
+      <div class="loader-percentage" id="loaderPercent">0%</div>
+    </div>
+  </div>
+  <script>
+    (function() {
+      var loader = document.getElementById('loader');
+      var loaderPercent = document.getElementById('loaderPercent');
+      var progressBar = document.querySelector('.loader-progress-bar');
+      var progress = 0;
+      var interval = setInterval(function() {
+        progress += Math.random() * 12 + 3;
+        if (progress >= 100) {
+          progress = 100;
+          clearInterval(interval);
+          loaderPercent.textContent = '100%';
+          progressBar.style.width = '100%';
+          setTimeout(function() {
+            loader.classList.add('hidden');
+            window.__portfolioLoaderHiddenAt = Date.now();
+            window.dispatchEvent(new CustomEvent('portfolio:loader-hidden'));
+          }, 400);
+        } else {
+          loaderPercent.textContent = Math.floor(progress) + '%';
+          progressBar.style.width = Math.floor(progress) + '%';
+        }
+      }, 80);
+    })();
+  </script>
+
   <div id="wrapper">
     <!-- Night Theme Chooser removed -->
     <!-- Header Start -->
     <header>
       <div class="logo">
-        <img src="./Images/userAsset/Alogo.jpeg" alt="#" />
-        <h2 class="logoText" style="padding-left: 12px;">ditya Rai</h2>
+        <img src="./Images/userAsset/ALRLogo.png" alt="ALR" class="header-logo-img" />
       </div>
-      <nav>
+      <nav class="glass-nav">
+        <span class="glass-filter" aria-hidden="true"></span>
+        <span class="glass-overlay" aria-hidden="true"></span>
+        <span class="glass-specular" aria-hidden="true"></span>
         <ul class="nav-links">
-          <li><a href="#projects">Projects</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Websites</a></li>
+          <li><a href="#graphics">Graphics</a></li>
+          <li><a href="#socialmedia">Social Media</a></li>
+          <li><a href="#advertisements">Ads</a></li>
+          <li><a href="#itSpecialist">IT Specialist</a></li>
           <li><a href="#skills">Skills</a></li>
         </ul>
-        <div class="nav-social-icons">
-          <a href="https://github.com/aditya-k-rai" target="_blank" title="GitHub">
-            <img src="./Images/nav icons/github.png" alt="GitHub" class="nav-icon-img" />
-          </a>
-          <a href="https://www.linkedin.com/in/aditya-k-rai" target="_blank" title="LinkedIn">
-            <img src="./Images/nav icons/linkedin.png" alt="LinkedIn" class="nav-icon-img" />
-          </a>
-          <a href="https://www.instagram.com/mighty_aditya" target="_blank" title="Instagram">
-            <img src="./Images/nav icons/instagram.png" alt="Instagram" class="nav-icon-img" />
-          </a>
-          <a href="https://t.me/Mighty_Joker" target="_blank" title="Telegram">
-            <img src="./Images/nav icons/telegram.png" alt="Telegram" class="nav-icon-img" />
-          </a>
-        </div>
       </nav>
+
+      <!-- SVG lens filter for the liquid-glass nav -->
+      <svg xmlns="http://www.w3.org/2000/svg" width="0" height="0" style="position:absolute;overflow:hidden;" aria-hidden="true">
+        <filter id="glassLensFilter" x="0%" y="0%" width="100%" height="100%" filterUnits="objectBoundingBox">
+          <feComponentTransfer in="SourceAlpha" result="alpha">
+            <feFuncA type="identity" />
+          </feComponentTransfer>
+          <feGaussianBlur in="alpha" stdDeviation="50" result="blur" />
+          <feDisplacementMap in="SourceGraphic" in2="blur" scale="50" xChannelSelector="A" yChannelSelector="A" />
+        </filter>
+      </svg>
     </header>
     <!-- Header End  -->
 
     <!-- Hero Section Start  -->
     <section class="heroSection">
-      <h3 class="fadedText absolute" style="padding-bottom: 16px;">Aditya Rai</h3>
+      <svg class="fadedText absolute water-text-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 720 120" style="padding-bottom: 16px;">
+        <defs>
+          <pattern id="water" width=".25" height="1.1" patternContentUnits="objectBoundingBox">
+            <path fill="#0077be" d="M0.25,1H0c0,0,0-0.659,0-0.916c0.083-0.303,0.158,0.334,0.25,0C0.25,0.327,0.25,1,0.25,1z"/>
+          </pattern>
+          <text id="water-txt" x="10" y="90" style="font-weight:bold;font-size:90px;font-family:'Space Grotesk',Helvetica,sans-serif">Aditya Rai</text>
+          <mask id="water-mask">
+            <use xlink:href="#water-txt" fill="#ffffff"/>
+          </mask>
+        </defs>
+        <g id="water-eff">
+          <use xlink:href="#water-txt" class="water-base-fill"/>
+          <rect class="water-fill" mask="url(#water-mask)" fill="url(#water)" x="-300" y="50" width="1200" height="120" opacity="0.3">
+            <animate attributeType="xml" attributeName="x" from="-300" to="0" repeatCount="indefinite" dur="3s"/>
+          </rect>
+          <rect class="water-fill" mask="url(#water-mask)" fill="url(#water)" y="45" width="1600" height="120" opacity="0.3">
+            <animate attributeType="xml" attributeName="x" from="-400" to="0" repeatCount="indefinite" dur="4s"/>
+          </rect>
+          <rect class="water-fill" mask="url(#water-mask)" fill="url(#water)" y="55" width="800" height="120" opacity="0.3">
+            <animate attributeType="xml" attributeName="x" from="-200" to="0" repeatCount="indefinite" dur="2.4s"/>
+          </rect>
+          <rect class="water-fill" mask="url(#water-mask)" fill="url(#water)" y="55" width="2000" height="120" opacity="0.3">
+            <animate attributeType="xml" attributeName="x" from="-500" to="0" repeatCount="indefinite" dur="3.8s"/>
+          </rect>
+        </g>
+        <use xlink:href="#water-eff" opacity="0.9"/>
+      </svg>
       <div class="infoContainer">
         <div class="heading">Hi! Aditya Rai</div>
         <div class="heading subHeading">
@@ -59,45 +140,195 @@
           I’m a Front-end Web developer and here is my portfolio website. Here
           you’ll learn about my journey as a Web developer. 
         </p> <a href="https://www.linkedin.com/in/aditya-k-rai">
-        <div class="btn">Hire Me</div></a>
+        <div class="btn">Connect +</div></a>
       </div>
-      <div class="imgContainer">
-        <div class="absolute icons iconDots">
-          <img src="./images/userAsset/dots.png" alt="" />
+      <div class="orbit-hero-right">
+        <!-- Center Image -->
+        <div class="orbit-center-image">
+          <div class="hero-shard-host">
+            <img src="./Images/userAsset/Aditya_nobg.png" alt="Aditya Rai" class="hero-shard-fallback" />
+            <svg id="heroFaceShards" class="hero-shards-svg" viewBox="0 0 600 750" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true"></svg>
+          </div>
         </div>
-        <div class="absolute icons icon-cube">
-          <img src="./images/userAsset/cube.png" alt="" />
-        </div>
-        <div class="absolute icons icon-circle">
-          <img src="./images/userAsset/circle.png" alt="" />
-        </div>
-        <div class="absolute icons iconZigZag">
-          <img src="./images/userAsset/zigzags.png" alt="" />
-        </div>
-        <div class="absolute icons icon-plus">
-          <img src="./images/userAsset/plus.png" alt="" />
-        </div>
-        <div class="">
-          <div class="userImage">
-            <!-- <img src="./images/userAsset/Aditya.png" width="345px" height="390px" alt="" /> -->
-            <img src="./Images/userAsset/Aditya.png" alt="" />
+
+        <!-- Background Glow -->
+        <div class="orbit-glow"></div>
+
+        <!-- Rotating Ring -->
+        <div class="orbit-animation-ring">
+          <div class="orbit-slot" style="--angle: 0deg;">
+            <div class="orbit-counter-rotator">
+              <div class="orbit-orientation-fixer">
+                <div class="chip c-frontend">SEO + AEO + ASO</div>
+              </div>
+            </div>
+          </div>
+          <div class="orbit-slot" style="--angle: 40deg;">
+            <div class="orbit-counter-rotator">
+              <div class="orbit-orientation-fixer">
+                <div class="chip c-react">Social Media</div>
+              </div>
+            </div>
+          </div>
+          <div class="orbit-slot" style="--angle: 80deg;">
+            <div class="orbit-counter-rotator">
+              <div class="orbit-orientation-fixer">
+                <div class="chip c-js">Advertisements</div>
+              </div>
+            </div>
+          </div>
+          <div class="orbit-slot" style="--angle: 120deg;">
+            <div class="orbit-counter-rotator">
+              <div class="orbit-orientation-fixer">
+                <div class="chip c-ai">AI Enthusiast</div>
+              </div>
+            </div>
+          </div>
+          <div class="orbit-slot" style="--angle: 160deg;">
+            <div class="orbit-counter-rotator">
+              <div class="orbit-orientation-fixer">
+                <div class="chip c-uiux">Graphics Designing</div>
+              </div>
+            </div>
+          </div>
+          <div class="orbit-slot" style="--angle: 200deg;">
+            <div class="orbit-counter-rotator">
+              <div class="orbit-orientation-fixer">
+                <div class="chip c-webdesign">Web Developer</div>
+              </div>
+            </div>
+          </div>
+          <div class="orbit-slot" style="--angle: 240deg;">
+            <div class="orbit-counter-rotator">
+              <div class="orbit-orientation-fixer">
+                <div class="chip c-marketing">IT Specialist</div>
+              </div>
+            </div>
+          </div>
+          <div class="orbit-slot" style="--angle: 280deg;">
+            <div class="orbit-counter-rotator">
+              <div class="orbit-orientation-fixer">
+                <div class="chip c-security">Cybersecurity</div>
+              </div>
+            </div>
+          </div>
+          <div class="orbit-slot" style="--angle: 320deg;">
+            <div class="orbit-counter-rotator">
+              <div class="orbit-orientation-fixer">
+                <div class="chip c-video">Video Editing</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </section>
     <!-- Hero Section End  -->
 
+    <!-- About Section Start -->
+    <section id="about" class="projectSection">
+      <h2 class="projectTitle text-effect"><span class="te-line"><span class="te-base">About</span><span class="te-fade"> Me</span></span><span class="te-hover">About Me</span></h2>
+
+      <div class="about-grid">
+        <div class="about-tv-wrap">
+          <iframe class="tv-frame" src="./tv.html" title="Interactive TV set" loading="lazy" scrolling="no"></iframe>
+        </div>
+        <div class="about-copy ak-resume">
+          <div class="ak-head">
+            <div class="ak-identity">
+              <h3 class="ak-name">Aditya Kumar Rai</h3>
+              <div class="ak-role">Full Stack Web Developer &middot; Digital Marketer &middot; IT Specialist</div>
+            </div>
+            <div class="ak-chips-row">
+              <span class="ak-mini-chip">24 yrs</span>
+              <a class="ak-mini-chip ak-mini-chip--link" href="https://www.ccsuniversity.ac.in/" target="_blank" rel="noopener" title="Chaudhary Charan Singh University, Meerut">
+                <img src="./Images/Graphics/Icons/Chaudhary_Charan_Singh_University_logo.png" alt="" class="ak-mini-chip-logo" loading="lazy" decoding="async" />
+                <span>BCA &middot; CCSU</span>
+              </a>
+              <a class="ak-mini-chip ak-mini-chip--link" href="https://www.njmskasia.com/" target="_blank" rel="noopener" title="Nav Jeevan Mission School, Kasia">
+                <img src="./Images/Graphics/Icons/NJMS%20School%20LOGO%20.png" alt="" class="ak-mini-chip-logo" loading="lazy" decoding="async" />
+                <span>10+2 &middot; NJMS, CBSE</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="ak-panels ak-split">
+            <div class="ak-panel is-shown" data-ak-panel="profile">
+              <div class="ak-panel-title">Profile</div>
+              <p class="ak-para">Full-stack developer, digital marketer, and IT specialist &mdash; I treat curiosity like a workbench. Build, break, fix, repeat &mdash; and stay for the part where it finally clicks.</p>
+              <p class="ak-para">BCA graduate, CCSU Meerut. Shipping production work across e-commerce, hospitality, construction, AI, and EV brands &mdash; code, campaigns, and creative under one roof.</p>
+              <div class="ak-interests">
+                <div class="ak-section-label">Areas of Interest</div>
+                <div class="ak-interests-tags">
+                  <span>Full-Stack Dev</span>
+                  <span>Digital Marketing</span>
+                  <span>AI &amp; Creative Tools</span>
+                  <span>Network Security</span>
+                  <span>UI / UX Design</span>
+                  <span>SEO &amp; Growth</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="ak-panel is-shown" data-ak-panel="journey">
+              <div class="ak-panel-title">Journey</div>
+              <div class="ak-timeline">
+                <div class="ak-t-item">
+                  <div class="ak-t-dot"></div>
+                  <div class="ak-t-period">Mar 2026 &mdash; Present</div>
+                  <div class="ak-t-role">Full Stack Developer</div>
+                  <div class="ak-t-company">Silveri &middot; E-commerce Jewelry</div>
+                </div>
+                <div class="ak-t-item">
+                  <div class="ak-t-dot"></div>
+                  <div class="ak-t-period">Mar &mdash; Apr 2026</div>
+                  <div class="ak-t-role">Frontend Developer (React)</div>
+                  <div class="ak-t-company">Lotwaala Platform &middot; Freelance</div>
+                </div>
+                <div class="ak-t-item">
+                  <div class="ak-t-dot"></div>
+                  <div class="ak-t-period">Sep 2025 &mdash; Apr 2026</div>
+                  <div class="ak-t-role">Web Developer and Digital Marketer</div>
+                  <div class="ak-t-company">Trackovo AI Technology</div>
+                </div>
+                <div class="ak-t-item">
+                  <div class="ak-t-dot"></div>
+                  <div class="ak-t-period">Aug 2025 &mdash; Apr 2026</div>
+                  <div class="ak-t-role">Full Stack Developer and Digital Marketer</div>
+                  <div class="ak-t-company">Aarna Constructions</div>
+                </div>
+                <div class="ak-t-item">
+                  <div class="ak-t-dot"></div>
+                  <div class="ak-t-period">Jan &mdash; Jul 2025</div>
+                  <div class="ak-t-role">Web Developer, Designer and Digital Marketer</div>
+                  <div class="ak-t-company">Freelance &middot; Hospitality Brands</div>
+                </div>
+                <div class="ak-t-item">
+                  <div class="ak-t-dot"></div>
+                  <div class="ak-t-period">Aug &mdash; Nov 2024</div>
+                  <div class="ak-t-role">Web Support &amp; Tech Executive</div>
+                  <div class="ak-t-company">Ryoto Electrix Pvt. Ltd.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- About Section End -->
+
     <!-- Project Section Start -->
     <section id="projects" class="projectSection">
-      <h2 class="projectTitle">Projects</h2>
-      <div class="projectContainer">
+      <h2 class="projectTitle text-effect"><span class="te-line"><span class="te-base">Website</span><span class="te-fade">s</span></span><span class="te-hover">Websites</span></h2>
+      <div class="projectContainer galleryGrid">
         <div class="projectCard" id="project1">
+          <span class="project-tag">College Project</span>
+          <div class="projectCardOverlay"></div>
           <div class="projectNumber rightNumber">01</div>
           <div class="projectContent leftProjectContent">
             <div class="projectSkillsContainer">
-              <img class="projectSkill" src="./images/stack/HTML.png" alt="" />
-              <img class="projectSkill" src="./images/stack/CSS.png" alt="" />
-              <img class="projectSkill" src="./images/stack/Javascript.svg" alt="" />
+              <img class="projectSkill" src="./Images/stack/HTML.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/CSS.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/Javascript.svg" alt="" />
               
             </div>
             <h2 class="projectHeading">Image Gallery</h2>
@@ -105,27 +336,27 @@
              This website is used to display image Collection
             </p>
             <div class="btnGroup">
-              <a href="/Image Gallery/index1.html">
-              <button class="btn btnProject">Read More</button></a>
-              <a href="">
-                <i title="GitHubLink" class="fa-brands fa-github icon"></i>
+              <a href="https://github.com/aditya-k-rai/P-Website/tree/main/Image%20Gallery" title="GitHubLink">
+                <span class="btn-icon github-icon"></span>
               </a>
-              <a href="https://github.com/aditya-k-rai">
-                <i title="Live Link" class="fa-solid fa-link icon"></i>
+              <a href="https://github.com/aditya-k-rai/P-Website/tree/main/Image%20Gallery" title="Live Link">
+                <span class="btn-icon link-icon"></span>
               </a>
             </div>
           </div>
         </div>
 
         <div class="projectCard" id="project2">
+          <span class="project-tag">College Project</span>
+          <div class="projectCardOverlay"></div>
           <div class="projectNumber leftNumber">02</div>
           <div class="projectContent rightProjectContent">
             <div class="projectSkillsContainer">
-              <img class="projectSkill" src="./images/stack/HTML.png" alt="" />
-              <img class="projectSkill" src="./images/stack/CSS.png" alt="" />
-              <img class="projectSkill" src="./images/stack/Javascript.svg" alt="" />
-              <img class="projectSkill" src="./images/stack/NextJsCircle.png" alt="" />
-              <img class="projectSkill" src="./images/stack/Tailwind.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/HTML.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/CSS.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/Javascript.svg" alt="" />
+              <img class="projectSkill" src="./Images/stack/NextJsCircle.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/Tailwind.png" alt="" />
 
               
             </div>
@@ -134,26 +365,26 @@
               A website yoused to generate strong and secure password
             </p>
             <div class="btnGroup">
-              <a href="/Password Generator/index2.html">
-              <button class="btn btnProject">Read More</button>
-              <a href="https://github.com/aditya-k-rai">
-                <i title="GitHubLink" class="fa-brands fa-github icon"></i>
+              <a href="https://github.com/aditya-k-rai/P-Website/tree/main/Password%20Generator" title="GitHubLink">
+                <span class="btn-icon github-icon"></span>
               </a>
-              <a href="">
-                <i title="Live Link" class="fa-solid fa-link icon"></i>
+              <a href="https://github.com/aditya-k-rai/P-Website/tree/main/Password%20Generator" title="Live Link">
+                <span class="btn-icon link-icon"></span>
               </a>
             </div>
           </div>
         </div>
         <div class="projectCard" id="project3">
+          <span class="project-tag">College Project</span>
+          <div class="projectCardOverlay"></div>
           <div class="projectNumber rightNumber">03</div>
           <div class="projectContent leftProjectContent">
             <div class="projectSkillsContainer">
-              <img class="projectSkill" src="./images/stack/HTML.png" alt="" />
-              <img class="projectSkill" src="./images/stack/CSS.png" alt="" />
-              <img class="projectSkill" src="./images/stack/Javascript.svg" alt="" />
+              <img class="projectSkill" src="./Images/stack/HTML.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/CSS.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/Javascript.svg" alt="" />
               
-              <img class="projectSkill" src="./images/stack/NextJsCircle.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/NextJsCircle.png" alt="" />
 
               
             </div>
@@ -162,27 +393,26 @@
               A Website to play tic tac toe Game
             </p>
             <div class="btnGroup">
-              <a href="/Tic Tac Toe Game/index3.html">
-              <button class="btn btnProject">Read More</button>
-              <a href="https://github.com/aditya-k-rai">
-                <i title="GitHubLink" class="fa-brands fa-github icon"></i>
+              <a href="https://github.com/aditya-k-rai/P-Website/tree/main/Tic%20Tac%20Toe%20Game" title="GitHubLink">
+                <span class="btn-icon github-icon"></span>
               </a>
-              <a href="">
-                <i title="Live Link" class="fa-solid fa-link icon"></i>
+              <a href="https://github.com/aditya-k-rai/P-Website/tree/main/Tic%20Tac%20Toe%20Game" title="Live Link">
+                <span class="btn-icon link-icon"></span>
               </a>
             </div>
           </div>
         </div>
 
         <div class="projectCard" id="project4">
+          <div class="projectCardOverlay"></div>
           <div class="projectNumber rightNumber">04</div>
           <div class="projectContent leftProjectContent">
             <div class="projectSkillsContainer">
-              <img class="projectSkill" src="./images/stack/php.png" alt="" />
-              <img class="projectSkill" src="./images/stack/CSS.png" alt="" />
-              <img class="projectSkill" src="./images/stack/Javascript.svg" alt="" />
+              <img class="projectSkill" src="./Images/stack/php.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/CSS.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/Javascript.svg" alt="" />
               
-              <img class="projectSkill" src="./Images/nav icons/whatsapp (1).png" alt="" />
+              <img class="projectSkill" src="./Images/nav%20icons/whatsapp%20(1).png" alt="" />
 
               
             </div>
@@ -191,27 +421,26 @@
               A website for a restaurant to showcase their menu and services
             </p>
             <div class="btnGroup">
-              <a href="/Jbbq/index.php">
-              <button class="btn btnProject">Read More</button>
-              <a href="https://github.com/aditya-k-rai">
-                <i title="GitHubLink" class="fa-brands fa-github icon"></i>
+              <a href="https://github.com/aditya-k-rai/Jungle-Barbeque" title="GitHubLink">
+                <span class="btn-icon github-icon"></span>
               </a>
-              <a href="">
-                <i title="Live Link" class="fa-solid fa-link icon"></i>
+              <a href="https://www.junglebarbeque.com/" title="Live Link">
+                <span class="btn-icon link-icon"></span>
               </a>
             </div>
           </div>
         </div>
 
         <div class="projectCard" id="project5">
+          <div class="projectCardOverlay"></div>
           <div class="projectNumber rightNumber">05</div>
           <div class="projectContent leftProjectContent">
             <div class="projectSkillsContainer">
-               <img class="projectSkill" src="./images/stack/wordpress.png" alt="" />
-              <img class="projectSkill" src="./images/stack/CSS.png" alt="" />
-              <img class="projectSkill" src="./images/stack/Javascript.svg" alt="" />
-              <img class="projectSkill" src="./images/stack/WooCommerce.png" alt="" />
-              <img class="projectSkill" src="./images/stack/online store .png" alt="" />
+               <img class="projectSkill" src="./Images/stack/wordpress.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/CSS.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/Javascript.svg" alt="" />
+              <img class="projectSkill" src="./Images/stack/woocommerce.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/online%20store%20.png" alt="" />
               
 
               
@@ -221,27 +450,26 @@
               A Bakery E commerce Website to sell Cakes and Pastries.
             </p>
             <div class="btnGroup">
-              <a href="/Tic Tac Toe Game/index3.html">
-              <button class="btn btnProject">Read More</button>
-              <a href="https://github.com/aditya-k-rai">
-                <i title="GitHubLink" class="fa-brands fa-github icon"></i>
+              <a href="https://github.com/aditya-k-rai" title="GitHubLink">
+                <span class="btn-icon github-icon"></span>
               </a>
-              <a href="">
-                <i title="Live Link" class="fa-solid fa-link icon"></i>
+              <a href="https://www.cafefit.konnectogo.com/" title="Live Link">
+                <span class="btn-icon link-icon"></span>
               </a>
             </div>
           </div>
         </div>
 
         <div class="projectCard" id="project6">
+          <div class="projectCardOverlay"></div>
           <div class="projectNumber rightNumber">06</div>
           <div class="projectContent leftProjectContent">
             <div class="projectSkillsContainer">
-              <img class="projectSkill" src="./images/stack/HTML.png" alt="" />
-              <img class="projectSkill" src="./images/stack/CSS.png" alt="" />
-              <img class="projectSkill" src="./images/stack/Javascript.svg" alt="" />
+              <img class="projectSkill" src="./Images/stack/HTML.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/CSS.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/Javascript.svg" alt="" />
               
-              <img class="projectSkill" src="./images/stack/NextJsCircle.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/NextJsCircle.png" alt="" />
             
 
               
@@ -251,13 +479,107 @@
               A Website for a restaurant to showcase their menu and services
             </p>
             <div class="btnGroup">
-              <a href="/Tic Tac Toe Game/index3.html">
-              <button class="btn btnProject">Read More</button>
-              <a href="https://github.com/aditya-k-rai">
-                <i title="GitHubLink" class="fa-brands fa-github icon"></i>
+              <a href="https://github.com/aditya-k-rai/NV-Clubstaurant" title="GitHubLink">
+                <span class="btn-icon github-icon"></span>
               </a>
-              <a href="">
-                <i title="Live Link" class="fa-solid fa-link icon"></i>
+              <a href="https://www.nvclubstraunt.in/" title="Live Link">
+                <span class="btn-icon link-icon"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="projectCard" id="project7">
+          <div class="projectCardOverlay"></div>
+          <div class="projectNumber rightNumber">07</div>
+          <div class="projectContent leftProjectContent">
+            <div class="projectSkillsContainer">
+              <img class="projectSkill" src="./Images/stack/HTML.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/CSS.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/Javascript.svg" alt="" />
+            </div>
+            <h2 class="projectHeading">Project 7</h2>
+            <p class="projectSubHeading">
+              Add your project description here
+            </p>
+            <div class="btnGroup">
+              <a href="" title="GitHubLink">
+                <span class="btn-icon github-icon"></span>
+              </a>
+              <a href="" title="Live Link">
+                <span class="btn-icon link-icon"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="projectCard" id="project8">
+          <div class="projectCardOverlay"></div>
+          <div class="projectNumber leftNumber">08</div>
+          <div class="projectContent rightProjectContent">
+            <div class="projectSkillsContainer">
+              <img class="projectSkill" src="./Images/stack/HTML.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/CSS.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/Javascript.svg" alt="" />
+            </div>
+            <h2 class="projectHeading">Trackovo</h2>
+            <p class="projectSubHeading">
+              A tracking and management application
+            </p>
+            <div class="btnGroup">
+              <a href="https://github.com/aditya-k-rai" title="GitHubLink">
+                <span class="btn-icon github-icon"></span>
+              </a>
+              <a href="https://trackovo.app/" title="Live Link">
+                <span class="btn-icon link-icon"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="projectCard" id="project9">
+          <div class="projectCardOverlay"></div>
+          <div class="projectNumber rightNumber">09</div>
+          <div class="projectContent leftProjectContent">
+            <div class="projectSkillsContainer">
+              <img class="projectSkill" src="./Images/stack/HTML.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/CSS.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/Javascript.svg" alt="" />
+            </div>
+            <h2 class="projectHeading">Aarna Constructions Portfolio</h2>
+            <p class="projectSubHeading">
+              A portfolio website for Aarna Constructions
+            </p>
+            <div class="btnGroup">
+              <a href="https://github.com/aditya-k-rai" title="GitHubLink">
+                <span class="btn-icon github-icon"></span>
+              </a>
+              <a href="https://portfolio.aarnaconstructions.com/" title="Live Link">
+                <span class="btn-icon link-icon"></span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="projectCard" id="project10">
+          <div class="projectCardOverlay"></div>
+          <div class="projectNumber leftNumber">10</div>
+          <div class="projectContent rightProjectContent">
+            <div class="projectSkillsContainer">
+              <img class="projectSkill" src="./Images/stack/HTML.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/CSS.png" alt="" />
+              <img class="projectSkill" src="./Images/stack/Javascript.svg" alt="" />
+            </div>
+            <h2 class="projectHeading">Aarna Constructions</h2>
+            <p class="projectSubHeading">
+              A website for Aarna Constructions
+            </p>
+            <div class="btnGroup">
+              <a href="https://github.com/aditya-k-rai" title="GitHubLink">
+                <span class="btn-icon github-icon"></span>
+              </a>
+              <a href="https://new.aarnaconstructions.com/" title="Live Link">
+                <span class="btn-icon link-icon"></span>
               </a>
             </div>
           </div>
@@ -266,6 +588,566 @@
       </div>
     </section>
     <!-- Project Section End  -->
+
+    <!-- Color Avalanche Section Start -->
+    <section class="color-avalanche-section" id="colorAvalanche">
+      <div class="ca-ui-layer">
+        <h2 class="ca-title">Skills Achived</h2>
+        <p class="ca-desc">Drag, throw, and explore the Skills Named Colors Blocks.</p>
+        <div class="ca-controls">
+          <button class="ca-btn" id="ca-btn-gravity">Zero Gravity</button>
+          <button class="ca-btn" id="ca-btn-explode">Explode</button>
+        </div>
+      </div>
+      <div class="ca-scene" id="ca-scene-container"></div>
+      <ul id="ca-color-source" style="display: none;">
+        <li data-color="AliceBlue">Meta Business Suite</li>
+        <li data-color="AntiqueWhite">Google Ads</li>
+        <li data-color="Aqua">LinkedIn Ads</li>
+        <li data-color="Aquamarine">Twitter (X) Ads</li>
+        <li data-color="Azure">Pinterest Ads</li>
+        <li data-color="Beige">Reddit Ads</li>
+        <li data-color="Bisque">Google Tag Manager</li>
+        <li data-color="Black">Google Analytics</li>
+        <li data-color="BlanchedAlmond">Meta Pixel</li>
+        <li data-color="Blue">LinkedIn Insight Tag</li>
+        <li data-color="BlueViolet">Google Keyword Planner</li>
+        <li data-color="Brown">Google Analytics</li>
+        <li data-color="BurlyWood">Google Search Console</li>
+        <li data-color="CadetBlue">Google Lighthouse</li>
+        <li data-color="Chartreuse">PageSpeed Insights</li>
+        <li data-color="Chocolate">GTmetrix</li>
+        <li data-color="Coral">WhatsApp Business</li>
+        <li data-color="CornflowerBlue">WhatsApp Marketing Campaigns</li>
+        <li data-color="Cornsilk">N8N</li>
+        <li data-color="Crimson">WhatsApp Business</li>
+        <li data-color="Cyan">HubSpot</li>
+        <li data-color="DarkBlue">Shopify</li>
+        <li data-color="DarkCyan">WooCommerce</li>
+        <li data-color="DarkGoldenRod">Payment Gateway Integration</li>
+        <li data-color="DarkGray">Canva</li>
+        <li data-color="DarkGreen">Tensor Art</li>
+        <li data-color="DarkKhaki">Adobe After Effects</li>
+        <li data-color="DarkMagenta">Adobe Premiere Pro</li>
+        <li data-color="DarkOliveGreen">CapCut</li>
+        <li data-color="DarkOrange">DaVinci Resolve</li>
+        <li data-color="DarkOrchid">VN Editor</li>
+        <li data-color="DarkRed">OBS Studio</li>
+        <li data-color="DarkSalmon">WordPress</li>
+        <li data-color="DarkSeaGreen">Shopify</li>
+        <li data-color="DarkSlateBlue">HTML</li>
+        <li data-color="DarkSlateGray">CSS</li>
+        <li data-color="DarkTurquoise">JavaScript</li>
+        <li data-color="DarkViolet">TypeScript</li>
+        <li data-color="DeepPink">React</li>
+        <li data-color="DeepSkyBlue">Redux</li>
+        <li data-color="DimGray">Tailwind CSS</li>
+        <li data-color="DodgerBlue">Bootstrap</li>
+        <li data-color="FireBrick">Three.js</li>
+        <li data-color="FloralWhite">Node.js</li>
+        <li data-color="ForestGreen">Express.js</li>
+        <li data-color="Fuchsia">REST API</li>
+        <li data-color="Gainsboro">SQL</li>
+        <li data-color="GhostWhite">Firebase</li>
+        <li data-color="Gold">Chatbot Interaction</li>
+        <li data-color="GoldenRod">Google Data Studio</li>
+        <li data-color="Gray">Google Analytics (GA4)</li>
+        <li data-color="Green">Conversion Optimization</li>
+      </ul>
+    </section>
+    <!-- Color Avalanche Section End -->
+
+    <!-- Graphics Designing Section Start -->
+    <section id="graphics" class="projectSection">
+      <h2 class="projectTitle text-effect"><span class="te-line"><span class="te-base">Graphics Design</span><span class="te-fade">ing</span></span><span class="te-hover">Graphics Designing</span></h2>
+      <!-- Division 1: Menu PDF Flipbook -->
+      <div class="gfx-division" id="gfx-menus">
+        <h3 class="gfx-division-title">Booklets Designs</h3>
+        <p class="gfx-division-desc">Interactive 3D flipbook Booklet designs</p>
+
+        <div class="gfx-menu-tabs">
+          <button class="gfx-menu-tab active" data-menu="Images/Graphics/Menu/NV Club Menu14.pdf">NV Club</button>
+          <button class="gfx-menu-tab" data-menu="Images/Graphics/Menu/Mulberry Street Bistro Menu12.pdf">Mulberry Bistro</button>
+          <button class="gfx-menu-tab" data-menu="Images/Graphics/Menu/The Rokka Menu 6.pdf">The Rokka</button>
+          <button class="gfx-menu-tab" data-menu="Images/Graphics/Menu/New Cafe Menu4.pdf">New Cafe</button>
+          <button class="gfx-menu-tab" data-menu="Images/Graphics/Menu/The Fab BAKER MENU 3.pdf">The Fab Baker</button>
+          <button class="gfx-menu-tab" data-menu="Images/Graphics/Menu/NV Bar Menu 2.pdf">NV Bar</button>
+          <button class="gfx-menu-tab" data-menu="Images/Graphics/Menu/The Choclate Room Menu2 .pdf">Choclate Room</button>
+          <button class="gfx-menu-tab" data-menu="Images/Graphics/Menu/The Chocolate Room 2.pdf">Chocolate Room 2</button>
+          <button class="gfx-menu-tab" data-menu="Images/Graphics/Menu/Gut Gully Menu1.pdf">Gut Gully</button>
+          <button class="gfx-menu-tab" data-menu="Images/Graphics/Menu/Chinese Food Menu1.pdf">Chinese Food</button>
+          <button class="gfx-menu-tab" data-menu="Images/Graphics/Menu/Crunch Cookies Menu1.pdf">Crunch Cookies</button>
+          <button class="gfx-menu-tab" data-menu="Images/Graphics/Menu/Mulberry Indian menu1.pdf">Mulberry Indian</button>
+          <button class="gfx-menu-tab" data-menu="Images/Graphics/Menu/CAFE.FIT menu1.pdf">Cafe.Fit</button>
+        </div>
+
+        <div class="gfx-book-wrapper">
+          <div class="gfx-book-container" id="gfx-book-container"></div>
+          <div class="gfx-book-controls">
+            <button class="gfx-book-btn" id="gfx-prev-btn">&#10094; Prev</button>
+            <span class="gfx-page-indicator" id="gfx-page-indicator">Page 1 / 1</span>
+            <button class="gfx-book-btn" id="gfx-next-btn">Next &#10095;</button>
+            <button class="gfx-book-btn gfx-fs-btn" id="gfx-fullscreen-btn" title="View Full Size">&#x26F6; Full Size</button>
+          </div>
+          <p class="gfx-fs-hint">Double-tap or long-press the menu to view full size</p>
+        </div>
+      </div>
+
+      <!-- Division 2: Posters & Banners -->
+      <div class="gfx-division pb-carousel-section" id="gfx-posters">
+        <h3 class="gfx-division-title pb-title">Posters &amp; Banners</h3>
+        <p class="gfx-division-desc pb-desc">Eye-catching poster and banner designs</p>
+
+        <div class="pb-carousel-track" style="--time: 39s; --total: 12;">
+          <div class="pb-carousel-item" style="--i: 1;"><img src="Images/Graphics/Banners%20%26%20Posters/2.jpg" alt="Banner Design" loading="lazy"></div>
+          <div class="pb-carousel-item" style="--i: 2;"><img src="Images/Graphics/Banners%20%26%20Posters/3.jpg" alt="Banner Design" loading="lazy"></div>
+          <div class="pb-carousel-item" style="--i: 3;"><img src="Images/Graphics/Banners%20%26%20Posters/4.jpg" alt="Banner Design" loading="lazy"></div>
+          <div class="pb-carousel-item" style="--i: 4;"><img src="Images/Graphics/Banners%20%26%20Posters/mulberrystreet.bistro-20250204-0007.jpg" alt="Poster Design" loading="lazy"></div>
+          <div class="pb-carousel-item" style="--i: 5;"><img src="Images/Graphics/Banners%20%26%20Posters/mulberrystreet.bistro-20250204-0008.jpg" alt="Poster Design" loading="lazy"></div>
+          <div class="pb-carousel-item" style="--i: 6;"><img src="Images/Graphics/Banners%20%26%20Posters/mulberrystreet.bistro-20250205-0004.jpg" alt="Poster Design" loading="lazy"></div>
+          <div class="pb-carousel-item" style="--i: 7;"><img src="Images/Graphics/Banners%20%26%20Posters/mulberrystreet.bistro-20250205-0005.jpg" alt="Poster Design" loading="lazy"></div>
+          <div class="pb-carousel-item" style="--i: 8;"><img src="Images/Graphics/Banners%20%26%20Posters/mulberrystreet.bistro-20250205-0006.jpg" alt="Poster Design" loading="lazy"></div>
+          <div class="pb-carousel-item" style="--i: 9;"><img src="Images/Graphics/Banners%20%26%20Posters/mulberrystreet.bistro-20250205-0008.jpg" alt="Poster Design" loading="lazy"></div>
+          <div class="pb-carousel-item" style="--i: 10;"><img src="Images/Graphics/Banners%20%26%20Posters/mulberrystreet.bistro-20250205-0009.jpg" alt="Poster Design" loading="lazy"></div>
+          <div class="pb-carousel-item" style="--i: 11;"><img src="Images/Graphics/Banners%20%26%20Posters/mulberrystreet.bistro-20250205-0010.jpg" alt="Poster Design" loading="lazy"></div>
+          <div class="pb-carousel-item" style="--i: 12;"><img src="Images/Graphics/Banners%20%26%20Posters/mulberrystreet.bistro-20250205-0001.jpg" alt="Poster Design" loading="lazy"></div>
+        </div>
+      </div>
+
+      <!-- Division 3: Poster Designs -->
+      <div class="gfx-division" id="gfx-posters-gallery">
+        <h3 class="gfx-division-title">Poster Designs</h3>
+        <p class="gfx-division-desc">Creative poster designs and visual artwork</p>
+
+        <div class="vg-wrapper">
+          <div class="vg-items" id="vg-gallery">
+            <div class="vg-item" tabindex="0" style="background-image:url('Images/Graphics/Banners%20%26%20Posters/2.jpg')"></div>
+            <div class="vg-item" tabindex="0" style="background-image:url('Images/Graphics/Banners%20%26%20Posters/3.jpg')"></div>
+            <div class="vg-item" tabindex="0" style="background-image:url('Images/Graphics/Banners%20%26%20Posters/4.jpg')"></div>
+            <div class="vg-item" tabindex="0" style="background-image:url('Images/Graphics/Banners%20%26%20Posters/mulberrystreet.bistro-20250204-0007.jpg')"></div>
+            <div class="vg-item" tabindex="0" style="background-image:url('Images/Graphics/Banners%20%26%20Posters/mulberrystreet.bistro-20250204-0008.jpg')"></div>
+            <div class="vg-item" tabindex="0" style="background-image:url('Images/Graphics/Banners%20%26%20Posters/mulberrystreet.bistro-20250205-0004.jpg')"></div>
+            <div class="vg-item" tabindex="0" style="background-image:url('Images/Graphics/Banners%20%26%20Posters/mulberrystreet.bistro-20250205-0005.jpg')"></div>
+            <div class="vg-item" tabindex="0" style="background-image:url('Images/Graphics/Banners%20%26%20Posters/mulberrystreet.bistro-20250205-0006.jpg')"></div>
+            <div class="vg-item" tabindex="0" style="background-image:url('Images/Graphics/Banners%20%26%20Posters/mulberrystreet.bistro-20250205-0008.jpg')"></div>
+            <div class="vg-item" tabindex="0" style="background-image:url('Images/Graphics/Banners%20%26%20Posters/mulberrystreet.bistro-20250205-0009.jpg')"></div>
+            <div class="vg-item" tabindex="0" style="background-image:url('Images/Graphics/Banners%20%26%20Posters/mulberrystreet.bistro-20250205-0010.jpg')"></div>
+            <div class="vg-item" tabindex="0" style="background-image:url('Images/Graphics/Banners%20%26%20Posters/mulberrystreet.bistro-20250205-0001.jpg')"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Graphics Designing Section End -->
+
+    <!-- Social Media Section Start -->
+    <section id="socialmedia" class="projectSection">
+      <h2 class="projectTitle text-effect"><span class="te-line"><span class="te-base">Social Medi</span><span class="te-fade">a</span></span><span class="te-hover">Social Media</span></h2>
+      <!-- Subsection 1: Reels -->
+      <div class="sm-division" id="sm-reels">
+        <h3 class="sm-division-title">Reels</h3>
+        <p class="sm-division-desc">Portrait video content for social media platforms</p>
+
+        <div class="sm-carousel sm-carousel--portrait" id="sm-reels-carousel">
+          <div class="sm-carousel__viewport">
+            <ul class="sm-carousel__track">
+              <li class="sm-carousel__card" data-index="0">
+                <video class="sm-carousel__video" preload="metadata" muted loop playsinline
+                  src="Images/Graphics/Social%20Media/Reels/Landscape%20Interior%20Designer%20of%20Facebook%20Portait%20Videos%20(5).mp4"></video>
+              </li>
+              <li class="sm-carousel__card" data-index="1">
+                <video class="sm-carousel__video" preload="metadata" muted loop playsinline
+                  src="Images/Graphics/Social%20Media/Reels/Landscape%20Interior%20Designer%20of%20Facebook%20Portait%20Videos.mp4"></video>
+              </li>
+              <li class="sm-carousel__card" data-index="2">
+                <video class="sm-carousel__video" preload="metadata" muted loop playsinline
+                  src="Images/Graphics/Social%20Media/Reels/Potrait%20Interior%20Designer%20of%20Facebook%20Portait%20Videos.mp4"></video>
+              </li>
+              <li class="sm-carousel__card" data-index="3">
+                <video class="sm-carousel__video" preload="metadata" muted loop playsinline
+                  src="Images/Graphics/Social%20Media/Reels/Where%20comfort%20meets%20class%20%E2%80%94%20transforming%20washrooms%20into%20your%20favorite%20space%20at%20home.%20%23AarnaInter.mp4"></video>
+              </li>
+              <li class="sm-carousel__card" data-index="4">
+                <video class="sm-carousel__video" preload="metadata" muted loop playsinline
+                  src="Images/Graphics/Social%20Media/Reels/Where%20functionality%20meets%20finesse%20%E2%80%94%20transforming%20kitchens%2C%20transforming%20lives.%20%23AarnaInteriors%20%23.mp4"></video>
+              </li>
+              <li class="sm-carousel__card" data-index="5">
+                <video class="sm-carousel__video" preload="metadata" muted loop playsinline
+                  src="Images/Graphics/Social%20Media/Reels/BR%20of%20Facebook%20Portait%20Videos%20(1).mp4"></video>
+              </li>
+              <li class="sm-carousel__card" data-index="6">
+                <video class="sm-carousel__video" preload="metadata" muted loop playsinline
+                  src="Images/Graphics/Social%20Media/Reels/Facebook%20Portait%20Videos_4.mp4"></video>
+              </li>
+              <li class="sm-carousel__card" data-index="7">
+                <video class="sm-carousel__video" preload="metadata" muted loop playsinline
+                  src="Images/Graphics/Social%20Media/Reels/MK%20of%20Facebook%20Portait%20Videos.mp4"></video>
+              </li>
+            </ul>
+          </div>
+          <div class="sm-carousel__controls">
+            <button class="sm-carousel__btn sm-carousel__btn--prev" aria-label="Previous reel">&#10094; PREV</button>
+            <button class="sm-carousel__btn sm-carousel__btn--playpause" aria-label="Pause"><i class="fa-solid fa-pause"></i></button>
+            <span class="sm-carousel__indicator">1 / 8</span>
+            <button class="sm-carousel__btn sm-carousel__btn--next" aria-label="Next reel">NEXT &#10095;</button>
+            <button class="sm-carousel__btn sm-carousel__btn--mute" aria-label="Unmute"><i class="fa-solid fa-volume-xmark"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Subsection 2: Ad Creative Video -->
+      <div class="sm-division" id="sm-ads">
+        <h3 class="sm-division-title">Ad Creative Video</h3>
+        <p class="sm-division-desc">Landscape advertisement videos and creative content</p>
+
+        <div class="sm-carousel sm-carousel--landscape" id="sm-ads-carousel">
+          <div class="sm-carousel__viewport">
+            <ul class="sm-carousel__track">
+              <li class="sm-carousel__card" data-index="0">
+                <video class="sm-carousel__video" preload="metadata" muted loop playsinline
+                  src="Images/Graphics/Social%20Media/Lanscape%20Video%20Add%20Creative/BR%20of%20Facebook%20Landscape%20Add%20Video.mp4"></video>
+              </li>
+              <li class="sm-carousel__card" data-index="1">
+                <video class="sm-carousel__video" preload="metadata" muted loop playsinline
+                  src="Images/Graphics/Social%20Media/Lanscape%20Video%20Add%20Creative/FB%20Add%20HC%20Landscape_3.mp4"></video>
+              </li>
+              <li class="sm-carousel__card" data-index="2">
+                <video class="sm-carousel__video" preload="metadata" muted loop playsinline
+                  src="Images/Graphics/Social%20Media/Lanscape%20Video%20Add%20Creative/MK%20of%20Facebook%20Landscape%20Add%20Video.mp4"></video>
+              </li>
+            </ul>
+          </div>
+          <div class="sm-carousel__controls">
+            <button class="sm-carousel__btn sm-carousel__btn--prev" aria-label="Previous ad">&#10094; PREV</button>
+            <button class="sm-carousel__btn sm-carousel__btn--playpause" aria-label="Pause"><i class="fa-solid fa-pause"></i></button>
+            <span class="sm-carousel__indicator">1 / 3</span>
+            <button class="sm-carousel__btn sm-carousel__btn--next" aria-label="Next ad">NEXT &#10095;</button>
+            <button class="sm-carousel__btn sm-carousel__btn--mute" aria-label="Unmute"><i class="fa-solid fa-volume-xmark"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Social Media Section End -->
+
+    <!-- Advertisements Section Start -->
+    <section id="advertisements" class="projectSection">
+      <!-- Liquid Gradient Background -->
+      <div class="lg-stage" aria-hidden="true">
+        <canvas class="lg-canvas" id="lg-canvas"></canvas>
+      </div>
+
+      <h2 class="projectTitle text-effect"><span class="te-line"><span class="te-base">Advertisement</span><span class="te-fade">s</span></span><span class="te-hover">Advertisements</span></h2>
+
+      <!-- Liquid Gradient Controls (side rails) -->
+      <button type="button" class="lg-toggle-adjuster" id="lg-toggle-adjuster">Adjust Colors</button>
+      <div class="lg-color-controls">
+        <button type="button" class="lg-color-btn active" data-lg-scheme="1">Scheme 1</button>
+        <button type="button" class="lg-color-btn" data-lg-scheme="2">Scheme 2</button>
+        <button type="button" class="lg-color-btn" data-lg-scheme="3">Scheme 3</button>
+        <button type="button" class="lg-color-btn" data-lg-scheme="4">Scheme 4</button>
+        <button type="button" class="lg-color-btn" data-lg-scheme="5">Scheme 5</button>
+      </div>
+      <div class="lg-adjuster-panel" id="lg-adjuster-panel" role="dialog" aria-label="Color Adjuster">
+        <div class="lg-adjuster-header">
+          <span class="lg-adjuster-title">Color Adjuster</span>
+          <button type="button" class="lg-adjuster-close" id="lg-adjuster-close" aria-label="Close">&times;</button>
+        </div>
+        <div class="lg-picker-group"><span class="lg-picker-label">Color 1</span><div class="lg-picker-row"><input type="color" class="lg-picker-input" id="lg-pick-1" data-lg-color="1" /><input type="text" class="lg-picker-value" id="lg-val-1" readonly /><button type="button" class="lg-copy-btn" data-lg-copy="1">Copy</button></div></div>
+        <div class="lg-picker-group"><span class="lg-picker-label">Color 2</span><div class="lg-picker-row"><input type="color" class="lg-picker-input" id="lg-pick-2" data-lg-color="2" /><input type="text" class="lg-picker-value" id="lg-val-2" readonly /><button type="button" class="lg-copy-btn" data-lg-copy="2">Copy</button></div></div>
+        <div class="lg-picker-group"><span class="lg-picker-label">Color 3</span><div class="lg-picker-row"><input type="color" class="lg-picker-input" id="lg-pick-3" data-lg-color="3" /><input type="text" class="lg-picker-value" id="lg-val-3" readonly /><button type="button" class="lg-copy-btn" data-lg-copy="3">Copy</button></div></div>
+        <div class="lg-picker-group"><span class="lg-picker-label">Color 4</span><div class="lg-picker-row"><input type="color" class="lg-picker-input" id="lg-pick-4" data-lg-color="4" /><input type="text" class="lg-picker-value" id="lg-val-4" readonly /><button type="button" class="lg-copy-btn" data-lg-copy="4">Copy</button></div></div>
+        <div class="lg-picker-group"><span class="lg-picker-label">Color 5</span><div class="lg-picker-row"><input type="color" class="lg-picker-input" id="lg-pick-5" data-lg-color="5" /><input type="text" class="lg-picker-value" id="lg-val-5" readonly /><button type="button" class="lg-copy-btn" data-lg-copy="5">Copy</button></div></div>
+        <div class="lg-picker-group"><span class="lg-picker-label">Color 6</span><div class="lg-picker-row"><input type="color" class="lg-picker-input" id="lg-pick-6" data-lg-color="6" /><input type="text" class="lg-picker-value" id="lg-val-6" readonly /><button type="button" class="lg-copy-btn" data-lg-copy="6">Copy</button></div></div>
+        <button type="button" class="lg-export-btn" id="lg-export-all">Export All Colors</button>
+      </div>
+
+      <!-- Performance Marketing Subsection -->
+      <div class="perf-marketing">
+        <h3 class="pm-subtitle">Performance Marketing</h3>
+
+        <!-- Disclaimer -->
+        <div class="pm-disclaimer">
+          <span style="font-size:15px;margin-top:1px;flex-shrink:0;">⚠️</span>
+          <div>
+            <span class="pm-disclaimer-title">Disclaimer &nbsp;·&nbsp;</span>
+            <span class="pm-disclaimer-quote">"I don't sell viral illusions, I deliver consistent, real growth."</span>
+            <span class="pm-disclaimer-note">All metrics shown reflect live platform data across active campaigns. Results may vary by industry, budget, and audience.</span>
+          </div>
+        </div>
+
+        <!-- Header -->
+        <div class="pm-section-header">
+          <div class="pm-section-title">
+            <span>📊</span> All Platforms Performance
+            <span class="pm-live-badge">LIVE</span>
+          </div>
+          <div class="pm-time-pills">
+            <span class="pm-time-pill">1D</span>
+            <span class="pm-time-pill active">7D</span>
+            <span class="pm-time-pill">1M</span>
+            <span class="pm-time-pill">3M</span>
+          </div>
+        </div>
+
+        <!-- Platform Legend -->
+        <div class="pm-legend" id="pmLegend">
+          <div class="pm-legend-item" data-idx="0"><span class="pm-legend-dot" style="background:#FF4500"></span>Reddit</div>
+          <div class="pm-legend-item" data-idx="1"><span class="pm-legend-dot" style="background:#E1306C"></span>Instagram</div>
+          <div class="pm-legend-item" data-idx="2"><span class="pm-legend-dot" style="background:#1877F2"></span>Facebook</div>
+          <div class="pm-legend-item" data-idx="3"><span class="pm-legend-dot" style="background:#111111"></span>X (Twitter)</div>
+          <div class="pm-legend-item" data-idx="4"><span class="pm-legend-dot" style="background:#69C9D0"></span>TikTok</div>
+          <div class="pm-legend-item" data-idx="5"><span class="pm-legend-dot" style="background:#0A66C2"></span>LinkedIn</div>
+          <div class="pm-legend-item" data-idx="6"><span class="pm-legend-dot" style="background:#4285F4"></span>Google Ads</div>
+          <div class="pm-legend-item" data-idx="7"><span class="pm-legend-dot" style="background:#25D366"></span>WhatsApp</div>
+        </div>
+
+        <!-- Graph Card -->
+        <div class="pm-chart-card">
+          <div class="pm-chart-area">
+            <canvas id="pmGraphCanvas"></canvas>
+            <div class="pm-chart-tooltip" id="pmTooltip"></div>
+          </div>
+        </div>
+
+        <!-- Metrics Grid -->
+        <div class="pm-metrics-grid" id="pmMetricsGrid">
+          <div class="pm-metric-card">
+            <span class="pm-metric-icon">👁️</span>
+            <div class="pm-metric-label">Impressions</div>
+            <div class="pm-metric-value" id="pm-mv-impressions">6.2k</div>
+            <div class="pm-metric-change up" id="pm-mc2-impressions">↑ 12.4%</div>
+            <svg class="pm-mini-spark" id="pm-sp-impressions" viewBox="0 0 70 36"></svg>
+          </div>
+          <div class="pm-metric-card">
+            <span class="pm-metric-icon">❤️</span>
+            <div class="pm-metric-label">Likes</div>
+            <div class="pm-metric-value" id="pm-mv-likes">2.8k</div>
+            <div class="pm-metric-change up" id="pm-mc2-likes">↑ 7.2%</div>
+            <svg class="pm-mini-spark" id="pm-sp-likes" viewBox="0 0 70 36"></svg>
+          </div>
+          <div class="pm-metric-card">
+            <span class="pm-metric-icon">👥</span>
+            <div class="pm-metric-label">Followers</div>
+            <div class="pm-metric-value" id="pm-mv-followers">1.1k</div>
+            <div class="pm-metric-change up" id="pm-mc2-followers">↑ 7.3%</div>
+            <svg class="pm-mini-spark" id="pm-sp-followers" viewBox="0 0 70 36"></svg>
+          </div>
+          <div class="pm-metric-card">
+            <span class="pm-metric-icon">💬</span>
+            <div class="pm-metric-label">Views</div>
+            <div class="pm-metric-value" id="pm-mv-views">87k</div>
+            <div class="pm-metric-change up" id="pm-mc2-views">↑ 18.9%</div>
+            <svg class="pm-mini-spark" id="pm-sp-views" viewBox="0 0 70 36"></svg>
+          </div>
+          <div class="pm-metric-card">
+            <span class="pm-metric-icon">🖱️</span>
+            <div class="pm-metric-label">Clicks</div>
+            <div class="pm-metric-value" id="pm-mv-clicks">940</div>
+            <div class="pm-metric-change up" id="pm-mc2-clicks">↑ 9.1%</div>
+            <svg class="pm-mini-spark" id="pm-sp-clicks" viewBox="0 0 70 36"></svg>
+          </div>
+          <div class="pm-metric-card" style="position:relative;">
+            <span class="pm-metric-icon">💰</span>
+            <div class="pm-metric-label">Sales</div>
+            <div style="font-size:11px;color:#16a34a;font-weight:700;margin-bottom:2px;">↑ Growing</div>
+            <canvas id="pmSalesCanvas" style="width:100%;height:52px;max-width:100%;display:block;margin-top:4px;border-radius:6px;"></canvas>
+          </div>
+          <div class="pm-metric-card">
+            <span class="pm-metric-icon">⚡</span>
+            <div class="pm-metric-label">Events</div>
+            <div class="pm-metric-value" id="pm-mv-events">612</div>
+            <div class="pm-metric-change up" id="pm-mc2-events">↑ 8.3%</div>
+            <svg class="pm-mini-spark" id="pm-sp-events" viewBox="0 0 70 36"></svg>
+          </div>
+        </div>
+
+        <!-- CPC / ROAS Row -->
+        <div class="pm-cpc-roas-row">
+          <!-- CPC -->
+          <div class="pm-cpc-roas-card">
+            <div class="pm-cpc-header">
+              <div class="pm-cpc-label-group">
+                <span style="font-size:18px;">🖱️</span>
+                <div>
+                  <div class="pm-metric-label" style="margin:0;">CPC</div>
+                  <div class="pm-cpc-sub">Cost Per Click</div>
+                </div>
+              </div>
+              <div style="text-align:right;">
+                <div class="pm-metric-value" id="pm-mv-cpc" style="font-size:22px;">₹1.84</div>
+                <div class="pm-metric-change down" id="pm-mc2-cpc" style="justify-content:flex-end;">↓ 4.2%</div>
+              </div>
+            </div>
+            <div id="pm-cpc-bars" style="display:flex;flex-direction:column;gap:4px;margin-top:2px;overflow:hidden;"></div>
+          </div>
+
+          <!-- ROAS -->
+          <div class="pm-cpc-roas-card">
+            <div class="pm-roas-header">
+              <div class="pm-roas-label-group">
+                <span style="font-size:18px;">📈</span>
+                <div>
+                  <div class="pm-metric-label" style="margin:0;">ROAS</div>
+                  <div class="pm-roas-sub">Return on Ad Spend</div>
+                </div>
+              </div>
+              <div style="text-align:right;">
+                <div class="pm-metric-value" id="pm-mv-roas" style="font-size:22px;">4.7x</div>
+                <div class="pm-metric-change up" id="pm-mc2-roas" style="justify-content:flex-end;">↑ 11.3%</div>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;margin-top:2px;">
+              <canvas id="pmRoasCanvas" width="64" height="64" style="flex-shrink:0;"></canvas>
+              <div id="pm-roas-platform-list" style="flex:1;display:flex;flex-direction:column;gap:3px;"></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- Performance Marketing Subsection End -->
+
+    </section>
+    <!-- Advertisements Section End -->
+
+    <!-- IT Specialist Section Start -->
+    <section id="itSpecialist" class="projectSection">
+      <canvas class="it-bg-canvas" aria-hidden="true"></canvas>
+      <h2 class="projectTitle text-effect"><span class="te-line"><span class="te-base">IT Special</span><span class="te-fade">ist</span></span><span class="te-hover">IT Specialist</span></h2>
+
+      <div class="it-wrap">
+        <p class="it-intro">Multi-skilled IT professional with expertise in System Administration, Technical Troubleshooting, Cybersecurity fundamentals, and Data Recovery. Experienced in handling OS-level issues, device connectivity, and forensic data analysis using tools like Autopsy and TestDisk.</p>
+
+        <!-- Problems I Solve -->
+        <div class="it-solve">
+          <div class="it-solve-label">Problems I Solve</div>
+          <div class="it-solve-grid">
+            <div class="it-solve-card" data-solve="1">
+              <span class="it-solve-icon">🔓</span>
+              <div class="it-solve-text">
+                <div class="it-solve-title">Windows Lock Bypass</div>
+                <div class="it-solve-desc">Recover files from password-locked Windows.</div>
+              </div>
+            </div>
+            <div class="it-solve-card" data-solve="2">
+              <span class="it-solve-icon">🩹</span>
+              <div class="it-solve-text">
+                <div class="it-solve-title">Corrupt Windows Fix</div>
+                <div class="it-solve-desc">Repair broken installs, registry, and crash loops.</div>
+              </div>
+            </div>
+            <div class="it-solve-card" data-solve="3">
+              <span class="it-solve-icon">🔁</span>
+              <div class="it-solve-text">
+                <div class="it-solve-title">Boot Error Recovery</div>
+                <div class="it-solve-desc">Windows &amp; Linux boot repair, bootloader rebuild.</div>
+              </div>
+            </div>
+            <div class="it-solve-card" data-solve="4">
+              <span class="it-solve-icon">📡</span>
+              <div class="it-solve-text">
+                <div class="it-solve-title">Wi-Fi &amp; Network Fix</div>
+                <div class="it-solve-desc">Dead connections, router setup, security testing.</div>
+              </div>
+            </div>
+            <div class="it-solve-card" data-solve="5">
+              <span class="it-solve-icon">🧠</span>
+              <div class="it-solve-text">
+                <div class="it-solve-title">Data Recovery</div>
+                <div class="it-solve-desc">Autopsy + TestDisk for damaged or deleted files.</div>
+              </div>
+            </div>
+            <div class="it-solve-card" data-solve="6">
+              <span class="it-solve-icon">🔌</span>
+              <div class="it-solve-text">
+                <div class="it-solve-title">ESP32 / IoT Scripting</div>
+                <div class="it-solve-desc">Microcontroller code for IoT &amp; networking.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categorized Specializations -->
+        <div class="it-categories">
+          <article class="it-cat" data-cat="1">
+            <div class="it-cat-head">
+              <span class="it-cat-badge">01</span>
+              <span class="it-cat-emoji">💻</span>
+            </div>
+            <h4 class="it-cat-title">System Administration &amp; OS Management</h4>
+            <p class="it-cat-why">Operating systems, installations, and system-level issues &mdash; handled end to end.</p>
+            <ul class="it-cat-skills">
+              <li>Windows Install &amp; Config</li>
+              <li>Linux Environment Handling</li>
+              <li>OS Troubleshooting</li>
+              <li>Boot Issues &amp; Crash Recovery</li>
+              <li>Driver Installation &amp; Fixes</li>
+              <li>Corrupted File Repair</li>
+              <li>Modified / Chinese Windows</li>
+              <li>Performance Optimization</li>
+              <li>Software Setup</li>
+              <li>Disk &amp; Partition Handling</li>
+            </ul>
+          </article>
+
+          <article class="it-cat" data-cat="2">
+            <div class="it-cat-head">
+              <span class="it-cat-badge">02</span>
+              <span class="it-cat-emoji">🔌</span>
+            </div>
+            <h4 class="it-cat-title">Technical Support &amp; Device Troubleshooting</h4>
+            <p class="it-cat-why">Real devices, real problems &mdash; software and connection fixes across gadgets.</p>
+            <ul class="it-cat-skills">
+              <li>End-to-End Troubleshooting</li>
+              <li>VR Headset Setup</li>
+              <li>Controller &amp; Wearable Fixes</li>
+              <li>Monitor-to-System Issues</li>
+              <li>Network Issue Diagnosis</li>
+              <li>Cross-Device Integration</li>
+              <li>Compatibility Fixes</li>
+              <li>Real-Time Debugging</li>
+            </ul>
+          </article>
+
+          <article class="it-cat" data-cat="3">
+            <div class="it-cat-head">
+              <span class="it-cat-badge">03</span>
+              <span class="it-cat-emoji">🔐</span>
+            </div>
+            <h4 class="it-cat-title">Cybersecurity &amp; Networking</h4>
+            <p class="it-cat-why">Networks, security fundamentals, and ethical testing concepts.</p>
+            <ul class="it-cat-skills">
+              <li>Network Security Basics</li>
+              <li>Wi-Fi Security Testing (WPA &middot; WPS)</li>
+              <li>Network Troubleshooting</li>
+              <li>Vulnerability Awareness</li>
+              <li>ESP32 Scripting (IoT)</li>
+              <li>Penetration Testing Concepts</li>
+              <li>Authentication &amp; Access Control</li>
+              <li>System Security Hygiene</li>
+            </ul>
+          </article>
+
+          <article class="it-cat" data-cat="4">
+            <div class="it-cat-head">
+              <span class="it-cat-badge">04</span>
+              <span class="it-cat-emoji">🧠</span>
+            </div>
+            <h4 class="it-cat-title">Data Recovery &amp; Digital Forensics</h4>
+            <p class="it-cat-why">Advanced recovery from damaged, corrupted, or locked systems.</p>
+            <ul class="it-cat-skills">
+              <li>Damaged System Recovery</li>
+              <li>File Recovery Without OS</li>
+              <li>Disk Analysis</li>
+              <li>Autopsy &amp; TestDisk</li>
+              <li>Deleted File Restore</li>
+              <li>Storage Device Investigation</li>
+              <li>File System Forensics</li>
+              <li>Windows Security Bypass &amp; Extract</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+    <!-- IT Specialist Section End -->
 
     <!-- Skill Section Start  -->
     <section class="skillContainer" id="skills">
@@ -289,7 +1171,7 @@
       </div>
 
       <div class="rightSkillContainer">
-        <img src="./Images/userAsset/blob vector.png" class="blobStyle" alt="" />
+        <img src="./Images/userAsset/blob%20vector.png" class="blobStyle" alt="" />
 
         <img src="./Images/stack/HTML.png" alt="" class="skillsLogo" />
         <img src="./Images/stack/CSS.png" alt="" class="skillsLogo" />
@@ -312,7 +1194,7 @@
         <img src="./Images/stack/meta.png" alt="Meta" class="skillsLogo" />
         <img src="./Images/stack/wordpress.png" alt="WordPress" class="skillsLogo" />
         <img src="./Images/stack/adwords.png" alt="Adwords" class="skillsLogo" />
-        <img src="./Images/stack/video editing.png" alt="Video Editing" class="skillsLogo" />
+        <img src="./Images/stack/video%20editing.png" alt="Video Editing" class="skillsLogo" />
       </div>
     </section>
     <!-- Skill Section End  -->
@@ -361,19 +1243,828 @@
       </a>
     </div>
 
+    <!-- Sanskrit Shloka Section -->
+    <section class="shloka-section" id="shlokaSection">
+      <div class="shloka-noise"></div>
+      <div class="shloka-container" id="shlokaContainer" style="--horizontal: 1; --vertical: 1;">
+        <div class="shloka-flipcard" id="shlokaFlipcard">
+          <div class="shloka-flip-inner">
+            <!-- Front: Sanskrit verse with glowing power words -->
+            <div class="shloka-flip-front">
+              <p class="shloka-line"><span class="pw" style="--pw-color: #FFE066;">उत्साहो</span> <span class="pw" style="--pw-color: #FF2D87;">बलवान्</span> <span class="pw" style="--pw-color: #BF40FF;">आर्य</span> <span class="shloka-normal">नास्त्युत्साहात्परं</span> <span class="pw" style="--pw-color: #00F0FF;">बलम्</span> <span class="shloka-normal">|</span></p>
+              <p class="shloka-line"><span class="pw" style="--pw-color: #39FF14;">सोत्साहस्य</span> <span class="shloka-normal">हि</span> <span class="pw" style="--pw-color: #4D9FFF;">लोकेषु</span> <span class="shloka-normal">न किञ्चिदपि</span> <span class="pw" style="--pw-color: #FF6B2B;">दुर्लभम्</span> <span class="shloka-normal">||</span></p>
+              <p class="shloka-hint">click to reveal meaning</p>
+            </div>
+            <!-- Back: Full English meaning -->
+            <div class="shloka-flip-back">
+              <p class="shloka-meaning">Enthusiasm is supreme strength, O Noble one; there is no power greater than enthusiasm.<br><br>For the one who is full of enthusiasm, nothing in this world is difficult to attain.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+    (function() {
+      // â”€â”€ Light-trail copies (faithful to attached effect) â”€â”€
+      var COPIES = 30;
+      document.querySelectorAll('.pw').forEach(function(pw) {
+        var text = pw.textContent.trim();
+        for (var i = 0; i < COPIES; i++) {
+          var copy = document.createElement('span');
+          copy.className = 'pw-copy';
+          copy.style.setProperty('--index', i + 1);
+          copy.textContent = text;
+          pw.appendChild(copy);
+        }
+      });
+
+      // â”€â”€ Mouse tracking for light direction (rAF-throttled for 60fps) â”€â”€
+      var section = document.getElementById('shlokaSection');
+      var container = document.getElementById('shlokaContainer');
+      var ticking = false;
+
+      if (section && container) {
+        section.addEventListener('mousemove', function(e) {
+          if (ticking) return;
+          ticking = true;
+          requestAnimationFrame(function() {
+            var rect = section.getBoundingClientRect();
+            var x = e.clientX - rect.left;
+            var y = e.clientY - rect.top;
+            var horizontal, vertical;
+            if (x > rect.width / 2) {
+              horizontal = ((x - rect.width / 2) / (rect.width / 2)) * -1;
+            } else {
+              horizontal = (rect.width / 2 - x) / (rect.width / 2);
+            }
+            if (y > rect.height / 2) {
+              vertical = ((y - rect.height / 2) / (rect.height / 2)) * -1;
+            } else {
+              vertical = (rect.height / 2 - y) / (rect.height / 2);
+            }
+            container.style.setProperty('--horizontal', horizontal);
+            container.style.setProperty('--vertical', vertical);
+            ticking = false;
+          });
+        });
+        section.addEventListener('mouseleave', function() {
+          container.style.setProperty('--horizontal', 0);
+          container.style.setProperty('--vertical', 0);
+        });
+      }
+
+      // â”€â”€ Click toggle for whole-verse flip â”€â”€
+      var flipcard = document.getElementById('shlokaFlipcard');
+      if (flipcard) {
+        flipcard.addEventListener('click', function() {
+          flipcard.classList.toggle('flipped');
+        });
+      }
+    })();
+    </script>
+
     <!-- Footer Section Start  -->
     <footer>
       <div class="container footerContainer">
         <div class="footerFadedText">AKR</div>
         <div class="footerLegal center-footer">
-          <span>© 2025 Aditya Rai. All rights reserved.</span>
+          <span>Â© 2026 Aditya Rai. All rights reserved.</span>
           <span>Terms &amp; Conditions | Privacy Policy</span>
         </div>
       </div>
     </footer>
   </div>
 
+  <!-- Section Navigation (left side) -->
+  <div class="section-nav" id="sectionNav" aria-label="Section navigation">
+    <button class="section-nav-btn" id="sectionNavUp" title="Tap: previous section • Hold: go to top" aria-label="Previous section (hold to go to top)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <button class="section-nav-btn" id="sectionNavDown" title="Tap: next section • Hold: go to bottom" aria-label="Next section (hold to go to bottom)">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+
+  <!-- Section Navigation Script -->
+  <script>
+    (function () {
+      var upBtn = document.getElementById('sectionNavUp');
+      var downBtn = document.getElementById('sectionNavDown');
+      if (!upBtn || !downBtn) return;
+
+      var HOLD_MS = 500;
+
+      function getAnchors() {
+        return Array.prototype.slice.call(
+          document.querySelectorAll('#wrapper > section, #wrapper > footer')
+        );
+      }
+
+      function currentIndex(anchors) {
+        var y = window.scrollY + window.innerHeight * 0.25;
+        var idx = 0;
+        for (var i = 0; i < anchors.length; i++) {
+          if (anchors[i].offsetTop <= y) idx = i;
+        }
+        return idx;
+      }
+
+      function scrollToEl(el) {
+        if (!el) return;
+        window.scrollTo({ top: el.offsetTop, behavior: 'smooth' });
+      }
+
+      function goPrev() {
+        var anchors = getAnchors();
+        var i = currentIndex(anchors);
+        scrollToEl(anchors[Math.max(0, i - 1)]);
+      }
+
+      function goNext() {
+        var anchors = getAnchors();
+        var i = currentIndex(anchors);
+        scrollToEl(anchors[Math.min(anchors.length - 1, i + 1)]);
+      }
+
+      function goTop() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+
+      function goBottom() {
+        var h = Math.max(
+          document.body.scrollHeight,
+          document.documentElement.scrollHeight
+        );
+        window.scrollTo({ top: h, behavior: 'smooth' });
+      }
+
+      function attachHold(btn, onTap, onHold) {
+        var holdTimer = null;
+        var didHold = false;
+
+        function begin() {
+          didHold = false;
+          btn.classList.add('is-pressed');
+          clearTimeout(holdTimer);
+          holdTimer = setTimeout(function () {
+            didHold = true;
+            btn.classList.add('is-held');
+            onHold();
+          }, HOLD_MS);
+        }
+
+        function finish() {
+          clearTimeout(holdTimer);
+          btn.classList.remove('is-pressed', 'is-held');
+        }
+
+        btn.addEventListener('pointerdown', function (e) {
+          if (e.pointerType === 'mouse' && e.button !== 0) return;
+          begin();
+        });
+        btn.addEventListener('pointerup', finish);
+        btn.addEventListener('pointerleave', finish);
+        btn.addEventListener('pointercancel', finish);
+
+        btn.addEventListener('click', function (e) {
+          if (didHold) {
+            didHold = false;
+            e.preventDefault();
+            e.stopPropagation();
+            return;
+          }
+          onTap();
+        });
+
+        btn.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+      }
+
+      attachHold(upBtn, goPrev, goTop);
+      attachHold(downBtn, goNext, goBottom);
+    })();
+  </script>
+
+  <!-- About Resume Tabs -->
+  <script>
+    (function () {
+      var tabs = document.querySelectorAll('.ak-tab');
+      var panels = document.querySelectorAll('.ak-panel');
+      if (!tabs.length || !panels.length) return;
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          var target = tab.getAttribute('data-ak-tab');
+          tabs.forEach(function (t) { t.classList.toggle('active', t === tab); });
+          panels.forEach(function (p) {
+            p.classList.toggle('active', p.getAttribute('data-ak-panel') === target);
+          });
+        });
+      });
+    })();
+  </script>
+
+  <!-- Advertisement Section · Liquid Gradient (Three.js) -->
+  <script>
+    (function () {
+      function boot() {
+        if (typeof THREE === 'undefined') { return setTimeout(boot, 120); }
+        var canvas = document.getElementById('lg-canvas');
+        var section = document.getElementById('advertisements');
+        if (!canvas || !section) return;
+
+        function TouchTexture() {
+          this.size = 64;
+          this.width = this.height = this.size;
+          this.maxAge = 64;
+          this.radius = 0.25 * this.size;
+          this.speed = 1 / this.maxAge;
+          this.trail = [];
+          this.last = null;
+          this.canvas = document.createElement('canvas');
+          this.canvas.width = this.width;
+          this.canvas.height = this.height;
+          this.ctx = this.canvas.getContext('2d');
+          this.ctx.fillStyle = 'black';
+          this.ctx.fillRect(0, 0, this.width, this.height);
+          this.texture = new THREE.Texture(this.canvas);
+        }
+        TouchTexture.prototype.update = function () {
+          this.ctx.fillStyle = 'black';
+          this.ctx.fillRect(0, 0, this.width, this.height);
+          var speed = this.speed;
+          for (var i = this.trail.length - 1; i >= 0; i--) {
+            var p = this.trail[i];
+            var f = p.force * speed * (1 - p.age / this.maxAge);
+            p.x += p.vx * f; p.y += p.vy * f; p.age++;
+            if (p.age > this.maxAge) this.trail.splice(i, 1); else this.drawPoint(p);
+          }
+          this.texture.needsUpdate = true;
+        };
+        TouchTexture.prototype.addTouch = function (pt) {
+          var force = 0, vx = 0, vy = 0, last = this.last;
+          if (last) {
+            var dx = pt.x - last.x, dy = pt.y - last.y;
+            if (dx === 0 && dy === 0) return;
+            var dd = dx * dx + dy * dy, d = Math.sqrt(dd);
+            vx = dx / d; vy = dy / d;
+            force = Math.min(dd * 20000, 2.0);
+          }
+          this.last = { x: pt.x, y: pt.y };
+          this.trail.push({ x: pt.x, y: pt.y, age: 0, force: force, vx: vx, vy: vy });
+        };
+        TouchTexture.prototype.drawPoint = function (p) {
+          var pos = { x: p.x * this.width, y: (1 - p.y) * this.height };
+          var intensity;
+          if (p.age < this.maxAge * 0.3) intensity = Math.sin((p.age / (this.maxAge * 0.3)) * (Math.PI / 2));
+          else { var t = 1 - (p.age - this.maxAge * 0.3) / (this.maxAge * 0.7); intensity = -t * (t - 2); }
+          intensity *= p.force;
+          var color = (((p.vx + 1) / 2) * 255) + ',' + (((p.vy + 1) / 2) * 255) + ',' + (intensity * 255);
+          var offset = this.size * 5;
+          this.ctx.shadowOffsetX = offset;
+          this.ctx.shadowOffsetY = offset;
+          this.ctx.shadowBlur = this.radius;
+          this.ctx.shadowColor = 'rgba(' + color + ',' + (0.2 * intensity) + ')';
+          this.ctx.beginPath();
+          this.ctx.fillStyle = 'rgba(255,0,0,1)';
+          this.ctx.arc(pos.x - offset, pos.y - offset, this.radius, 0, Math.PI * 2);
+          this.ctx.fill();
+        };
+
+        var VERTEX = 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0); }';
+        var FRAGMENT = [
+          'uniform float uTime;',
+          'uniform vec2 uResolution;',
+          'uniform vec3 uColor1;uniform vec3 uColor2;uniform vec3 uColor3;uniform vec3 uColor4;uniform vec3 uColor5;uniform vec3 uColor6;',
+          'uniform float uSpeed;uniform float uIntensity;uniform sampler2D uTouchTexture;uniform float uGrainIntensity;',
+          'uniform vec3 uDarkBase;uniform float uGradientSize;uniform float uGradientCount;uniform float uColor1Weight;uniform float uColor2Weight;',
+          'varying vec2 vUv;',
+          '#define PI 3.14159265359',
+          'float grain(vec2 uv,float time){ vec2 g=uv*uResolution*0.5; return fract(sin(dot(g+time,vec2(12.9898,78.233)))*43758.5453)*2.0-1.0; }',
+          'vec3 getGradientColor(vec2 uv,float time){',
+          '  float gr = uGradientSize;',
+          '  vec2 c1=vec2(0.5+sin(time*uSpeed*0.4)*0.4,0.5+cos(time*uSpeed*0.5)*0.4);',
+          '  vec2 c2=vec2(0.5+cos(time*uSpeed*0.6)*0.5,0.5+sin(time*uSpeed*0.45)*0.5);',
+          '  vec2 c3=vec2(0.5+sin(time*uSpeed*0.35)*0.45,0.5+cos(time*uSpeed*0.55)*0.45);',
+          '  vec2 c4=vec2(0.5+cos(time*uSpeed*0.5)*0.4,0.5+sin(time*uSpeed*0.4)*0.4);',
+          '  vec2 c5=vec2(0.5+sin(time*uSpeed*0.7)*0.35,0.5+cos(time*uSpeed*0.6)*0.35);',
+          '  vec2 c6=vec2(0.5+cos(time*uSpeed*0.45)*0.5,0.5+sin(time*uSpeed*0.65)*0.5);',
+          '  float i1=1.0-smoothstep(0.0,gr,length(uv-c1));',
+          '  float i2=1.0-smoothstep(0.0,gr,length(uv-c2));',
+          '  float i3=1.0-smoothstep(0.0,gr,length(uv-c3));',
+          '  float i4=1.0-smoothstep(0.0,gr,length(uv-c4));',
+          '  float i5=1.0-smoothstep(0.0,gr,length(uv-c5));',
+          '  float i6=1.0-smoothstep(0.0,gr,length(uv-c6));',
+          '  vec2 ru=uv-0.5; float a1=time*uSpeed*0.15; ru=vec2(ru.x*cos(a1)-ru.y*sin(a1),ru.x*sin(a1)+ru.y*cos(a1))+0.5;',
+          '  float rad=1.0-smoothstep(0.0,0.8,length(ru-0.5));',
+          '  vec3 color=vec3(0.0);',
+          '  color+=uColor1*i1*(0.55+0.45*sin(time*uSpeed))*uColor1Weight;',
+          '  color+=uColor2*i2*(0.55+0.45*cos(time*uSpeed*1.2))*uColor2Weight;',
+          '  color+=uColor3*i3*(0.55+0.45*sin(time*uSpeed*0.8))*uColor1Weight;',
+          '  color+=uColor4*i4*(0.55+0.45*cos(time*uSpeed*1.3))*uColor2Weight;',
+          '  color+=uColor5*i5*(0.55+0.45*sin(time*uSpeed*1.1))*uColor1Weight;',
+          '  color+=uColor6*i6*(0.55+0.45*cos(time*uSpeed*0.9))*uColor2Weight;',
+          '  color+=mix(uColor1,uColor3,rad)*0.4*uColor1Weight;',
+          '  color=clamp(color,vec3(0.0),vec3(1.0))*uIntensity;',
+          '  float lum=dot(color,vec3(0.299,0.587,0.114));',
+          '  color=mix(vec3(lum),color,1.3);',
+          '  color=pow(color,vec3(0.92));',
+          '  float b=length(color); float mf=max(b*1.2,0.15);',
+          '  color=mix(uDarkBase,color,mf);',
+          '  float mb=1.0, br=length(color); if(br>mb) color=color*(mb/br);',
+          '  return color;',
+          '}',
+          'void main(){',
+          '  vec2 uv=vUv;',
+          '  vec4 tt=texture2D(uTouchTexture,uv);',
+          '  float vx=-(tt.r*2.0-1.0); float vy=-(tt.g*2.0-1.0); float it=tt.b;',
+          '  uv.x+=vx*0.8*it; uv.y+=vy*0.8*it;',
+          '  float dist=length(uv-vec2(0.5));',
+          '  uv+=vec2(sin(dist*20.0-uTime*3.0)*0.04*it + sin(dist*15.0-uTime*2.0)*0.03*it);',
+          '  vec3 color=getGradientColor(uv,uTime);',
+          '  color+=grain(uv,uTime)*uGrainIntensity;',
+          '  float ts=uTime*0.5;',
+          '  color.r+=sin(ts)*0.02; color.g+=cos(ts*1.4)*0.02; color.b+=sin(ts*1.2)*0.02;',
+          '  float b2=length(color); color=mix(uDarkBase,color,max(b2*1.2,0.15));',
+          '  color=clamp(color,vec3(0.0),vec3(1.0));',
+          '  float br2=length(color); if(br2>1.0) color=color*(1.0/br2);',
+          '  gl_FragColor=vec4(color,1.0);',
+          '}'
+        ].join('\n');
+
+        var renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: false, powerPreference: 'high-performance', alpha: false, stencil: false, depth: false });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1));
+        renderer.setSize(section.clientWidth, section.clientHeight, false);
+
+        var scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x0a0e27);
+        var camera = new THREE.PerspectiveCamera(45, section.clientWidth / Math.max(1, section.clientHeight), 0.1, 1000);
+        camera.position.z = 50;
+        var clock = new THREE.Clock();
+        var tt = new TouchTexture();
+
+        var uniforms = {
+          uTime: { value: 0 },
+          uResolution: { value: new THREE.Vector2(section.clientWidth, section.clientHeight) },
+          uColor1: { value: new THREE.Vector3(0.945, 0.353, 0.133) },
+          uColor2: { value: new THREE.Vector3(0.039, 0.055, 0.153) },
+          uColor3: { value: new THREE.Vector3(0.945, 0.353, 0.133) },
+          uColor4: { value: new THREE.Vector3(0.039, 0.055, 0.153) },
+          uColor5: { value: new THREE.Vector3(0.945, 0.353, 0.133) },
+          uColor6: { value: new THREE.Vector3(0.039, 0.055, 0.153) },
+          uSpeed: { value: 1.2 },
+          uIntensity: { value: 1.8 },
+          uTouchTexture: { value: tt.texture },
+          uGrainIntensity: { value: 0.08 },
+          uDarkBase: { value: new THREE.Vector3(0.039, 0.055, 0.153) },
+          uGradientSize: { value: 1.0 },
+          uGradientCount: { value: 6.0 },
+          uColor1Weight: { value: 1.0 },
+          uColor2Weight: { value: 1.0 }
+        };
+
+        function getViewSize() {
+          var fov = (camera.fov * Math.PI) / 180;
+          var h = Math.abs(camera.position.z * Math.tan(fov / 2) * 2);
+          return { width: h * camera.aspect, height: h };
+        }
+        var vs = getViewSize();
+        var geometry = new THREE.PlaneGeometry(vs.width, vs.height, 1, 1);
+        var material = new THREE.ShaderMaterial({ uniforms: uniforms, vertexShader: VERTEX, fragmentShader: FRAGMENT });
+        var mesh = new THREE.Mesh(geometry, material);
+        scene.add(mesh);
+
+        var schemes = {
+          1: { c1: [0.945, 0.353, 0.133], c2: [0.039, 0.055, 0.153], base: [0.039, 0.055, 0.153], size: 0.45, count: 12, speed: 1.5, w1: 0.5, w2: 1.8, mode: 'ab' },
+          2: { c1: [1.0, 0.424, 0.314], c2: [0.251, 0.878, 0.816], base: [0.039, 0.055, 0.153], size: 1.0, count: 6, speed: 1.2, w1: 1.0, w2: 1.0, mode: 'ab' },
+          3: { c1: [0.945, 0.353, 0.133], c2: [0.039, 0.055, 0.153], c3: [0.251, 0.878, 0.816], base: [0.039, 0.055, 0.153], size: 1.0, count: 6, speed: 1.2, w1: 1.0, w2: 1.0, mode: 'triple' },
+          4: { c1: [0.949, 0.4, 0.2], c2: [0.176, 0.42, 0.427], c3: [0.82, 0.686, 0.612], base: [1, 1, 1], size: 1.0, count: 6, speed: 1.2, w1: 1.0, w2: 1.0, mode: 'triple' },
+          5: { c1: [0.945, 0.353, 0.133], c2: [0.0, 0.259, 0.22], c3: [0.945, 0.353, 0.133], c4: [0.0, 0.0, 0.0], c5: [0.945, 0.353, 0.133], c6: [0.0, 0.0, 0.0], base: [0.039, 0.055, 0.153], size: 0.45, count: 12, speed: 1.5, w1: 0.5, w2: 1.8, mode: 'six' }
+        };
+
+        function setScheme(n) {
+          var s = schemes[n]; if (!s) return;
+          var U = uniforms;
+          if (s.mode === 'triple') {
+            U.uColor1.value.set(s.c1[0], s.c1[1], s.c1[2]);
+            U.uColor2.value.set(s.c2[0], s.c2[1], s.c2[2]);
+            U.uColor3.value.set(s.c3[0], s.c3[1], s.c3[2]);
+            U.uColor4.value.set(s.c1[0], s.c1[1], s.c1[2]);
+            U.uColor5.value.set(s.c2[0], s.c2[1], s.c2[2]);
+            U.uColor6.value.set(s.c3[0], s.c3[1], s.c3[2]);
+          } else if (s.mode === 'six') {
+            U.uColor1.value.set(s.c1[0], s.c1[1], s.c1[2]);
+            U.uColor2.value.set(s.c2[0], s.c2[1], s.c2[2]);
+            U.uColor3.value.set(s.c3[0], s.c3[1], s.c3[2]);
+            U.uColor4.value.set(s.c4[0], s.c4[1], s.c4[2]);
+            U.uColor5.value.set(s.c5[0], s.c5[1], s.c5[2]);
+            U.uColor6.value.set(s.c6[0], s.c6[1], s.c6[2]);
+          } else {
+            U.uColor1.value.set(s.c1[0], s.c1[1], s.c1[2]);
+            U.uColor2.value.set(s.c2[0], s.c2[1], s.c2[2]);
+            U.uColor3.value.set(s.c1[0], s.c1[1], s.c1[2]);
+            U.uColor4.value.set(s.c2[0], s.c2[1], s.c2[2]);
+            U.uColor5.value.set(s.c1[0], s.c1[1], s.c1[2]);
+            U.uColor6.value.set(s.c2[0], s.c2[1], s.c2[2]);
+          }
+          U.uDarkBase.value.set(s.base[0], s.base[1], s.base[2]);
+          U.uGradientSize.value = s.size;
+          U.uGradientCount.value = s.count;
+          U.uSpeed.value = s.speed;
+          U.uColor1Weight.value = s.w1;
+          U.uColor2Weight.value = s.w2;
+          scene.background = new THREE.Color((Math.round(s.base[0] * 255) << 16) | (Math.round(s.base[1] * 255) << 8) | Math.round(s.base[2] * 255));
+          updatePickers();
+        }
+
+        var running = false, rafId = 0;
+        function tick() {
+          if (!running) return;
+          var delta = Math.min(clock.getDelta(), 0.1);
+          tt.update();
+          uniforms.uTime.value += delta;
+          renderer.render(scene, camera);
+          rafId = requestAnimationFrame(tick);
+        }
+        function start() { if (running) return; running = true; clock.getDelta(); tick(); }
+        function stop() { running = false; if (rafId) cancelAnimationFrame(rafId); }
+
+        var resizeTO;
+        function resize() {
+          var w = section.clientWidth, h = section.clientHeight;
+          if (!w || !h) return;
+          renderer.setSize(w, h, false);
+          camera.aspect = w / h;
+          camera.updateProjectionMatrix();
+          var v = getViewSize();
+          mesh.geometry.dispose();
+          mesh.geometry = new THREE.PlaneGeometry(v.width, v.height, 1, 1);
+          uniforms.uResolution.value.set(w, h);
+        }
+        window.addEventListener('resize', function () { clearTimeout(resizeTO); resizeTO = setTimeout(resize, 120); });
+
+        section.addEventListener('mousemove', function (e) {
+          var r = section.getBoundingClientRect();
+          tt.addTouch({ x: (e.clientX - r.left) / r.width, y: 1 - (e.clientY - r.top) / r.height });
+        });
+        section.addEventListener('touchmove', function (e) {
+          var t = e.touches[0]; if (!t) return;
+          var r = section.getBoundingClientRect();
+          tt.addTouch({ x: (t.clientX - r.left) / r.width, y: 1 - (t.clientY - r.top) / r.height });
+        }, { passive: true });
+
+        if ('IntersectionObserver' in window) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+              if (en.isIntersecting && !document.hidden) start();
+              else stop();
+            });
+          }, { threshold: 0 });
+          io.observe(section);
+        } else { start(); }
+        document.addEventListener('visibilitychange', function () {
+          if (document.hidden) stop();
+          else {
+            var r = section.getBoundingClientRect();
+            if (r.bottom > 0 && r.top < window.innerHeight) start();
+          }
+        });
+
+        // Controls: scheme buttons
+        var schemeBtns = section.querySelectorAll('.lg-color-btn');
+        schemeBtns.forEach(function (b) {
+          b.addEventListener('click', function () {
+            schemeBtns.forEach(function (x) { x.classList.remove('active'); });
+            b.classList.add('active');
+            setScheme(parseInt(b.getAttribute('data-lg-scheme'), 10));
+          });
+        });
+
+        // Controls: adjuster panel
+        var toggle = document.getElementById('lg-toggle-adjuster');
+        var panel = document.getElementById('lg-adjuster-panel');
+        var closeBtn = document.getElementById('lg-adjuster-close');
+        toggle.addEventListener('click', function () {
+          panel.classList.add('open');
+          toggle.classList.add('hidden');
+          updatePickers();
+        });
+        closeBtn.addEventListener('click', function () {
+          panel.classList.remove('open');
+          toggle.classList.remove('hidden');
+        });
+
+        function rgbToHex(r, g, b) {
+          function h(n) { var x = Math.round(n * 255).toString(16); return x.length === 1 ? '0' + x : x; }
+          return '#' + h(r) + h(g) + h(b);
+        }
+        function hexToRgb(h) {
+          var m = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(h);
+          return m ? { r: parseInt(m[1], 16) / 255, g: parseInt(m[2], 16) / 255, b: parseInt(m[3], 16) / 255 } : null;
+        }
+        function updatePickers() {
+          var vals = [uniforms.uColor1.value, uniforms.uColor2.value, uniforms.uColor3.value, uniforms.uColor4.value, uniforms.uColor5.value, uniforms.uColor6.value];
+          for (var i = 0; i < 6; i++) {
+            var hex = rgbToHex(vals[i].x, vals[i].y, vals[i].z);
+            var p = document.getElementById('lg-pick-' + (i + 1));
+            var v = document.getElementById('lg-val-' + (i + 1));
+            if (p) p.value = hex;
+            if (v) v.value = hex.toUpperCase();
+          }
+        }
+        for (var i = 1; i <= 6; i++) {
+          (function (idx) {
+            var p = document.getElementById('lg-pick-' + idx);
+            var v = document.getElementById('lg-val-' + idx);
+            if (!p || !v) return;
+            p.addEventListener('input', function (e) {
+              var rgb = hexToRgb(e.target.value);
+              if (!rgb) return;
+              uniforms['uColor' + idx].value.set(rgb.r, rgb.g, rgb.b);
+              v.value = e.target.value.toUpperCase();
+            });
+          })(i);
+        }
+        section.querySelectorAll('.lg-copy-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var idx = btn.getAttribute('data-lg-copy');
+            var v = document.getElementById('lg-val-' + idx);
+            if (v && navigator.clipboard) {
+              navigator.clipboard.writeText(v.value).then(function () {
+                btn.textContent = 'Copied';
+                btn.classList.add('copied');
+                setTimeout(function () { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 1600);
+              });
+            }
+          });
+        });
+        var exportBtn = document.getElementById('lg-export-all');
+        if (exportBtn) {
+          exportBtn.addEventListener('click', function () {
+            var arr = [];
+            for (var i = 1; i <= 6; i++) { arr.push(document.getElementById('lg-val-' + i).value); }
+            var txt = 'Color Scheme:\n' + arr.map(function (c, i) { return 'Color ' + (i + 1) + ': ' + c; }).join('\n') +
+                      '\n\nHex Array: [' + arr.map(function (c) { return '"' + c + '"'; }).join(', ') + ']';
+            if (navigator.clipboard) {
+              navigator.clipboard.writeText(txt).then(function () {
+                exportBtn.textContent = 'Copied';
+                exportBtn.classList.add('copied');
+                setTimeout(function () { exportBtn.textContent = 'Export All Colors'; exportBtn.classList.remove('copied'); }, 1800);
+              });
+            }
+          });
+        }
+
+        setScheme(1);
+        resize();
+      }
+
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
+      else boot();
+    })();
+  </script>
+
+  <!-- IT Specialist Section Liquid Lights Background -->
+  <script>
+    (function () {
+      var section = document.getElementById('itSpecialist');
+      if (!section) return;
+      var canvas = section.querySelector('.it-bg-canvas');
+      if (!canvas || !canvas.getContext) return;
+      var ctx = canvas.getContext('2d');
+
+      var arr = [];
+      var cnt = 0;
+      var _w = 0, _h = 0;
+      var running = false;
+      var rafId = 0;
+
+      function resize() {
+        var rect = section.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
+        // Cap DPR at 1 to halve render cost on retina — blur effect hides any softness
+        var dpr = Math.min(1, window.devicePixelRatio || 1);
+        canvas.width = Math.max(1, Math.round(rect.width * dpr));
+        canvas.height = Math.max(1, Math.round(rect.height * dpr));
+        canvas.style.width = rect.width + 'px';
+        canvas.style.height = rect.height + 'px';
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        _w = rect.width * 0.5;
+        _h = rect.height * 0.5;
+      }
+
+      function rndCol() {
+        var r = Math.floor(Math.random() * 180);
+        var g = Math.floor(Math.random() * 60);
+        var b = Math.floor(Math.random() * 100);
+        return 'rgb(' + r + ',' + g + ',' + b + ')';
+      }
+
+      function rng(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+
+      function draw() {
+        if (!_w || !_h) { resize(); if (!_w || !_h) return; }
+
+        var spread = Math.max(_w, _h);
+        arr.push({
+          x: rng(_w - spread, _w + spread),
+          y: rng(_h - spread, _h + spread),
+          r: rng(28, 90),
+          spX: rng(-1, 1),
+          spY: rng(-1, 1),
+          col: rndCol(),
+          shadow: rndCol()
+        });
+        while (arr.length > 45) arr.shift();
+
+        ctx.clearRect(0, 0, _w * 2, _h * 2);
+
+        // Set shadow params once (they don't change per splat)
+        ctx.shadowBlur = 35;
+        ctx.shadowOffsetX = 2;
+        ctx.shadowOffsetY = 2;
+        ctx.globalCompositeOperation = 'lighter';
+
+        for (var i = 0; i < arr.length; i++) {
+          var s = arr[i];
+          ctx.fillStyle = s.col;
+          ctx.shadowColor = s.shadow;
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2, true);
+          ctx.fill();
+
+          s.x += s.spX;
+          s.y += s.spY;
+          s.r *= 0.965;
+        }
+      }
+
+      // Frame-rate independent throttle: draw at most ~8 fps
+      var lastDraw = 0;
+      var DRAW_INTERVAL = 125; // ms
+      function anim(ts) {
+        if (!running) return;
+        if (!lastDraw || ts - lastDraw >= DRAW_INTERVAL) {
+          lastDraw = ts;
+          draw();
+        }
+        rafId = requestAnimationFrame(anim);
+      }
+
+      function start() {
+        if (running) return;
+        running = true;
+        lastDraw = 0;
+        resize();
+        rafId = requestAnimationFrame(anim);
+      }
+
+      function stop() {
+        running = false;
+        if (rafId) cancelAnimationFrame(rafId);
+      }
+
+      var resizeTO;
+      function onResize() {
+        clearTimeout(resizeTO);
+        resizeTO = setTimeout(resize, 120);
+      }
+      window.addEventListener('resize', onResize);
+
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting && !document.hidden) start();
+            else stop();
+          });
+        });
+        io.observe(section);
+      } else {
+        start();
+      }
+
+      document.addEventListener('visibilitychange', function () {
+        if (document.hidden) stop();
+        else if (section.getBoundingClientRect().top < window.innerHeight && section.getBoundingClientRect().bottom > 0) start();
+      });
+    })();
+  </script>
+
+  <!-- Orbit Chip Color Cycle -->
+  <script>
+    (function () {
+      var chips = document.querySelectorAll('.orbit-animation-ring .chip');
+      if (!chips.length) return;
+
+      var palette = [
+        '#e84949', '#ea580c', '#eab308', '#22c55e',
+        '#14b8a6', '#0891b2', '#3b82f6', '#4f46e5',
+        '#8b5cf6', '#ec4899', '#f43f5e', '#475569'
+      ];
+      var STEP_MS = 3000;
+
+      function textColorFor(hex) {
+        var r = parseInt(hex.slice(1, 3), 16);
+        var g = parseInt(hex.slice(3, 5), 16);
+        var b = parseInt(hex.slice(5, 7), 16);
+        var lum = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+        return lum > 0.62 ? '#1a1a2e' : '#ffffff';
+      }
+
+      var tick = 0;
+      function apply() {
+        for (var i = 0; i < chips.length; i++) {
+          var color = palette[(tick + i) % palette.length];
+          chips[i].style.background = color;
+          chips[i].style.color = textColorFor(color);
+        }
+        tick = (tick + 1) % palette.length;
+      }
+
+      apply();
+      setInterval(apply, STEP_MS);
+    })();
+  </script>
+
+  <!-- Social Share FAB Button -->
+  <button class="share-toggle-btn" id="shareToggle">
+    <i class="fas fa-plus"></i>
+  </button>
+
+  <!-- Social Share Overlay -->
+  <div class="share-overlay" id="shareOverlay">
+    <div class="share-menu">
+      <li style="--i: 0; --clr: #1877f2">
+        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+      </li>
+      <li style="--i: 1; --clr: #25d366">
+        <a href="#" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+      </li>
+      <li style="--i: 2; --clr: #1b1e21">
+        <a href="#" title="X / Twitter"><i class="fab fa-x-twitter"></i></a>
+      </li>
+      <li style="--i: 3; --clr: #0088cc">
+        <a href="https://t.me/Mighty_Joker" target="_blank" title="Telegram"><i class="fab fa-telegram"></i></a>
+      </li>
+      <li style="--i: 4; --clr: #0a66c2">
+        <a href="https://www.linkedin.com/in/aditya-k-rai" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      </li>
+      <li style="--i: 5; --clr: #c32aa3">
+        <a href="https://www.instagram.com/mighty_aditya" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+      </li>
+      <li style="--i: 6; --clr: #333">
+        <a href="https://github.com/aditya-k-rai" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+      </li>
+      <li style="--i: 7; --clr: #ff0000">
+        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+      </li>
+    </div>
+  </div>
+
+  <!-- Share Button Script -->
+  <script>
+    (function () {
+      var toggle = document.getElementById('shareToggle');
+      var overlay = document.getElementById('shareOverlay');
+      if (!toggle || !overlay) return;
+
+      function openShare() {
+        toggle.classList.add('active');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeShare() {
+        toggle.classList.remove('active');
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      toggle.addEventListener('click', function () {
+        if (overlay.classList.contains('active')) {
+          closeShare();
+        } else {
+          openShare();
+        }
+      });
+
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) closeShare();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && overlay.classList.contains('active')) closeShare();
+      });
+    })();
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/matter-js@0.19.0/build/matter.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+  <script src="./hero-shards.js"></script>
   <script src="https://kit.fontawesome.com/58a810656e.js" crossorigin="anonymous"></script>
   <script>
     // Night theme and mouse trail activation based on time
@@ -526,6 +2217,806 @@
       backDelay: 1000,
     });
   </script>
+
+  <!-- Script for Read More button functionality -->
+  <script src="./script.js"></script>
+
+  <!-- Card Lightbox -->
+  <div class="card-lightbox" id="cardLightbox">
+    <div class="card-lightbox-inner" id="cardLightboxInner">
+      <button class="card-lightbox-close" id="cardLightboxClose">&times;</button>
+      <div class="card-lb-overlay"></div>
+      <div class="card-lb-body" id="cardLbBody"></div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      var lightbox = document.getElementById('cardLightbox');
+      var inner = document.getElementById('cardLightboxInner');
+      var lbBody = document.getElementById('cardLbBody');
+      var closeBtn = document.getElementById('cardLightboxClose');
+
+      document.querySelectorAll('.projectCard').forEach(function (card) {
+        card.style.cursor = 'pointer';
+        card.addEventListener('click', function (e) {
+          if (e.target.closest('a, button')) return;
+
+          var style = window.getComputedStyle(card);
+          inner.style.backgroundImage = style.backgroundImage;
+          inner.style.backgroundColor = style.backgroundColor;
+          inner.style.backgroundSize = 'cover';
+          inner.style.backgroundPosition = 'center';
+
+          var heading = card.querySelector('.projectHeading');
+          var sub = card.querySelector('.projectSubHeading');
+          var btns = card.querySelector('.btnGroup');
+          var skills = card.querySelector('.projectSkillsContainer');
+
+          // Set text/image content via innerHTML
+          lbBody.innerHTML =
+            '<div class="card-lb-skills">' + (skills ? skills.innerHTML : '') + '</div>' +
+            '<h2 class="card-lb-heading">' + (heading ? heading.textContent : '') + '</h2>' +
+            '<p class="card-lb-sub">' + (sub ? sub.textContent.trim() : '') + '</p>' +
+            '<div class="card-lb-btns"></div>';
+
+          // Build button links via cloneNode to preserve FA Kit SVG exactly
+          if (btns) {
+            var lbBtnsContainer = lbBody.querySelector('.card-lb-btns');
+            btns.querySelectorAll('a').forEach(function (link) {
+              var newLink = link.cloneNode(true);
+              newLink.className = 'card-lb-link';
+              newLink.setAttribute('target', '_blank');
+              newLink.setAttribute('rel', 'noopener');
+              newLink.removeAttribute('style');
+              lbBtnsContainer.appendChild(newLink);
+            });
+          }
+
+          lightbox.classList.add('active');
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      function closeLightbox() {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      closeBtn.addEventListener('click', closeLightbox);
+      lightbox.addEventListener('click', function (e) {
+        if (e.target === lightbox) closeLightbox();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') closeLightbox();
+      });
+    })();
+  </script>
+  <script src="./color-avalanche.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+  <script src="./graphics-flipbook.js"></script>
+
+  <!-- Vertical 3D Gallery -->
+  <script>
+  (function(){
+    const container = document.getElementById('vg-gallery');
+    if (!container) return;
+    const items = Array.from(container.querySelectorAll('.vg-item'));
+
+    const bands = [
+      'vg-hover-main',
+      ['vg-left-1','vg-right-1'],
+      ['vg-left-2','vg-right-2'],
+      ['vg-left-3','vg-right-3'],
+      ['vg-left-4','vg-right-4'],
+    ];
+
+    let openIndex = -1;
+    let hoverIndex = -1;
+    let padLeft = 0, firstCenter = 0, step = 0, epsBase = 12;
+    let prevX = null, prevT = 0;
+
+    function metric(){
+      const cs = getComputedStyle(container);
+      padLeft = parseFloat(cs.paddingLeft)||0;
+      const w = items[0]?.offsetWidth || 0;
+      const gap = parseFloat(cs.gap)||0;
+      step = w + gap;
+      firstCenter = (items[0]?.offsetLeft || 0) + w/2;
+      epsBase = Math.max(10, step * 0.08);
+    }
+
+    function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
+    function indexFromX(x){ return clamp(Math.round((x - firstCenter)/step), 0, items.length-1); }
+    function centerFor(i){ return firstCenter + i * step; }
+    function clearClasses(){ items.forEach(el => el.className = 'vg-item'); }
+
+    function applyHoverState(idx){
+      clearClasses();
+      if (idx < 0) return;
+      container.classList.add('vg-hovering');
+      items[idx].classList.add(bands[0]);
+      for (let d=1; d<bands.length; d++){
+        const L = idx - d, R = idx + d;
+        if (L >= 0) items[L].classList.add(bands[d][0]);
+        if (R < items.length) items[R].classList.add(bands[d][1]);
+      }
+    }
+
+    function centerItem(idx){
+      const wrap = container.getBoundingClientRect();
+      const it = items[idx].getBoundingClientRect();
+      const centerX = wrap.left + wrap.width/2;
+      const delta = centerX - (it.left + it.width/2);
+      const maxShift = wrap.width * 0.35;
+      const clamped = Math.max(-maxShift, Math.min(maxShift, delta));
+      container.style.setProperty('--vg-shift', clamped.toFixed(1)+'px');
+    }
+    function resetShift(){ container.style.setProperty('--vg-shift','0px'); }
+
+    function openItem(idx){
+      clearClasses();
+      container.classList.add('vg-is-open');
+      items[idx].classList.add('vg-is-open');
+      openIndex = idx;
+      centerItem(idx);
+    }
+
+    function closeOpen(){
+      openIndex = -1;
+      container.classList.remove('vg-is-open');
+      resetShift();
+      clearClasses();
+    }
+
+    function ensureHoveringOnce(){
+      if (container.classList.contains('vg-hovering')) return;
+      container.classList.add('vg-hovering');
+      requestAnimationFrame(metric);
+    }
+
+    function effectiveEPS(x){
+      if (prevX == null) return epsBase;
+      const dx = Math.abs(x - prevX);
+      const now = performance.now();
+      const dt = Math.max(1, now - (prevT || now));
+      const v = dx / dt;
+      prevT = now;
+      const k = clamp(1 - v*0.8, 0.4, 1);
+      return epsBase * k;
+    }
+
+    container.addEventListener('pointerenter', ()=>{
+      if (openIndex !== -1) return;
+      ensureHoveringOnce();
+    });
+
+    container.addEventListener('pointermove', (e)=>{
+      if (openIndex !== -1) return;
+      ensureHoveringOnce();
+      const rect = container.getBoundingClientRect();
+      const x = e.clientX - rect.left - padLeft;
+      const idxRaw = indexFromX(x);
+      let idx = idxRaw;
+      if (hoverIndex >= 0){
+        const c = centerFor(hoverIndex);
+        const movingRight = prevX == null ? true : x > prevX;
+        const eps = effectiveEPS(x);
+        if (movingRight && x < c + eps) idx = hoverIndex;
+        if (!movingRight && x > c - eps) idx = hoverIndex;
+      }
+      prevX = x;
+      if (idx !== hoverIndex){
+        hoverIndex = idx;
+        applyHoverState(idx);
+      }
+    }, {passive:true});
+
+    container.addEventListener('pointerleave', (e)=>{
+      if (openIndex !== -1) return;
+      const r = container.getBoundingClientRect(), M = 48;
+      if (e.clientX > r.left - M && e.clientX < r.right + M &&
+          e.clientY > r.top  - M && e.clientY < r.bottom + M) return;
+      hoverIndex = -1; prevX = null; prevT = 0;
+      container.classList.remove('vg-hovering');
+      clearClasses();
+    }, {passive:true});
+
+    container.addEventListener('click', (e)=>{
+      const el = e.target.closest('.vg-item');
+      let idx = -1;
+      if (el) idx = items.indexOf(el);
+      else if (hoverIndex >= 0) idx = hoverIndex;
+      if (idx < 0) return;
+      if (openIndex === idx) closeOpen(); else openItem(idx);
+    });
+
+    items.forEach((el, idx)=>{
+      el.addEventListener('keydown', (e)=>{
+        if ((e.key==='Enter'||e.key===' ') && !e.repeat){
+          e.preventDefault();
+          if (openIndex === idx) closeOpen(); else openItem(idx);
+        }
+      });
+    });
+    container.addEventListener('keydown', (e)=>{
+      if (e.key==='Escape' && openIndex !== -1){ e.preventDefault(); closeOpen(); }
+    });
+
+    window.addEventListener('resize', metric);
+    metric();
+    container.addEventListener('dragstart', e=>e.preventDefault());
+  })();
+  </script>
+
+  <!-- Social Media 3D Card Carousel -->
+  <script>
+  (function () {
+    function initCarousel(carouselEl) {
+      var cards = Array.from(carouselEl.querySelectorAll('.sm-carousel__card'));
+      var prevBtn = carouselEl.querySelector('.sm-carousel__btn--prev');
+      var nextBtn = carouselEl.querySelector('.sm-carousel__btn--next');
+      var playPauseBtn = carouselEl.querySelector('.sm-carousel__btn--playpause');
+      var muteBtn = carouselEl.querySelector('.sm-carousel__btn--mute');
+      var indicator = carouselEl.querySelector('.sm-carousel__indicator');
+      var total = cards.length;
+      if (total === 0) return;
+
+      var activeIndex = 0;
+      var isPlaying = true;   // auto-advance state
+      var isMuted = true;     // audio state
+      var autoTimer = null;
+      var isHovering = false; // hover-to-play-full state
+
+      function getActiveVideo() {
+        var card = cards[activeIndex];
+        return card ? card.querySelector('.sm-carousel__video') : null;
+      }
+
+      function updatePositions() {
+        cards.forEach(function (card, i) {
+          var diff = i - activeIndex;
+          if (diff > total / 2) diff -= total;
+          if (diff < -total / 2) diff += total;
+          card.setAttribute('data-pos', diff);
+
+          var video = card.querySelector('.sm-carousel__video');
+          if (!video) return;
+
+          if (diff === 0) {
+            video.muted = isMuted;
+            video.loop = !isHovering;
+            var p = video.play();
+            if (p !== undefined) p.catch(function () {});
+          } else {
+            video.pause();
+            video.loop = true;
+          }
+        });
+        if (indicator) indicator.textContent = (activeIndex + 1) + ' / ' + total;
+      }
+
+      function goNext() {
+        activeIndex = (activeIndex + 1) % total;
+        updatePositions();
+        resetAutoTimer();
+      }
+
+      function goPrev() {
+        activeIndex = (activeIndex - 1 + total) % total;
+        updatePositions();
+        resetAutoTimer();
+      }
+
+      // â”€â”€ Auto-advance every 3 seconds â”€â”€
+      function startAutoTimer() {
+        stopAutoTimer();
+        if (isPlaying && !isHovering) {
+          autoTimer = setInterval(function () {
+            activeIndex = (activeIndex + 1) % total;
+            updatePositions();
+          }, 3000);
+        }
+      }
+
+      function stopAutoTimer() {
+        if (autoTimer) { clearInterval(autoTimer); autoTimer = null; }
+      }
+
+      function resetAutoTimer() {
+        if (isPlaying && !isHovering) startAutoTimer();
+      }
+
+      // â”€â”€ Hover: pause timer, let video play full, then advance â”€â”€
+      cards.forEach(function (card, i) {
+        var video = card.querySelector('.sm-carousel__video');
+
+        card.addEventListener('mouseenter', function () {
+          if (i !== activeIndex || !isPlaying) return;
+          isHovering = true;
+          stopAutoTimer();
+          if (video) {
+            video.loop = false;
+          }
+        });
+
+        card.addEventListener('mouseleave', function () {
+          if (!isHovering) return;
+          isHovering = false;
+          var v = getActiveVideo();
+          if (v) v.loop = true;
+          if (isPlaying) startAutoTimer();
+        });
+
+        if (video) {
+          video.addEventListener('ended', function () {
+            if (isHovering && i === activeIndex && isPlaying) {
+              isHovering = false;
+              goNext();
+            }
+          });
+        }
+      });
+
+      // â”€â”€ Play / Pause (auto-advance + video) â”€â”€
+      if (playPauseBtn) {
+        playPauseBtn.addEventListener('click', function () {
+          isPlaying = !isPlaying;
+          if (isPlaying) {
+            playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+            playPauseBtn.setAttribute('aria-label', 'Pause');
+            var v = getActiveVideo();
+            if (v) v.play().catch(function () {});
+            startAutoTimer();
+          } else {
+            playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+            playPauseBtn.setAttribute('aria-label', 'Play');
+            var v = getActiveVideo();
+            if (v) v.pause();
+            stopAutoTimer();
+          }
+        });
+      }
+
+      // â”€â”€ Mute / Unmute â”€â”€
+      if (muteBtn) {
+        muteBtn.addEventListener('click', function () {
+          isMuted = !isMuted;
+          if (isMuted) {
+            muteBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+            muteBtn.setAttribute('aria-label', 'Unmute');
+          } else {
+            muteBtn.innerHTML = '<i class="fa-solid fa-volume-high"></i>';
+            muteBtn.setAttribute('aria-label', 'Mute');
+          }
+          var v = getActiveVideo();
+          if (v) v.muted = isMuted;
+        });
+      }
+
+      if (prevBtn) prevBtn.addEventListener('click', goPrev);
+      if (nextBtn) nextBtn.addEventListener('click', goNext);
+
+      carouselEl.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); goPrev(); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); goNext(); }
+      });
+
+      // Touch swipe
+      var touchStartX = 0;
+      carouselEl.addEventListener('touchstart', function (e) {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      carouselEl.addEventListener('touchend', function (e) {
+        var diff = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 50) {
+          if (diff > 0) goNext();
+          else goPrev();
+        }
+      }, { passive: true });
+
+      // Click: non-center â†’ navigate, center â†’ play/pause
+      cards.forEach(function (card, i) {
+        card.addEventListener('click', function () {
+          if (i !== activeIndex) {
+            isHovering = false;
+            activeIndex = i;
+            updatePositions();
+            resetAutoTimer();
+          } else {
+            // Toggle play/pause on active video
+            var v = getActiveVideo();
+            if (!v) return;
+            if (v.paused) {
+              v.play().catch(function () {});
+              if (playPauseBtn) playPauseBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
+              isPlaying = true;
+              startAutoTimer();
+            } else {
+              v.pause();
+              if (playPauseBtn) playPauseBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
+              isPlaying = false;
+              stopAutoTimer();
+            }
+          }
+        });
+      });
+
+      // Pause videos when section out of view
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) {
+            isHovering = false;
+            stopAutoTimer();
+            cards.forEach(function (card) {
+              var v = card.querySelector('.sm-carousel__video');
+              if (v) v.pause();
+            });
+          } else {
+            if (isPlaying) {
+              var v = getActiveVideo();
+              if (v) v.play().catch(function () {});
+              startAutoTimer();
+            }
+          }
+        });
+      }, { threshold: 0.3 });
+      observer.observe(carouselEl);
+
+      updatePositions();
+      startAutoTimer();
+    }
+
+    document.querySelectorAll('.sm-carousel').forEach(initCarousel);
+  })();
+  </script>
+
+  <!-- Performance Marketing Analytics Script -->
+  <script>
+  (function() {
+    const PM_PLATFORMS = [
+      { name: 'Reddit',     color: '#FF4500', visible: true },
+      { name: 'Instagram',  color: '#E1306C', visible: true },
+      { name: 'Facebook',   color: '#1877F2', visible: true },
+      { name: 'X',          color: '#111111', visible: true },
+      { name: 'TikTok',     color: '#69C9D0', visible: true },
+      { name: 'LinkedIn',   color: '#0A66C2', visible: true },
+      { name: 'Google Ads', color: '#4285F4', visible: true },
+      { name: 'WhatsApp',   color: '#25D366', visible: true },
+    ];
+
+    const PM_NUM_POINTS = 40;
+
+    function pmGenerateData(type) {
+      var pts = [], v = 0.3 + Math.random() * 0.3;
+      for (var i = 0; i < PM_NUM_POINTS; i++) {
+        var t = i / (PM_NUM_POINTS - 1);
+        var noise = (Math.random() - 0.5) * 0.08;
+        var trend = 0;
+        if (type === 'surge')   trend = t * 0.5;
+        if (type === 'dip')     trend = -t * 0.2;
+        if (type === 'wavey')   trend = Math.sin(t * Math.PI * 3) * 0.2;
+        if (type === 'gradual') trend = t * 0.25;
+        if (type === 'spike')   trend = (i === 28 || i === 29) ? 0.4 : (i > 29 ? -0.1 : 0);
+        if (type === 'steady')  trend = Math.sin(t * Math.PI * 1.5) * 0.1;
+        v = Math.max(0.05, Math.min(0.98, v + trend * 0.04 + noise));
+        pts.push(v);
+      }
+      return pts;
+    }
+
+    var patterns = ['surge','wavey','dip','gradual','spike','steady','surge','gradual'];
+    var pmData = PM_PLATFORMS.map(function(p, i) {
+      var base = pmGenerateData(patterns[i]);
+      return { name: p.name, color: p.color, visible: p.visible, base: base, live: base.slice() };
+    });
+
+    var canvas = document.getElementById('pmGraphCanvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var W, H;
+    var PAD = { top: 10, right: 16, bottom: 28, left: 38 };
+
+    function pmResize() {
+      var rect = canvas.parentElement.getBoundingClientRect();
+      W = rect.width; H = rect.height;
+      canvas.width = W * devicePixelRatio;
+      canvas.height = H * devicePixelRatio;
+      canvas.style.width = W + 'px';
+      canvas.style.height = H + 'px';
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.scale(devicePixelRatio, devicePixelRatio);
+    }
+    window.addEventListener('resize', pmResize);
+    pmResize();
+
+    function ptX(i) { return PAD.left + (i / (PM_NUM_POINTS - 1)) * (W - PAD.left - PAD.right); }
+    function ptY(v) { return PAD.top + (1 - v) * (H - PAD.top - PAD.bottom); }
+
+    function drawGrid() {
+      ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+      ctx.lineWidth = 1;
+      for (var i = 0; i <= 4; i++) {
+        var y = PAD.top + (i / 4) * (H - PAD.top - PAD.bottom);
+        ctx.beginPath(); ctx.moveTo(PAD.left, y); ctx.lineTo(W - PAD.right, y); ctx.stroke();
+        var val = Math.round((1 - i / 4) * 1000);
+        ctx.fillStyle = 'rgba(255,255,255,0.25)';
+        ctx.font = '10px Inter, sans-serif';
+        ctx.textAlign = 'right';
+        ctx.fillText(val, PAD.left - 5, y + 3.5);
+      }
+      var days = ['Mar 4','Mar 5','Mar 6','Mar 7','Mar 8','Mar 9','Mar 10'];
+      ctx.textAlign = 'center';
+      days.forEach(function(d, i) {
+        var x = PAD.left + (i / (days.length - 1)) * (W - PAD.left - PAD.right);
+        ctx.fillStyle = 'rgba(255,255,255,0.25)';
+        ctx.fillText(d, x, H - 6);
+      });
+    }
+
+    function drawLine(pts, color, highlight) {
+      if (pts.length < 2) return;
+      ctx.save();
+      ctx.beginPath();
+      pts.forEach(function(v, i) {
+        var x = ptX(i), y = ptY(v);
+        i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+      });
+      ctx.strokeStyle = color;
+      ctx.lineWidth = highlight ? 2.5 : 1.8;
+      ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+      ctx.globalAlpha = highlight ? 1 : 0.7;
+      ctx.shadowColor = color; ctx.shadowBlur = highlight ? 8 : 4;
+      ctx.stroke();
+      ctx.lineTo(ptX(pts.length - 1), ptY(0));
+      ctx.lineTo(ptX(0), ptY(0));
+      ctx.closePath();
+      var grad = ctx.createLinearGradient(0, PAD.top, 0, H - PAD.bottom);
+      grad.addColorStop(0, color + '28');
+      grad.addColorStop(1, color + '00');
+      ctx.fillStyle = grad; ctx.shadowBlur = 0; ctx.fill();
+      var lx = ptX(pts.length - 1), ly = ptY(pts[pts.length - 1]);
+      ctx.beginPath(); ctx.arc(lx, ly, 4, 0, Math.PI * 2);
+      ctx.fillStyle = color; ctx.shadowColor = color; ctx.shadowBlur = 10; ctx.fill();
+      ctx.restore();
+    }
+
+    var pmTick = 0;
+    function pmUpdateLive() {
+      pmTick++;
+      pmData.forEach(function(p) {
+        var last = p.live[p.live.length - 1];
+        var target = p.base[pmTick % PM_NUM_POINTS];
+        var next = last + (target - last) * 0.3 + (Math.random() - 0.5) * 0.06;
+        p.live.shift();
+        p.live.push(Math.max(0.04, Math.min(0.97, next)));
+      });
+      pmUpdateMetrics();
+    }
+
+    var PM_METRIC_KEYS = ['impressions','likes','followers','views','clicks','events'];
+    var PM_METRIC_RANGES = {
+      impressions: [2000, 10000], likes: [500, 5000], followers: [400, 2000],
+      views: [40000, 140000], clicks: [400, 1500], events: [400, 800]
+    };
+    var pmMetricHistory = {};
+    PM_METRIC_KEYS.forEach(function(k) { pmMetricHistory[k] = []; });
+
+    var salesCanvas = document.getElementById('pmSalesCanvas');
+    var sCtx = salesCanvas ? salesCanvas.getContext('2d') : null;
+    var salesPts = [];
+    for (var si = 0; si < 30; si++) salesPts.push(0.1 + (si / 29) * 0.4 + (Math.random() - 0.5) * 0.05);
+
+    function pmDrawSales() {
+      if (!sCtx) return;
+      var sw = salesCanvas.offsetWidth, sh = salesCanvas.offsetHeight;
+      salesCanvas.width = sw * devicePixelRatio;
+      salesCanvas.height = sh * devicePixelRatio;
+      sCtx.scale(devicePixelRatio, devicePixelRatio);
+      sCtx.clearRect(0, 0, sw, sh);
+      var pad = 2;
+      sCtx.beginPath();
+      salesPts.forEach(function(v, i) {
+        var x = pad + (i / (salesPts.length - 1)) * (sw - pad * 2);
+        var y = sh - pad - v * (sh - pad * 2);
+        i === 0 ? sCtx.moveTo(x, y) : sCtx.lineTo(x, y);
+      });
+      sCtx.strokeStyle = '#16a34a'; sCtx.lineWidth = 2;
+      sCtx.lineJoin = 'round'; sCtx.lineCap = 'round';
+      sCtx.shadowColor = '#16a34a'; sCtx.shadowBlur = 6; sCtx.stroke();
+      sCtx.lineTo(pad + (salesPts.length - 1) / (salesPts.length - 1) * (sw - pad * 2), sh - pad);
+      sCtx.lineTo(pad, sh - pad); sCtx.closePath();
+      var g = sCtx.createLinearGradient(0, 0, 0, sh);
+      g.addColorStop(0, 'rgba(22,163,74,0.25)'); g.addColorStop(1, 'rgba(22,163,74,0)');
+      sCtx.fillStyle = g; sCtx.shadowBlur = 0; sCtx.fill();
+    }
+
+    function pmUpdateSales() {
+      var last = salesPts[salesPts.length - 1];
+      var next = Math.min(0.97, last + 0.008 + (Math.random() - 0.3) * 0.015);
+      salesPts.shift(); salesPts.push(next);
+      pmDrawSales();
+    }
+    pmDrawSales();
+
+    function pmFmt(k, v) { return v >= 1000 ? (v / 1000).toFixed(1) + 'k' : v.toString(); }
+
+    function pmUpdateSparkline(k) {
+      var svg = document.getElementById('pm-sp-' + k);
+      if (!svg || pmMetricHistory[k].length < 2) return;
+      var vals = pmMetricHistory[k];
+      var min = Math.min.apply(null, vals), max = Math.max.apply(null, vals);
+      var range = max - min || 1;
+      var pts = vals.map(function(v, i) {
+        var x = (i / (vals.length - 1)) * 70;
+        var y = 36 - 4 - ((v - min) / range) * 28;
+        return x + ',' + y;
+      }).join(' ');
+      var isUp = vals[vals.length - 1] >= vals[0];
+      var col = isUp ? '#16a34a' : '#dc2626';
+      svg.innerHTML = '<polyline points="' + pts + '" fill="none" stroke="' + col + '" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>';
+    }
+
+    function pmUpdateMetrics() {
+      var avgLive = pmData.filter(function(p) { return p.visible; }).map(function(p) {
+        return p.live.reduce(function(a, b) { return a + b; }, 0) / p.live.length;
+      });
+      var ratio = avgLive.length ? avgLive.reduce(function(a, b) { return a + b; }, 0) / avgLive.length : 0.5;
+
+      PM_METRIC_KEYS.forEach(function(k) {
+        var mn = PM_METRIC_RANGES[k][0], mx = PM_METRIC_RANGES[k][1];
+        var val = Math.round(mn + ratio * (mx - mn) + (Math.random() - 0.5) * (mx - mn) * 0.03);
+        var prev = pmMetricHistory[k].length ? pmMetricHistory[k][pmMetricHistory[k].length - 1] : val;
+        pmMetricHistory[k].push(val);
+        if (pmMetricHistory[k].length > 20) pmMetricHistory[k].shift();
+        var pct = prev ? ((val - prev) / prev * 100) : 0;
+        var isUp = pct >= 0;
+        var elV = document.getElementById('pm-mv-' + k);
+        var elC = document.getElementById('pm-mc2-' + k);
+        if (elV) elV.textContent = pmFmt(k, val);
+        if (elC) {
+          elC.textContent = (isUp ? '↑ ' : '↓ ') + Math.abs(pct).toFixed(1) + '%';
+          elC.className = 'pm-metric-change ' + (isUp ? 'up' : 'down');
+        }
+        pmUpdateSparkline(k);
+      });
+      pmUpdateSales();
+    }
+
+    var pmHoveredX = -1;
+    canvas.addEventListener('mousemove', function(e) {
+      var rect = canvas.getBoundingClientRect();
+      var mx = e.clientX - rect.left, my = e.clientY - rect.top;
+      var idx = Math.round((mx - PAD.left) / (W - PAD.left - PAD.right) * (PM_NUM_POINTS - 1));
+      if (idx < 0 || idx >= PM_NUM_POINTS) { pmHoveredX = -1; pmHideTooltip(); return; }
+      pmHoveredX = idx;
+      var tip = document.getElementById('pmTooltip');
+      var visible = pmData.filter(function(p) { return p.visible; });
+      var html = '<div class="pm-tooltip-label">Point ' + (idx + 1) + '</div>';
+      visible.forEach(function(p) {
+        var v = Math.round(p.live[idx] * 1000);
+        html += '<div class="pm-tooltip-row"><span class="pm-tooltip-dot" style="background:' + p.color + '"></span><span class="pm-tooltip-name">' + p.name + '</span><span class="pm-tooltip-val">' + v + '</span></div>';
+      });
+      tip.innerHTML = html; tip.classList.add('visible');
+      var tx = mx + 14, ty = my - 20;
+      if (tx + 145 > W) tx = mx - 155;
+      if (ty < 0) ty = 10;
+      tip.style.left = tx + 'px'; tip.style.top = ty + 'px';
+    });
+    canvas.addEventListener('mouseleave', function() { pmHoveredX = -1; pmHideTooltip(); });
+    function pmHideTooltip() { document.getElementById('pmTooltip').classList.remove('visible'); }
+
+    document.querySelectorAll('#pmLegend .pm-legend-item').forEach(function(el) {
+      el.addEventListener('click', function() {
+        var idx = +el.dataset.idx;
+        pmData[idx].visible = !pmData[idx].visible;
+        el.classList.toggle('dimmed', !pmData[idx].visible);
+      });
+    });
+
+    function pmRender() {
+      ctx.clearRect(0, 0, W, H);
+      drawGrid();
+      pmData.forEach(function(p) {
+        if (!p.visible) return;
+        drawLine(p.live, p.color, pmHoveredX >= 0);
+      });
+      if (pmHoveredX >= 0) {
+        var cx = ptX(pmHoveredX);
+        ctx.save(); ctx.setLineDash([4, 4]);
+        ctx.strokeStyle = 'rgba(255,255,255,0.2)'; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(cx, PAD.top); ctx.lineTo(cx, H - PAD.bottom); ctx.stroke();
+        ctx.restore();
+        pmData.filter(function(p) { return p.visible; }).forEach(function(p) {
+          var v = p.live[pmHoveredX], cy = ptY(v);
+          ctx.save(); ctx.beginPath(); ctx.arc(cx, cy, 5, 0, Math.PI * 2);
+          ctx.fillStyle = 'white'; ctx.fill();
+          ctx.strokeStyle = p.color; ctx.lineWidth = 2; ctx.stroke(); ctx.restore();
+        });
+      }
+      requestAnimationFrame(pmRender);
+    }
+
+    var PM_CPC_BASES = { Reddit:0.95, Instagram:2.10, Facebook:1.72, X:0.88, TikTok:1.45, LinkedIn:5.26, 'Google Ads':3.80, WhatsApp:0.62 };
+    var pmCpcValues = Object.assign({}, PM_CPC_BASES);
+
+    function pmUpdateCPC() {
+      PM_PLATFORMS.forEach(function(p) {
+        pmCpcValues[p.name] = Math.max(0.30, pmCpcValues[p.name] + (Math.random() - 0.5) * 0.04);
+      });
+      var newAvg = PM_PLATFORMS.map(function(p) { return pmCpcValues[p.name]; }).reduce(function(a, b) { return a + b; }, 0) / PM_PLATFORMS.length;
+      var prev = parseFloat(document.getElementById('pm-mv-cpc').textContent.replace('₹', '')) || newAvg;
+      document.getElementById('pm-mv-cpc').textContent = '₹' + newAvg.toFixed(2);
+      var pct = ((newAvg - prev) / prev * 100);
+      var el = document.getElementById('pm-mc2-cpc');
+      el.textContent = (pct >= 0 ? '↑ ' : '↓ ') + Math.abs(pct).toFixed(1) + '%';
+      el.className = 'pm-metric-change ' + (pct >= 0 ? 'up' : 'down');
+      var maxCpc = Math.max.apply(null, PM_PLATFORMS.map(function(p) { return pmCpcValues[p.name]; }));
+      var barEl = document.getElementById('pm-cpc-bars');
+      barEl.innerHTML = PM_PLATFORMS.map(function(p) {
+        var pct2 = pmCpcValues[p.name] / maxCpc * 100;
+        return '<div style="display:flex;align-items:center;gap:6px;"><span style="font-size:9px;color:#888;font-weight:600;width:72px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + p.name + '</span><div style="flex:1;background:rgba(255,255,255,0.06);border-radius:3px;height:5px;overflow:hidden;"><div style="width:' + pct2 + '%;height:100%;background:' + p.color + ';border-radius:3px;transition:width 0.5s;"></div></div><span style="font-size:9px;font-weight:700;color:#ccc;width:32px;text-align:right;">₹' + pmCpcValues[p.name].toFixed(2) + '</span></div>';
+      }).join('');
+    }
+
+    var PM_ROAS_BASES = { Reddit:3.8, Instagram:5.2, Facebook:4.1, X:2.9, TikTok:6.3, LinkedIn:2.4, 'Google Ads':7.1, WhatsApp:3.5 };
+    var pmRoasValues = Object.assign({}, PM_ROAS_BASES);
+
+    function pmDrawROASRing() {
+      var rc = document.getElementById('pmRoasCanvas');
+      var rx = rc.getContext('2d');
+      var size = 64;
+      rc.width = size * devicePixelRatio; rc.height = size * devicePixelRatio;
+      rc.style.width = size + 'px'; rc.style.height = size + 'px';
+      rx.scale(devicePixelRatio, devicePixelRatio);
+      rx.clearRect(0, 0, size, size);
+      var cx2 = size / 2, cy2 = size / 2, r = 26, lw = 7;
+      var visible = PM_PLATFORMS.filter(function(p) { return p.visible; });
+      var total = visible.reduce(function(s, p) { return s + pmRoasValues[p.name]; }, 0);
+      var start = -Math.PI / 2;
+      visible.forEach(function(p) {
+        var angle = (pmRoasValues[p.name] / total) * Math.PI * 2;
+        rx.beginPath(); rx.arc(cx2, cy2, r, start, start + angle);
+        rx.strokeStyle = p.color; rx.lineWidth = lw; rx.stroke();
+        start += angle + 0.03;
+      });
+      var avg = total / visible.length;
+      rx.fillStyle = '#e0e0e0';
+      rx.font = 'bold 10px Inter, sans-serif';
+      rx.textAlign = 'center'; rx.textBaseline = 'middle';
+      rx.fillText(avg.toFixed(1) + 'x', cx2, cy2);
+    }
+
+    function pmUpdateROAS() {
+      PM_PLATFORMS.forEach(function(p) {
+        pmRoasValues[p.name] = Math.max(1.0, pmRoasValues[p.name] + (Math.random() - 0.42) * 0.08);
+      });
+      var visible = PM_PLATFORMS.filter(function(p) { return p.visible; });
+      var avg = visible.reduce(function(s, p) { return s + pmRoasValues[p.name]; }, 0) / visible.length;
+      var prev = parseFloat(document.getElementById('pm-mv-roas').textContent) || avg;
+      document.getElementById('pm-mv-roas').textContent = avg.toFixed(1) + 'x';
+      var pct = ((avg - prev) / prev * 100);
+      var el = document.getElementById('pm-mc2-roas');
+      el.textContent = (pct >= 0 ? '↑ ' : '↓ ') + Math.abs(pct).toFixed(1) + '%';
+      el.className = 'pm-metric-change ' + (pct >= 0 ? 'up' : 'down');
+      pmDrawROASRing();
+      var list = document.getElementById('pm-roas-platform-list');
+      var sorted = visible.slice().sort(function(a, b) { return pmRoasValues[b.name] - pmRoasValues[a.name]; });
+      list.innerHTML = sorted.map(function(p) {
+        return '<div style="display:flex;align-items:center;gap:5px;"><span style="width:6px;height:6px;border-radius:50%;background:' + p.color + ';flex-shrink:0;display:inline-block;"></span><span style="font-size:9px;color:#888;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">' + p.name + '</span><span style="font-size:10px;font-weight:700;color:#e0e0e0;">' + pmRoasValues[p.name].toFixed(1) + 'x</span></div>';
+      }).join('');
+    }
+
+    pmUpdateCPC();
+    pmUpdateROAS();
+    pmRender();
+    setInterval(pmUpdateLive, 600);
+    setInterval(pmUpdateCPC, 1200);
+    setInterval(pmUpdateROAS, 1500);
+  })();
+  </script>
 </body>
 
 </html>
+
